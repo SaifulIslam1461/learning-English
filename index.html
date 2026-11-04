@@ -1,1 +1,1187 @@
 
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমার জীবন - Personal Space</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Hind Siliguri & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Hind Siliguri', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        appDark: '#0B1519',
+                        appCard: '#15252B',
+                        appCardHover: '#1B2F37',
+                        navyCard: '#182C34',
+                        blueBox: '#E8F1FF',
+                        greenBox: '#E9F7EF',
+                        orangeBox: '#FFF4E5',
+                        purpleBox: '#F3EBFB',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Hind Siliguri', 'Inter', sans-serif;
+            background-color: #060E11;
+            color: #E2E8F0;
+            min-height: 100vh;
+        }
+        .main-app-shell {
+            background-color: #0D1C22;
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .dark-box {
+            background-color: #172A32;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease-in-out;
+        }
+        .dark-box:hover {
+            background-color: #1E343E;
+            transform: translateY(-2px);
+        }
+        .light-card-blue { background-color: #EBF3FF; color: #1E293B; }
+        .light-card-green { background-color: #EDF7F2; color: #1E293B; }
+        .light-card-orange { background-color: #FFF5EB; color: #1E293B; }
+        .light-card-purple { background-color: #F5EEFC; color: #1E293B; }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #112228;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #274450;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="p-2 sm:p-4 md:p-6 flex justify-center items-start">
+
+    <!-- Container matching image container style -->
+    <div class="main-app-shell w-full max-w-4xl p-4 sm:p-6 md:p-8 my-auto space-y-6">
+
+        <!-- Top Profile & App Title Header (Image 1 Style) -->
+        <header class="flex justify-between items-start border-b border-slate-800 pb-5">
+            <div>
+                <span class="text-xs uppercase tracking-widest font-semibold text-teal-400/80">MY PERSONAL SPACE</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">আমার জীবন</h1>
+                <p class="text-xs sm:text-sm text-slate-400 mt-1 font-medium">শিখুন • পরিকল্পনা করুন • আমল করুন</p>
+            </div>
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <div id="liveClock" class="hidden sm:block text-xs bg-slate-800/80 text-teal-300 px-3 py-1.5 rounded-full border border-slate-700"></div>
+                <button onclick="goHome()" class="w-12 h-12 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-teal-400 flex items-center justify-center text-xl transition">
+                    <i class="fa-regular fa-circle-user"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Home 2x2 Navigation Grid (Image 1 Layout) -->
+        <section id="homeGridSection" class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <!-- Box 1: English Learning -->
+                <button onclick="openMainSection('english')" class="dark-box p-6 text-left flex flex-col justify-between h-44 group cursor-pointer w-full">
+                    <div class="w-10 h-10 rounded-xl bg-teal-900/50 text-teal-300 border border-teal-500/20 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white group-hover:text-teal-300 transition">ইংরেজি শিক্ষা</h2>
+                        <p class="text-xs text-slate-400 mt-1">শব্দ, বাক্য ও কথোপকথন</p>
+                    </div>
+                </button>
+
+                <!-- Box 2: Routine & Tasks -->
+                <button onclick="openMainSection('tasks')" class="dark-box p-6 text-left flex flex-col justify-between h-44 group cursor-pointer w-full">
+                    <div class="w-10 h-10 rounded-xl bg-teal-900/50 text-teal-300 border border-teal-500/20 flex items-center justify-center text-xl">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white group-hover:text-teal-300 transition">দৈনন্দিন রুটিন</h2>
+                        <p class="text-xs text-slate-400 mt-1">সময় ও কাজের পরিকল্পনা</p>
+                    </div>
+                </button>
+
+                <!-- Box 3: Amal Tracker -->
+                <button onclick="openMainSection('amal')" class="dark-box p-6 text-left flex flex-col justify-between h-44 group cursor-pointer w-full">
+                    <div class="w-10 h-10 rounded-xl bg-teal-900/50 text-teal-300 border border-teal-500/20 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white group-hover:text-teal-300 transition">আমলের হিসাব</h2>
+                        <p class="text-xs text-slate-400 mt-1">সালাত ও নফল আমল</p>
+                    </div>
+                </button>
+
+                <!-- Box 4: Monthly Report -->
+                <button onclick="openMonthlyAmalModal()" class="dark-box p-6 text-left flex flex-col justify-between h-44 group cursor-pointer w-full">
+                    <div class="w-10 h-10 rounded-xl bg-teal-900/50 text-teal-300 border border-teal-500/20 flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white group-hover:text-teal-300 transition">মাসিক রিপোর্ট</h2>
+                        <p class="text-xs text-slate-400 mt-1">অগ্রগতি ও পরিসংখ্যান</p>
+                    </div>
+                </button>
+
+            </div>
+
+            <!-- Footer Badge -->
+            <div class="text-center pt-4">
+                <span class="text-[11px] font-bold text-slate-500 tracking-widest uppercase">TODAY • LEARN • PLAN • GROW</span>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 1: ENGLISH LEARNING MODULE (Image 2 Style) ================= -->
+        <section id="section-english" class="main-section hidden space-y-6">
+            
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <button onclick="goHome()" class="text-slate-400 hover:text-white transition text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+                    <h2 class="text-2xl font-bold text-white">English Learning</h2>
+                </div>
+            </div>
+
+            <!-- 2x2 Colored Pastel Cards Grid (Image 2 Style) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="engGridNav">
+                
+                <button onclick="switchEngSubTab('vocab')" class="light-card-blue p-6 rounded-2xl text-left flex flex-col justify-between h-44 transition hover:opacity-95 shadow-lg">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-xl font-bold border border-blue-200">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900">ইংরেজি শব্দভাণ্ডার</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-0.5">Vocabulary Cards</p>
+                    </div>
+                </button>
+
+                <button onclick="switchEngSubTab('quiz')" class="light-card-green p-6 rounded-2xl text-left flex flex-col justify-between h-44 transition hover:opacity-95 shadow-lg">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-600/10 text-emerald-600 flex items-center justify-center text-xl font-bold border border-emerald-200">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900">বাংলা থেকে ইংরেজি</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-0.5">Translation Practice</p>
+                    </div>
+                </button>
+
+                <button onclick="switchEngSubTab('dialog')" class="light-card-orange p-6 rounded-2xl text-left flex flex-col justify-between h-44 transition hover:opacity-95 shadow-lg">
+                    <div class="w-10 h-10 rounded-xl bg-amber-600/10 text-amber-600 flex items-center justify-center text-xl font-bold border border-amber-200">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900">কথোপকথন</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-0.5">Daily Conversation</p>
+                    </div>
+                </button>
+
+                <button onclick="switchEngSubTab('sentences')" class="light-card-purple p-6 rounded-2xl text-left flex flex-col justify-between h-44 transition hover:opacity-95 shadow-lg">
+                    <div class="w-10 h-10 rounded-xl bg-purple-600/10 text-purple-600 flex items-center justify-center text-xl font-bold border border-purple-200">
+                        <i class="fa-solid fa-pen-clip"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900">বাক্য শিক্ষা</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-0.5">Sentence Learning</p>
+                    </div>
+                </button>
+
+            </div>
+
+            <!-- Sub Tab Content Display Area -->
+            <div id="engSubTabDisplay" class="hidden space-y-4">
+                
+                <div class="flex items-center justify-between bg-slate-800/40 p-3 rounded-xl border border-slate-700/50">
+                    <button onclick="backToEngGrid()" class="text-xs font-semibold text-teal-400 hover:text-teal-300 flex items-center">
+                        <i class="fa-solid fa-chevron-left mr-1.5"></i> ইংরেজি বক্স সমূহে ফিরে যান
+                    </button>
+                    <span id="currentEngSubTitle" class="text-xs font-bold text-slate-300"></span>
+                </div>
+
+                <!-- 1. Vocab Grid (Image 3 Card Style) -->
+                <div id="eng-tab-vocab" class="eng-sub-content space-y-4">
+                    <div class="flex flex-col sm:flex-row justify-between gap-3">
+                        <div class="relative flex-1">
+                            <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input type="text" id="vocabSearch" oninput="renderVocabCards()" placeholder="শব্দ খুঁজুন..." class="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm focus:outline-none focus:border-teal-500">
+                        </div>
+                        <button onclick="openWordModal()" class="px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center">
+                            + নতুন শব্দ যোগ করুন
+                        </button>
+                    </div>
+
+                    <div id="vocabGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Dynamic Vocab Cards injected by JS -->
+                    </div>
+                </div>
+
+                <!-- 2. Flashcard / Quiz (Image 4 Style) -->
+                <div id="eng-tab-quiz" class="eng-sub-content hidden space-y-6">
+                    
+                    <div class="space-y-6 max-w-xl mx-auto">
+                        <!-- Practice 1: Bengali to English Reveal -->
+                        <div class="dark-box p-6 rounded-2xl space-y-4">
+                            <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">প্রথম পদ্ধতি: বাংলা দেখে ইংরেজি শেখা</span>
+                            <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-800 text-center">
+                                <span class="text-xs text-slate-400">বাংলা অর্থ</span>
+                                <h4 id="q1Meaning" class="text-2xl font-bold text-white mt-1">সুন্দর</h4>
+                                <div id="q1Answer" class="hidden mt-4 pt-3 border-t border-slate-800">
+                                    <span class="text-emerald-400 text-xl font-bold">English: Beautiful</span>
+                                </div>
+                            </div>
+                            <button onclick="document.getElementById('q1Answer').classList.toggle('hidden')" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl text-xs">
+                                উত্তর দেখুন / লুকান
+                            </button>
+                        </div>
+
+                        <!-- Practice 2: Self English Writing (Image 4 Style) -->
+                        <div class="dark-box p-6 rounded-2xl space-y-4">
+                            <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">দ্বিতীয় পদ্ধতি: নিজে ইংরেজি লেখা</span>
+                            <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-800 space-y-3">
+                                <div>
+                                    <span class="text-xs text-slate-400">বাংলা অর্থ</span>
+                                    <h4 id="q2Meaning" class="text-2xl font-bold text-white mt-1">সুন্দর</h4>
+                                </div>
+                                <div class="pt-2">
+                                    <label class="text-xs text-slate-400 block mb-1">ইংরেজিতে লিখুন:</label>
+                                    <input type="text" id="quizInput" placeholder="আপনার উত্তর লিখুন..." class="w-full px-4 py-2.5 rounded-xl bg-black/60 border border-slate-700 text-white font-semibold text-sm focus:outline-none focus:border-teal-500">
+                                </div>
+                                <button onclick="checkQuizAnswer()" class="w-full py-2.5 bg-teal-700 hover:bg-teal-600 text-white font-bold rounded-xl text-xs transition">
+                                    উত্তর যাচাই করুন
+                                </button>
+                                <div id="quizFeedback" class="text-xs text-center font-bold"></div>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Controls -->
+                        <div class="flex justify-between items-center">
+                            <button onclick="prevQuizCard()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold">আগের শব্দ</button>
+                            <span id="quizCounter" class="text-xs text-slate-400">1/3</span>
+                            <button onclick="nextQuizCard()" class="px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-xs font-bold">পরের শব্দ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Conversations Sub Tab -->
+                <div id="eng-tab-dialog" class="eng-sub-content hidden space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="dark-box p-4 rounded-2xl space-y-3">
+                            <div class="flex justify-between items-center border-b border-slate-700/50 pb-2">
+                                <h4 class="font-bold text-slate-200 text-sm">বিষয়সমূহ</h4>
+                                <button onclick="openDialogTopicModal()" class="px-2 py-1 bg-teal-600 hover:bg-teal-500 text-white rounded text-[11px] font-bold">+ বিষয়</button>
+                            </div>
+                            <div id="dialogTopicsList" class="space-y-2 max-h-[380px] overflow-y-auto custom-scrollbar"></div>
+                        </div>
+                        <div class="md:col-span-2 dark-box p-4 rounded-2xl flex flex-col h-[420px]">
+                            <div class="border-b border-slate-700/50 pb-3 mb-3 flex justify-between items-center">
+                                <div>
+                                    <h4 id="dialogTitle" class="font-bold text-white text-base">বিষয় নির্বাচন করুন</h4>
+                                    <p id="dialogDesc" class="text-xs text-slate-400">কথোপকথন লোড করতে বাঁক থেকে নির্বাচন করুন</p>
+                                </div>
+                                <button id="dialogActionBtns" onclick="openAddMsgModal()" class="hidden px-3 py-1 bg-teal-600 text-white rounded text-xs font-bold">+ বার্তা</button>
+                            </div>
+                            <div id="dialogChatBox" class="flex-1 overflow-y-auto space-y-3 custom-scrollbar pr-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Sentences Sub Tab -->
+                <div id="eng-tab-sentences" class="eng-sub-content hidden space-y-4">
+                    <div class="dark-box p-5 rounded-2xl space-y-3">
+                        <h4 class="font-bold text-white text-base">সংরক্ষিত শব্দ থেকে তৈরি বাক্যসমূহ</h4>
+                        <div id="sentenceList" class="grid grid-cols-1 gap-3"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================= SECTION 2: ROUTINE & TASKS (Image 5 Style) ================= -->
+        <section id="section-tasks" class="main-section hidden space-y-6">
+            
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <button onclick="goHome()" class="text-slate-400 hover:text-white transition text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+                    <h2 class="text-2xl font-bold text-white">Daily Life Management</h2>
+                </div>
+            </div>
+
+            <!-- Pastel Cards Switcher (Image 5 Layout) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button onclick="switchTaskSubTab('routine')" id="btnSubRoutine" class="light-card-blue p-6 rounded-2xl text-left flex flex-col justify-between h-40 transition shadow-lg border-2 border-blue-400">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900">দৈনিক রুটিন</h3>
+                        <p class="text-xs text-slate-500 font-medium">Daily Schedule</p>
+                    </div>
+                </button>
+
+                <button onclick="switchTaskSubTab('queue')" id="btnSubTasks" class="light-card-orange p-6 rounded-2xl text-left flex flex-col justify-between h-40 transition shadow-lg border-2 border-transparent">
+                    <div class="w-10 h-10 rounded-xl bg-amber-600/10 text-amber-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900">দৈনিক কাজ</h3>
+                        <p class="text-xs text-slate-500 font-medium">Task Manager</p>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Task/Routine Content Container -->
+            <div class="dark-box p-5 rounded-2xl space-y-4">
+                
+                <!-- Daily Routine List -->
+                <div id="task-tab-routine" class="task-sub-content space-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-700/50 pb-2">
+                        <h4 class="font-bold text-white text-base">দৈনন্দিন সময়সূচী</h4>
+                        <button onclick="openRoutineModal()" class="px-3 py-1.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-xs font-bold">+ সময়সূচী</button>
+                    </div>
+                    <div id="routineTimeline" class="space-y-2"></div>
+                </div>
+
+                <!-- Daily Priority Task Manager -->
+                <div id="task-tab-queue" class="task-sub-content hidden space-y-4">
+                    <form id="taskForm" onsubmit="handleAddTask(event)" class="grid grid-cols-1 sm:grid-cols-12 gap-2 bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+                        <input type="text" id="taskTitle" required placeholder="কাজের বিবরণ..." class="sm:col-span-5 px-3 py-2 rounded-lg bg-black/50 border border-slate-700 text-xs text-white">
+                        <select id="taskPriority" class="sm:col-span-3 px-2 py-2 rounded-lg bg-black/50 border border-slate-700 text-xs text-white">
+                            <option value="high">🔴 সবচেয়ে গুরুত্বপূর্ণ</option>
+                            <option value="medium">🟡 মাঝারি কাজ</option>
+                            <option value="low">🟢 সাধারণ কাজ</option>
+                        </select>
+                        <select id="taskTiming" class="sm:col-span-2 px-2 py-2 rounded-lg bg-black/50 border border-slate-700 text-xs text-white">
+                            <option value="before">⚡ আগে করার</option>
+                            <option value="after">⌛ পরে করার</option>
+                        </select>
+                        <button type="submit" class="sm:col-span-2 py-2 bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold rounded-lg">যোগ করুন</button>
+                    </form>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="bg-slate-900/40 p-3 rounded-xl border border-red-500/20 space-y-2">
+                            <h5 class="text-xs font-bold text-red-400">জরুরী কাজ</h5>
+                            <div id="highTaskList" class="space-y-2"></div>
+                        </div>
+                        <div class="bg-slate-900/40 p-3 rounded-xl border border-amber-500/20 space-y-2">
+                            <h5 class="text-xs font-bold text-amber-400">সাধারণ ও মাঝারি কাজ</h5>
+                            <div id="normalTaskList" class="space-y-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================= SECTION 3: AMAL TRACKER ================= -->
+        <section id="section-amal" class="main-section hidden space-y-6">
+            
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <button onclick="goHome()" class="text-slate-400 hover:text-white transition text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+                    <h2 class="text-2xl font-bold text-white">আমলের হিসাব</h2>
+                </div>
+                <button onclick="openCustomAmalModal()" class="px-3 py-1.5 bg-slate-800 border border-slate-700 text-teal-300 rounded-xl text-xs font-bold hover:bg-slate-700">
+                    <i class="fa-solid fa-gear mr-1"></i> আমল কাস্টমাইজ
+                </button>
+            </div>
+
+            <!-- Prayer Cards -->
+            <div class="dark-box p-5 rounded-2xl space-y-3">
+                <div class="flex justify-between items-center border-b border-slate-700/50 pb-2">
+                    <h4 class="font-bold text-white text-base">দৈনিক পাঁচ ওয়াক্ত সালাত</h4>
+                    <span id="prayerProgressBadge" class="text-xs text-teal-400 bg-teal-950 px-2.5 py-1 rounded-full border border-teal-800">0/5 আদায়</span>
+                </div>
+                <div id="prayerContainer" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5"></div>
+            </div>
+
+            <!-- Custom Amals -->
+            <div class="dark-box p-5 rounded-2xl space-y-3">
+                <h4 class="font-bold text-white text-base border-b border-slate-700/50 pb-2">নফল আমল ও জিকির</h4>
+                <div id="customAmalGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
+            </div>
+
+        </section>
+
+        <!-- ================= MONTHLY REPORT MODAL (Image 6 Style) ================= -->
+        <div id="monthlyAmalModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+            <div class="main-app-shell max-w-lg w-full p-6 space-y-5 border border-slate-700 relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+                
+                <button onclick="closeMonthlyAmalModal()" class="absolute right-4 top-4 text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+
+                <div>
+                    <h3 class="text-2xl font-bold text-white">মাসিক আমল রিপোর্ট</h3>
+                    <p class="text-xs text-slate-400">আপনার সংরক্ষিত আমল ও অগ্রগতির পরিসংখ্যান</p>
+                </div>
+
+                <!-- Selected Month Card (Image 6 Style) -->
+                <div class="dark-box p-4 rounded-xl border border-slate-700">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase">নির্বাচিত মাস</span>
+                    <h4 id="reportMonthTitle" class="text-2xl font-extrabold text-teal-400 mt-0.5">নভেম্বর ২০২৬</h4>
+                </div>
+
+                <!-- 2x2 Stats Grid (Image 6 Layout) -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="dark-box p-4 rounded-xl text-left border-l-4 border-emerald-500">
+                        <span class="text-xs font-semibold text-slate-400">আদায়কৃত সালাত</span>
+                        <h4 id="statPrayerRate" class="text-2xl font-bold text-white mt-1">0%</h4>
+                    </div>
+                    <div class="dark-box p-4 rounded-xl text-left border-l-4 border-amber-500">
+                        <span class="text-xs font-semibold text-slate-400">কাজা সালাত</span>
+                        <h4 id="statKazaCount" class="text-2xl font-bold text-white mt-1">0</h4>
+                    </div>
+                    <div class="dark-box p-4 rounded-xl text-left border-l-4 border-blue-500">
+                        <span class="text-xs font-semibold text-slate-400">মোট দিন</span>
+                        <h4 id="statTotalDays" class="text-2xl font-bold text-white mt-1">0</h4>
+                    </div>
+                    <div class="dark-box p-4 rounded-xl text-left border-l-4 border-purple-500">
+                        <span class="text-xs font-semibold text-slate-400">সম্পন্ন আমল</span>
+                        <h4 id="statCustomAmalsDone" class="text-2xl font-bold text-white mt-1">0</h4>
+                    </div>
+                </div>
+
+                <!-- Log Entries -->
+                <div class="space-y-2 pt-2">
+                    <span class="text-xs font-bold text-slate-400 uppercase">দৈনিক রিপোর্ট সমূহের ইতিহাস</span>
+                    <div id="monthlyHistoryList" class="space-y-2 max-h-44 overflow-y-auto custom-scrollbar pr-1"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ================= OTHER MODALS ================= -->
+        
+        <!-- Word Modal -->
+        <div id="wordModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+            <div class="main-app-shell max-w-md w-full p-6 space-y-4 border border-slate-700 relative">
+                <button onclick="closeWordModal()" class="absolute right-4 top-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <h3 id="wordModalTitle" class="font-bold text-lg text-white border-b border-slate-800 pb-2">নতুন শব্দ যোগ করুন</h3>
+                <form id="wordForm" onsubmit="saveWord(event)" class="space-y-3">
+                    <input type="hidden" id="wordEditId">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">ইংলিশ শব্দ</label>
+                        <input type="text" id="inputWord" required placeholder="Beautiful" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-sm text-white focus:outline-none focus:border-teal-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">উচ্চারণ</label>
+                        <input type="text" id="inputPhonetic" required placeholder="বিউটিফুল" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-sm text-white focus:outline-none focus:border-teal-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">বাংলা অর্থ (কমা দিয়ে)</label>
+                        <input type="text" id="inputMeanings" required placeholder="সুন্দর, মনোমুগ্ধকর" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-sm text-white focus:outline-none focus:border-teal-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">উদাহরণ বাক্য</label>
+                        <textarea id="inputExamples" rows="2" placeholder="She is a beautiful girl." class="w-full px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-sm text-white focus:outline-none focus:border-teal-500"></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-2 space-x-reverse pt-2">
+                        <button type="button" onclick="closeWordModal()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs font-bold">বাতিল</button>
+                        <button type="submit" class="px-5 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-xs font-bold">সংরক্ষণ করুন</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Routine Modal -->
+        <div id="routineModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+            <div class="main-app-shell max-w-md w-full p-6 space-y-4 border border-slate-700 relative">
+                <button onclick="closeRoutineModal()" class="absolute right-4 top-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <h3 class="font-bold text-lg text-white border-b border-slate-800 pb-2">নতুন রুটিন স্লট</h3>
+                <form onsubmit="addRoutineSlot(event)" class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">সময়</label>
+                        <input type="text" id="routineTime" required placeholder="০৬:০০ AM - ০৭:০০ AM" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">কাজের বিবরণ</label>
+                        <input type="text" id="routineTask" required placeholder="পড়াশোনা ও রিভিশন" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div class="flex justify-end space-x-2 space-x-reverse pt-2">
+                        <button type="button" onclick="closeRoutineModal()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs font-bold">বাতিল</button>
+                        <button type="submit" class="px-5 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-xs font-bold">সংরক্ষণ করুন</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Custom Amal Modal -->
+        <div id="customAmalModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+            <div class="main-app-shell max-w-md w-full p-6 space-y-4 border border-slate-700 relative">
+                <button onclick="closeCustomAmalModal()" class="absolute right-4 top-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <h3 class="font-bold text-lg text-white border-b border-slate-800 pb-2">আমল তালিকা কাস্টমাইজ</h3>
+                <form onsubmit="addCustomAmal(event)" class="flex gap-2">
+                    <input type="text" id="newAmalTitle" required placeholder="নতুন আমলের নাম..." class="flex-1 px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-xs text-white">
+                    <button type="submit" class="px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-xl text-xs">যোগ</button>
+                </form>
+                <div id="customAmalsList" class="space-y-2 max-h-44 overflow-y-auto custom-scrollbar"></div>
+            </div>
+        </div>
+
+        <!-- Conversation Topic Modal -->
+        <div id="dialogTopicModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+            <div class="main-app-shell max-w-md w-full p-6 space-y-4 border border-slate-700 relative">
+                <button onclick="closeDialogTopicModal()" class="absolute right-4 top-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <h3 class="font-bold text-lg text-white border-b border-slate-800 pb-2">নতুন কথোপকথন বিষয়</h3>
+                <form onsubmit="saveDialogTopic(event)" class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">শিরোনাম (Topic)</label>
+                        <input type="text" id="topicTitle" required placeholder="ডাক্তারের সাথে কথা" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">বিবরণ</label>
+                        <input type="text" id="topicDesc" placeholder="ডাক্তারের চেম্বারে কথোপকথন" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div class="flex justify-end space-x-2 space-x-reverse pt-2">
+                        <button type="button" onclick="closeDialogTopicModal()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs font-bold">বাতিল</button>
+                        <button type="submit" class="px-5 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-xs font-bold">সংরক্ষণ করুন</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Conversation Message Modal -->
+        <div id="dialogMsgModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+            <div class="main-app-shell max-w-md w-full p-6 space-y-4 border border-slate-700 relative">
+                <button onclick="closeAddMsgModal()" class="absolute right-4 top-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <h3 class="font-bold text-lg text-white border-b border-slate-800 pb-2">নতুন কথোপকথন বার্তা</h3>
+                <form onsubmit="saveDialogMessage(event)" class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">স্পিকার</label>
+                        <input type="text" id="msgSpeaker" required placeholder="Doctor / Patient" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">ইংলিশ বাক্য</label>
+                        <textarea id="msgEng" rows="2" required placeholder="How can I help you?" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-sm text-white"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-1">বাংলা অনুবাদ</label>
+                        <textarea id="msgBn" rows="2" required placeholder="আমি আপনাকে কিভাবে সাহায্য করতে পারি?" class="w-full px-3 py-2 rounded-xl bg-black/60 border border-slate-700 text-sm text-white"></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-2 space-x-reverse pt-2">
+                        <button type="button" onclick="closeAddMsgModal()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs font-bold">বাতিল</button>
+                        <button type="submit" class="px-5 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-xs font-bold">যোগ করুন</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // Data States
+        const DEFAULT_WORDS = [
+            { id: '1', word: 'Beautiful', phonetic: 'বিউটিফুল', meanings: ['সুন্দর', 'মনোমুগ্ধকর'], examples: ['She has a beautiful smile.', 'What a beautiful place!'] },
+            { id: '2', word: 'Perseverance', phonetic: 'পারসিভিয়ারেন্স', meanings: ['অধ্যবসায়', 'সংকল্প'], examples: ['Perseverance leads to ultimate success.'] }
+        ];
+
+        const DEFAULT_DIALOGS = [
+            {
+                id: 'shopping', title: 'কেনাকাটা (Shopping)', description: 'দোকানদারের সাথে কথা বলা',
+                messages: [
+                    { speaker: 'Buyer', text: 'How much is this shirt?', bn: 'এই শার্টটির দাম কত?' },
+                    { speaker: 'Seller', text: 'It is 500 Taka.', bn: 'এটার দাম ৫০০ টাকা।' }
+                ]
+            }
+        ];
+
+        const DEFAULT_ROUTINES = [
+            { id: 'r1', time: '০৫:৩০ AM - ০৬:৩০ AM', task: 'ফজরের সালাত ও তিলওয়াত' },
+            { id: 'r2', time: '০৭:০০ AM - ০৮:০০ AM', task: 'সকালের নাস্তা ও রিভিশন' }
+        ];
+
+        const DEFAULT_PRAYERS = [
+            { id: 'fajr', name: 'ফজর' }, { id: 'dhuhr', name: 'জোহর' },
+            { id: 'asr', name: 'আসর' }, { id: 'maghrib', name: 'মাগরিব' }, { id: 'isha', name: 'এশা' }
+        ];
+
+        const DEFAULT_CUSTOM_AMALS = [
+            { id: 'ca1', name: 'সকাল-সন্ধ্যার জিকির' },
+            { id: 'ca2', name: 'কোরআন তিলওয়াত' }
+        ];
+
+        let vocabList = JSON.parse(localStorage.getItem('app_vocab')) || DEFAULT_WORDS;
+        let taskList = JSON.parse(localStorage.getItem('app_tasks')) || [];
+        let routineList = JSON.parse(localStorage.getItem('app_routine')) || DEFAULT_ROUTINES;
+        let customAmalMaster = JSON.parse(localStorage.getItem('app_custom_amals')) || DEFAULT_CUSTOM_AMALS;
+        let amalLogs = JSON.parse(localStorage.getItem('app_amal_logs')) || {};
+        let dialogTopicsList = JSON.parse(localStorage.getItem('app_dialog_topics')) || DEFAULT_DIALOGS;
+        let activeSelectedTopicId = null;
+        let quizIndex = 0;
+
+        const getTodayKey = () => new Date().toISOString().split('T')[0];
+        let currentTodayKey = getTodayKey();
+
+        if (!amalLogs[currentTodayKey]) {
+            amalLogs[currentTodayKey] = { prayers: { fajr: 'none', dhuhr: 'none', asr: 'none', maghrib: 'none', isha: 'none' }, customs: {} };
+        }
+
+        function saveAllState() {
+            localStorage.setItem('app_vocab', JSON.stringify(vocabList));
+            localStorage.setItem('app_tasks', JSON.stringify(taskList));
+            localStorage.setItem('app_routine', JSON.stringify(routineList));
+            localStorage.setItem('app_custom_amals', JSON.stringify(customAmalMaster));
+            localStorage.setItem('app_amal_logs', JSON.stringify(amalLogs));
+            localStorage.setItem('app_dialog_topics', JSON.stringify(dialogTopicsList));
+        }
+
+        // Navigation
+        function goHome() {
+            document.querySelectorAll('.main-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById('homeGridSection').classList.remove('hidden');
+        }
+
+        function openMainSection(secId) {
+            document.getElementById('homeGridSection').classList.add('hidden');
+            document.querySelectorAll('.main-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`section-${secId}`).classList.remove('hidden');
+
+            if(secId === 'english') {
+                backToEngGrid();
+            }
+        }
+
+        function switchEngSubTab(subId) {
+            document.getElementById('engGridNav').classList.add('hidden');
+            document.getElementById('engSubTabDisplay').classList.remove('hidden');
+
+            document.querySelectorAll('.eng-sub-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`eng-tab-${subId}`).classList.remove('hidden');
+
+            const titles = {
+                'vocab': 'ইংরেজি শব্দভাণ্ডার',
+                'quiz': 'বাংলা থেকে ইংরেজি কুইজ',
+                'dialog': 'কথোপকথন সেকশন',
+                'sentences': 'বাক্য শিক্ষা'
+            };
+            document.getElementById('currentEngSubTitle').innerText = titles[subId] || '';
+
+            if (subId === 'quiz') updateQuizDisplay();
+            if (subId === 'sentences') renderAutoSentences();
+        }
+
+        function backToEngGrid() {
+            document.getElementById('engSubTabDisplay').classList.add('hidden');
+            document.getElementById('engGridNav').classList.remove('hidden');
+        }
+
+        function switchTaskSubTab(subId) {
+            document.querySelectorAll('.task-sub-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`task-tab-${subId}`).classList.remove('hidden');
+
+            if (subId === 'routine') {
+                document.getElementById('btnSubRoutine').className = 'light-card-blue p-6 rounded-2xl text-left flex flex-col justify-between h-40 transition shadow-lg border-2 border-blue-400';
+                document.getElementById('btnSubTasks').className = 'light-card-orange p-6 rounded-2xl text-left flex flex-col justify-between h-40 transition shadow-lg border-2 border-transparent';
+            } else {
+                document.getElementById('btnSubTasks').className = 'light-card-orange p-6 rounded-2xl text-left flex flex-col justify-between h-40 transition shadow-lg border-2 border-amber-500';
+                document.getElementById('btnSubRoutine').className = 'light-card-blue p-6 rounded-2xl text-left flex flex-col justify-between h-40 transition shadow-lg border-2 border-transparent';
+            }
+        }
+
+        // Vocab Logic (Image 3 Style)
+        function renderVocabCards() {
+            const grid = document.getElementById('vocabGrid');
+            const search = document.getElementById('vocabSearch').value.toLowerCase();
+            grid.innerHTML = '';
+
+            const filtered = vocabList.filter(item => 
+                item.word.toLowerCase().includes(search) || 
+                item.meanings.some(m => m.toLowerCase().includes(search))
+            );
+
+            filtered.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "dark-box p-5 rounded-2xl border border-slate-800 space-y-3 relative";
+                
+                const cardNum = String(index + 1).padStart(3, '0');
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                        <span class="text-[10px] font-bold tracking-wider text-slate-400">WORD NO. ${cardNum}</span>
+                        <div class="flex space-x-2 space-x-reverse text-slate-400">
+                            <button onclick="speakWord('${item.word}')" title="উচ্চারণ"><i class="fa-solid fa-volume-high text-xs hover:text-teal-400"></i></button>
+                            <button onclick="editWord('${item.id}')" title="এডিট"><i class="fa-solid fa-pen text-xs hover:text-teal-400"></i></button>
+                            <button onclick="deleteWord('${item.id}')" title="ডিলিট"><i class="fa-solid fa-trash text-xs hover:text-red-400"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="text-center py-2">
+                        <h3 class="text-2xl font-bold text-white tracking-wide">${item.word}</h3>
+                        <p class="text-xs text-teal-400 font-medium mt-0.5">${item.phonetic}</p>
+                    </div>
+
+                    <!-- 3 Horizontal Action Buttons (Image 3 Style) -->
+                    <div class="grid grid-cols-3 gap-1.5 pt-1">
+                        <button onclick="toggleCardDetail('${item.id}', 'pron')" class="py-2 px-1 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-xl text-[11px] font-bold flex flex-col items-center justify-center gap-1">
+                            <i class="fa-solid fa-volume-high text-teal-400"></i>
+                            <span>উচ্চারণ দেখুন</span>
+                        </button>
+                        <button onclick="toggleCardDetail('${item.id}', 'mean')" class="py-2 px-1 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-xl text-[11px] font-bold flex flex-col items-center justify-center gap-1">
+                            <i class="fa-solid fa-book text-amber-400"></i>
+                            <span>অর্থ দেখুন</span>
+                        </button>
+                        <button onclick="toggleCardDetail('${item.id}', 'ex')" class="py-2 px-1 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded-xl text-[11px] font-bold flex flex-col items-center justify-center gap-1">
+                            <i class="fa-solid fa-comment-dots text-purple-400"></i>
+                            <span>উদাহরণ দেখুন</span>
+                        </button>
+                    </div>
+
+                    <!-- Details Area -->
+                    <div id="pron-${item.id}" class="hidden text-center text-xs text-teal-300 bg-teal-950/40 p-2 rounded-xl">🔊 উচ্চারণ: ${item.phonetic}</div>
+                    <div id="mean-${item.id}" class="hidden text-xs text-slate-300 bg-slate-900 p-2.5 rounded-xl font-semibold">অর্থ: ${item.meanings.join(', ')}</div>
+                    <div id="ex-${item.id}" class="hidden text-xs text-slate-300 bg-slate-900 p-2.5 rounded-xl">
+                        <ul class="list-disc pl-4 space-y-1">${(item.examples||[]).map(e=>`<li>${e}</li>`).join('')}</ul>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function toggleCardDetail(id, type) {
+            const el = document.getElementById(`${type}-${id}`);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US';
+                window.speechSynthesis.speak(u);
+            }
+        }
+
+        function openWordModal(editId = null) {
+            document.getElementById('wordForm').reset();
+            document.getElementById('wordEditId').value = '';
+            if (editId) {
+                const w = vocabList.find(x => x.id === editId);
+                if (w) {
+                    document.getElementById('wordEditId').value = w.id;
+                    document.getElementById('inputWord').value = w.word;
+                    document.getElementById('inputPhonetic').value = w.phonetic;
+                    document.getElementById('inputMeanings').value = w.meanings.join(', ');
+                    document.getElementById('inputExamples').value = (w.examples||[]).join('; ');
+                }
+            }
+            document.getElementById('wordModal').classList.remove('hidden');
+        }
+        function closeWordModal() { document.getElementById('wordModal').classList.add('hidden'); }
+
+        function saveWord(e) {
+            e.preventDefault();
+            const id = document.getElementById('wordEditId').value;
+            const word = document.getElementById('inputWord').value.trim();
+            const phonetic = document.getElementById('inputPhonetic').value.trim();
+            const meanings = document.getElementById('inputMeanings').value.split(',').map(s=>s.trim()).filter(Boolean);
+            const examples = document.getElementById('inputExamples').value.split(';').map(s=>s.trim()).filter(Boolean);
+
+            if (id) {
+                const idx = vocabList.findIndex(w => w.id === id);
+                if (idx !== -1) vocabList[idx] = { id, word, phonetic, meanings, examples };
+            } else {
+                vocabList.push({ id: Date.now().toString(), word, phonetic, meanings, examples });
+            }
+            saveAllState();
+            renderVocabCards();
+            closeWordModal();
+        }
+        function editWord(id) { openWordModal(id); }
+        function deleteWord(id) {
+            vocabList = vocabList.filter(w => w.id !== id);
+            saveAllState();
+            renderVocabCards();
+        }
+
+        // Quiz Logic
+        function updateQuizDisplay() {
+            if (vocabList.length === 0) return;
+            if (quizIndex >= vocabList.length) quizIndex = 0;
+            if (quizIndex < 0) quizIndex = vocabList.length - 1;
+
+            const item = vocabList[quizIndex];
+            document.getElementById('q1Meaning').innerText = item.meanings.join(', ');
+            document.getElementById('q2Meaning').innerText = item.meanings.join(', ');
+            document.getElementById('q1Answer').innerHTML = `<span class="text-emerald-400 text-xl font-bold">English: ${item.word}</span>`;
+            document.getElementById('quizCounter').innerText = `${quizIndex + 1}/${vocabList.length}`;
+            document.getElementById('quizInput').value = '';
+            document.getElementById('quizFeedback').innerText = '';
+            document.getElementById('q1Answer').classList.add('hidden');
+        }
+
+        function checkQuizAnswer() {
+            if (vocabList.length === 0) return;
+            const item = vocabList[quizIndex];
+            const val = document.getElementById('quizInput').value.trim().toLowerCase();
+            const fb = document.getElementById('quizFeedback');
+            if (val === item.word.toLowerCase()) {
+                fb.className = "text-xs text-center font-bold text-emerald-400 mt-2";
+                fb.innerText = "🎉 উত্তর সঠিক হয়েছে!";
+            } else {
+                fb.className = "text-xs text-center font-bold text-red-400 mt-2";
+                fb.innerText = `❌ ভুল হয়েছে! সঠিক উত্তর: ${item.word}`;
+            }
+        }
+        function nextQuizCard() { quizIndex++; updateQuizDisplay(); }
+        function prevQuizCard() { quizIndex--; updateQuizDisplay(); }
+
+        // Conversations
+        function renderDialogTopics() {
+            const container = document.getElementById('dialogTopicsList');
+            container.innerHTML = '';
+            dialogTopicsList.forEach(dialog => {
+                const btn = document.createElement('div');
+                btn.className = "p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-teal-500 cursor-pointer flex justify-between items-center";
+                btn.onclick = () => loadDialog(dialog.id);
+                btn.innerHTML = `
+                    <div>
+                        <h5 class="font-bold text-xs text-white">${dialog.title}</h5>
+                        <p class="text-[10px] text-slate-400">${dialog.description}</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); deleteDialogTopic('${dialog.id}')" class="text-slate-500 hover:text-red-400 text-xs"><i class="fa-solid fa-trash"></i></button>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        function loadDialog(dialogId) {
+            activeSelectedTopicId = dialogId;
+            const dialog = dialogTopicsList.find(d => d.id === dialogId);
+            if (!dialog) return;
+
+            document.getElementById('dialogTitle').innerText = dialog.title;
+            document.getElementById('dialogDesc').innerText = dialog.description;
+            document.getElementById('dialogActionBtns').classList.remove('hidden');
+
+            const chatBox = document.getElementById('dialogChatBox');
+            chatBox.innerHTML = '';
+            (dialog.messages || []).forEach((msg, idx) => {
+                const div = document.createElement('div');
+                div.className = "p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1";
+                div.innerHTML = `
+                    <div class="flex justify-between text-[10px] text-teal-400 font-bold">
+                        <span>${msg.speaker}</span>
+                        <button onclick="speakWord('${msg.text.replace(/'/g, "\\'")}')">🔊</button>
+                    </div>
+                    <p class="text-xs font-semibold text-white">${msg.text}</p>
+                    <p class="text-[11px] text-slate-400 border-t border-slate-800/60 pt-1">${msg.bn}</p>
+                `;
+                chatBox.appendChild(div);
+            });
+        }
+
+        function openDialogTopicModal() { document.getElementById('dialogTopicModal').classList.remove('hidden'); }
+        function closeDialogTopicModal() { document.getElementById('dialogTopicModal').classList.add('hidden'); }
+
+        function saveDialogTopic(e) {
+            e.preventDefault();
+            const title = document.getElementById('topicTitle').value.trim();
+            const description = document.getElementById('topicDesc').value.trim() || '';
+            if (title) {
+                const newId = 'dt_' + Date.now();
+                dialogTopicsList.push({ id: newId, title, description, messages: [] });
+                saveAllState();
+                renderDialogTopics();
+                loadDialog(newId);
+                closeDialogTopicModal();
+            }
+        }
+        function deleteDialogTopic(id) {
+            dialogTopicsList = dialogTopicsList.filter(d => d.id !== id);
+            saveAllState();
+            renderDialogTopics();
+        }
+
+        function openAddMsgModal() { if (activeSelectedTopicId) document.getElementById('dialogMsgModal').classList.remove('hidden'); }
+        function closeAddMsgModal() { document.getElementById('dialogMsgModal').classList.add('hidden'); }
+
+        function saveDialogMessage(e) {
+            e.preventDefault();
+            const speaker = document.getElementById('msgSpeaker').value.trim();
+            const text = document.getElementById('msgEng').value.trim();
+            const bn = document.getElementById('msgBn').value.trim();
+
+            const topic = dialogTopicsList.find(d => d.id === activeSelectedTopicId);
+            if (topic && speaker && text && bn) {
+                if (!topic.messages) topic.messages = [];
+                topic.messages.push({ speaker, text, bn });
+                saveAllState();
+                loadDialog(activeSelectedTopicId);
+                closeAddMsgModal();
+            }
+        }
+
+        function renderAutoSentences() {
+            const container = document.getElementById('sentenceList');
+            container.innerHTML = '';
+            vocabList.forEach(w => {
+                (w.examples || []).forEach(ex => {
+                    const card = document.createElement('div');
+                    card.className = "p-3 rounded-xl bg-slate-900 border border-slate-800 flex justify-between items-center text-xs";
+                    card.innerHTML = `
+                        <div>
+                            <span class="text-[10px] text-teal-400 font-bold block">${w.word}</span>
+                            <span class="text-white font-medium">${ex}</span>
+                        </div>
+                        <button onclick="speakWord('${ex.replace(/'/g, "\\'")}')" class="text-slate-400 hover:text-teal-400">🔊</button>
+                    `;
+                    container.appendChild(card);
+                });
+            });
+        }
+
+        // Tasks & Routine
+        function handleAddTask(e) {
+            e.preventDefault();
+            const title = document.getElementById('taskTitle').value.trim();
+            const priority = document.getElementById('taskPriority').value;
+            const timing = document.getElementById('taskTiming').value;
+            if (title) {
+                taskList.push({ id: Date.now().toString(), title, priority, timing, completed: false });
+                saveAllState();
+                renderTasks();
+                document.getElementById('taskForm').reset();
+            }
+        }
+
+        function renderTasks() {
+            const highList = document.getElementById('highTaskList');
+            const normalList = document.getElementById('normalTaskList');
+            highList.innerHTML = ''; normalList.innerHTML = '';
+
+            taskList.forEach(task => {
+                const card = document.createElement('div');
+                card.className = `p-2.5 rounded-xl border flex items-center justify-between text-xs ${task.completed ? 'bg-slate-900/30 border-slate-800 opacity-50' : 'bg-slate-900 border-slate-800'}`;
+                card.innerHTML = `
+                    <div class="flex items-center space-x-2 space-x-reverse">
+                        <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask('${task.id}')">
+                        <span class="${task.completed ? 'line-through text-slate-500' : 'text-slate-200'} font-semibold">${task.title}</span>
+                    </div>
+                    <button onclick="deleteTask('${task.id}')" class="text-slate-500 hover:text-red-400"><i class="fa-solid fa-xmark"></i></button>
+                `;
+                if (task.priority === 'high') highList.appendChild(card);
+                else normalList.appendChild(card);
+            });
+        }
+
+        function toggleTask(id) {
+            const t = taskList.find(x => x.id === id);
+            if (t) { t.completed = !t.completed; saveAllState(); renderTasks(); }
+        }
+        function deleteTask(id) {
+            taskList = taskList.filter(t => t.id !== id);
+            saveAllState();
+            renderTasks();
+        }
+
+        function renderRoutine() {
+            const container = document.getElementById('routineTimeline');
+            container.innerHTML = '';
+            routineList.forEach(r => {
+                const item = document.createElement('div');
+                item.className = "p-3 rounded-xl bg-slate-900 border border-slate-800 flex justify-between items-center text-xs";
+                item.innerHTML = `
+                    <div class="flex items-center space-x-3 space-x-reverse">
+                        <span class="text-teal-400 font-bold bg-teal-950/60 px-2 py-1 rounded-md text-[11px]">${r.time}</span>
+                        <span class="text-slate-200 font-semibold">${r.task}</span>
+                    </div>
+                    <button onclick="deleteRoutine('${r.id}')" class="text-slate-500 hover:text-red-400"><i class="fa-solid fa-xmark"></i></button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function openRoutineModal() { document.getElementById('routineModal').classList.remove('hidden'); }
+        function closeRoutineModal() { document.getElementById('routineModal').classList.add('hidden'); }
+
+        function addRoutineSlot(e) {
+            e.preventDefault();
+            const time = document.getElementById('routineTime').value.trim();
+            const task = document.getElementById('routineTask').value.trim();
+            if (time && task) {
+                routineList.push({ id: Date.now().toString(), time, task });
+                saveAllState();
+                renderRoutine();
+                closeRoutineModal();
+            }
+        }
+        function deleteRoutine(id) {
+            routineList = routineList.filter(r => r.id !== id);
+            saveAllState();
+            renderRoutine();
+        }
+
+        // Amal Tracker
+        function renderAmalTracker() {
+            const todayLog = amalLogs[currentTodayKey] || { prayers: {}, customs: {} };
+
+            // Prayers
+            const prayerContainer = document.getElementById('prayerContainer');
+            prayerContainer.innerHTML = '';
+            let doneCount = 0;
+
+            DEFAULT_PRAYERS.forEach(p => {
+                const st = todayLog.prayers[p.id] || 'none';
+                if (st === 'ada') doneCount++;
+
+                const card = document.createElement('div');
+                card.className = "dark-box p-3 rounded-xl text-center space-y-2 border border-slate-800";
+                card.innerHTML = `
+                    <span class="font-bold text-sm text-white block">${p.name}</span>
+                    <div class="flex flex-col gap-1">
+                        <button onclick="setPrayerStatus('${p.id}', 'ada')" class="py-1 text-[11px] font-bold rounded-lg ${st === 'ada' ? 'bg-emerald-600 text-white' : 'bg-slate-900 text-slate-400'}">আদায়</button>
+                        <button onclick="setPrayerStatus('${p.id}', 'kaza')" class="py-1 text-[11px] font-bold rounded-lg ${st === 'kaza' ? 'bg-amber-600 text-white' : 'bg-slate-900 text-slate-400'}">কাজা</button>
+                    </div>
+                `;
+                prayerContainer.appendChild(card);
+            });
+            document.getElementById('prayerProgressBadge').innerText = `${doneCount}/5 আদায়`;
+
+            // Custom Amals
+            const customGrid = document.getElementById('customAmalGrid');
+            customGrid.innerHTML = '';
+            customAmalMaster.forEach(ca => {
+                const isChecked = !!todayLog.customs[ca.id];
+                const card = document.createElement('div');
+                card.className = `p-3 rounded-xl border flex items-center justify-between cursor-pointer ${isChecked ? 'bg-teal-950/40 border-teal-600 text-teal-300' : 'bg-slate-900 border-slate-800 text-slate-300'}`;
+                card.onclick = () => toggleCustomAmal(ca.id);
+                card.innerHTML = `
+                    <span class="text-xs font-semibold">${ca.name}</span>
+                    <div class="w-4 h-4 rounded border flex items-center justify-center text-[10px] ${isChecked ? 'bg-teal-500 border-teal-500 text-black' : 'border-slate-700'}">
+                        ${isChecked ? '<i class="fa-solid fa-check"></i>' : ''}
+                    </div>
+                `;
+                customGrid.appendChild(card);
+            });
+        }
+
+        function setPrayerStatus(pId, st) {
+            if (!amalLogs[currentTodayKey]) amalLogs[currentTodayKey] = { prayers: {}, customs: {} };
+            amalLogs[currentTodayKey].prayers[pId] = st;
+            saveAllState();
+            renderAmalTracker();
+        }
+
+        function toggleCustomAmal(caId) {
+            if (!amalLogs[currentTodayKey]) amalLogs[currentTodayKey] = { prayers: {}, customs: {} };
+            const cur = !!amalLogs[currentTodayKey].customs[caId];
+            amalLogs[currentTodayKey].customs[caId] = !cur;
+            saveAllState();
+            renderAmalTracker();
+        }
+
+        function openCustomAmalModal() {
+            const container = document.getElementById('customAmalsList');
+            container.innerHTML = '';
+            customAmalMaster.forEach(ca => {
+                const div = document.createElement('div');
+                div.className = "p-2 bg-slate-900 border border-slate-800 rounded-lg flex justify-between items-center text-xs text-slate-300";
+                div.innerHTML = `<span>${ca.name}</span><button onclick="removeCustomAmal('${ca.id}')" class="text-slate-500 hover:text-red-400"><i class="fa-solid fa-trash"></i></button>`;
+                container.appendChild(div);
+            });
+            document.getElementById('customAmalModal').classList.remove('hidden');
+        }
+        function closeCustomAmalModal() { document.getElementById('customAmalModal').classList.add('hidden'); }
+
+        function addCustomAmal(e) {
+            e.preventDefault();
+            const input = document.getElementById('newAmalTitle');
+            const name = input.value.trim();
+            if (name) {
+                customAmalMaster.push({ id: 'ca_' + Date.now(), name });
+                saveAllState();
+                openCustomAmalModal();
+                renderAmalTracker();
+                input.value = '';
+            }
+        }
+        function removeCustomAmal(id) {
+            customAmalMaster = customAmalMaster.filter(c => c.id !== id);
+            saveAllState();
+            openCustomAmalModal();
+            renderAmalTracker();
+        }
+
+        // Monthly Modal Report (Image 6 Style)
+        function openMonthlyAmalModal() {
+            const list = document.getElementById('monthlyHistoryList');
+            list.innerHTML = '';
+
+            const keys = Object.keys(amalLogs).sort().reverse();
+            let totalDays = keys.length;
+            let totalAda = 0;
+            let totalKaza = 0;
+            let totalCustoms = 0;
+
+            keys.forEach(dateStr => {
+                const log = amalLogs[dateStr];
+                const prayers = log.prayers || {};
+                const ada = Object.values(prayers).filter(v => v === 'ada').length;
+                const kaza = Object.values(prayers).filter(v => v === 'kaza').length;
+                const customs = Object.values(log.customs || {}).filter(Boolean).length;
+
+                totalAda += ada;
+                totalKaza += kaza;
+                totalCustoms += customs;
+
+                const item = document.createElement('div');
+                item.className = "p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex justify-between items-center text-xs";
+                item.innerHTML = `
+                    <span class="font-bold text-slate-300">${dateStr}</span>
+                    <span class="text-teal-400 font-bold">আদায়: ${ada}/৫ (${kaza} কাজা)</span>
+                `;
+                list.appendChild(item);
+            });
+
+            document.getElementById('statTotalDays').innerText = totalDays;
+            const rate = totalDays > 0 ? Math.round((totalAda / (totalDays * 5)) * 100) : 0;
+            document.getElementById('statPrayerRate').innerText = `${rate}%`;
+            document.getElementById('statKazaCount').innerText = totalKaza;
+            document.getElementById('statCustomAmalsDone').innerText = totalCustoms;
+
+            document.getElementById('monthlyAmalModal').classList.remove('hidden');
+        }
+        function closeMonthlyAmalModal() { document.getElementById('monthlyAmalModal').classList.add('hidden'); }
+
+        // Live Clock
+        function updateClock() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            document.getElementById('liveClock').innerText = `${now.toLocaleDateString('bn-BD', options)} | ${now.toLocaleTimeString('bn-BD')}`;
+        }
+
+        window.onload = function() {
+            setInterval(updateClock, 1000);
+            updateClock();
+
+            renderVocabCards();
+            renderDialogTopics();
+            renderTasks();
+            renderRoutine();
+            renderAmalTracker();
+
+            if (dialogTopicsList.length > 0) loadDialog(dialogTopicsList[0].id);
+        }
+    </script>
+</body>
+</html>
