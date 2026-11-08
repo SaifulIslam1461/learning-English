@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Master — শিখুন সহজে</title>
+    <title>HAYAT OS — English Master</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -17,13 +17,10 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#f5f3ff',
-                            100: '#ede9fe',
-                            500: '#8b5cf6',
-                            600: '#7c3aed',
-                            700: '#6d28d9',
-                        }
+                        darkBg: '#0b0f19',
+                        cardBg: '#131c2e',
+                        goldAccent: '#f59e0b',
+                        goldText: '#fbbf24'
                     },
                     fontFamily: {
                         bangla: ['"Hind Siliguri"', 'sans-serif'],
@@ -36,337 +33,303 @@
     <style>
         body { font-family: 'Hind Siliguri', sans-serif; }
         .font-en { font-family: 'Poppins', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%); }
-        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
-        .dark .glass-card { background: rgba(30, 41, 59, 0.85); }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+<body class="bg-darkBg text-slate-100 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black">
 
-    <!-- Header -->
-    <header class="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-filter blur-lg border-b border-slate-200 dark:border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('dashboard')">
-                <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/30 font-en">
-                    E
+    <!-- Top Navigation / Header -->
+    <header class="sticky top-0 z-40 bg-darkBg/90 backdrop-blur-md border-b border-slate-800 px-4 py-3">
+        <div class="max-w-md mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-2.5">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 font-bold text-xl flex items-center justify-center shadow-md font-en">
+                    H
                 </div>
                 <div>
-                    <h1 class="font-bold text-lg leading-tight font-en tracking-tight">English Master</h1>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">সহজে ইংরেজি শিখুন</p>
+                    <div class="flex items-center space-x-1.5">
+                        <h1 class="font-bold text-base tracking-wide font-en text-white">HAYAT OS</h1>
+                        <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 font-en">প্রো</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400">আপনার জীবন। আপনার সময়। আপনার বিকাশ।</p>
                 </div>
             </div>
 
             <div class="flex items-center space-x-2">
-                <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition">
+                <button onclick="openAdminModal()" class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 text-amber-400 flex items-center justify-center hover:bg-slate-700 transition">
+                    <i class="fas fa-plus text-sm"></i>
+                </button>
+                <button onclick="toggleDarkMode()" class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 text-amber-400 flex items-center justify-center hover:bg-slate-700 transition">
                     <i class="fas fa-moon dark:hidden"></i>
                     <i class="fas fa-sun hidden dark:inline"></i>
-                </button>
-                <button onclick="openAdminModal()" class="px-3 py-2 rounded-xl bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-medium text-sm hover:bg-purple-200 transition flex items-center gap-1.5">
-                    <i class="fas fa-plus-circle"></i> <span class="hidden sm:inline">নতুন তথ্য</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Main Content Area -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <main class="flex-grow max-w-md w-full mx-auto px-4 py-5 space-y-6">
 
-        <!-- Dashboard View -->
-        <section id="view-dashboard" class="space-y-6">
-            <!-- Welcome Banner -->
-            <div class="gradient-bg rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-purple-500/10 relative overflow-hidden">
-                <div class="relative z-10 max-w-2xl space-y-3">
-                    <div class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-en font-medium tracking-wide">
-                        <i class="fas fa-sparkles mr-1"></i> Daily Motivation
+        <!-- Dashboard Tab -->
+        <section id="view-dashboard" class="space-y-4">
+            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl"></div>
+                <div class="space-y-3 relative z-10">
+                    <div class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-en font-medium">
+                        <i class="fas fa-sparkles mr-1"></i> Welcome Dashboard
                     </div>
-                    <h2 class="text-2xl sm:text-3xl font-bold font-en" id="user-greeting">Welcome, Learner!</h2>
-                    <p class="text-purple-100 text-sm sm:text-base leading-relaxed">
-                        "ইংরেজি শেখা কঠিন কিছু নয়। প্রতিদিন অল্প অল্প অনুশীলনই আপনাকে একদিন আত্মবিশ্বাসী করে তুলবে। ভুল করতে ভয় পাবেন না। আজকের ছোট্ট প্রচেষ্টাই আগামী দিনের বড় সাফল্য।"
+                    <h2 class="text-xl font-bold font-en text-white" id="user-greeting">স্বাগতম, Learner!</h2>
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                        "ইংরেজি শেখা কঠিন কিছু নয়। প্রতিদিন অল্প অল্প অনুশীলনই আপনাকে একদিন আত্মবিশ্বাসী করে তুলবে। ভুল করতে ভয় পাবেন না।"
                     </p>
                 </div>
             </div>
 
             <!-- Stats Grid -->
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 shadow-sm flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg">
-                        <i class="fas fa-book"></i>
+            <div class="grid grid-cols-2 gap-3">
+                <div onclick="switchTab('vocab')" class="bg-cardBg border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-amber-500/50 transition">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center"><i class="fas fa-font"></i></div>
+                        <span class="text-xs text-slate-500 font-en" id="stat-vocab-count">0</span>
                     </div>
-                    <div>
-                        <div class="text-xl font-bold font-en" id="stat-vocab">0</div>
-                        <div class="text-xs text-slate-500">শব্দভাণ্ডার</div>
-                    </div>
+                    <h3 class="font-bold text-sm">শব্দভাণ্ডার</h3>
+                    <p class="text-[11px] text-slate-400">১০০টি ইংরেজি শব্দ</p>
                 </div>
-                <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 shadow-sm flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center text-lg">
-                        <i class="fas fa-align-left"></i>
+                <div onclick="switchTab('sentences')" class="bg-cardBg border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-amber-500/50 transition">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center"><i class="fas fa-align-left"></i></div>
+                        <span class="text-xs text-slate-500 font-en" id="stat-sentence-count">0</span>
                     </div>
-                    <div>
-                        <div class="text-xl font-bold font-en" id="stat-sentences">0</div>
-                        <div class="text-xs text-slate-500">বাক্য ভাণ্ডার</div>
-                    </div>
+                    <h3 class="font-bold text-sm">বাক্য ভাণ্ডার</h3>
+                    <p class="text-[11px] text-slate-400">১০০টি প্রয়োজনীয় বাক্য</p>
                 </div>
-                <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 shadow-sm flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg">
-                        <i class="fas fa-comments"></i>
+                <div onclick="switchTab('dialogue')" class="bg-cardBg border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-amber-500/50 transition">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center"><i class="fas fa-comments"></i></div>
+                        <span class="text-xs text-slate-500 font-en">২০টি</span>
                     </div>
-                    <div>
-                        <div class="text-xl font-bold font-en" id="stat-dialogues">0</div>
-                        <div class="text-xs text-slate-500">কথোপকথন</div>
-                    </div>
+                    <h3 class="font-bold text-sm">কথোপকথন</h3>
+                    <p class="text-[11px] text-slate-400">৫ মিনিটের প্র্যাকটিস</p>
                 </div>
-                <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 shadow-sm flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg">
-                        <i class="fas fa-graduation-cap"></i>
+                <div onclick="switchTab('grammar')" class="bg-cardBg border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-amber-500/50 transition">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center"><i class="fas fa-graduation-cap"></i></div>
+                        <span class="text-xs text-slate-500 font-en">৩০টি</span>
                     </div>
-                    <div>
-                        <div class="text-xl font-bold font-en" id="stat-grammar">0</div>
-                        <div class="text-xs text-slate-500">গ্রামার টপিক</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Learning Modules Navigation Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Card 1 -->
-                <div onclick="switchTab('vocab')" class="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200/60 dark:border-slate-700/60 hover:shadow-xl hover:-translate-y-1 transition duration-200 cursor-pointer group">
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-500 text-white flex items-center justify-center text-xl shadow-lg shadow-indigo-500/30 mb-4 group-hover:scale-110 transition duration-200">
-                        <i class="fas fa-font"></i>
-                    </div>
-                    <h3 class="text-lg font-bold font-en group-hover:text-purple-600 transition">Vocabulary</h3>
-                    <p class="text-xs text-slate-500 mt-1">উচ্চারণ, অর্থ ও ব্যবহারসহ প্রয়োজনীয় ১০০টি শব্দ</p>
-                </div>
-                <!-- Card 2 -->
-                <div onclick="switchTab('sentences')" class="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200/60 dark:border-slate-700/60 hover:shadow-xl hover:-translate-y-1 transition duration-200 cursor-pointer group">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-500 text-white flex items-center justify-center text-xl shadow-lg shadow-blue-500/30 mb-4 group-hover:scale-110 transition duration-200">
-                        <i class="fas fa-layer-group"></i>
-                    </div>
-                    <h3 class="text-lg font-bold font-en group-hover:text-blue-600 transition">Sentence Bank</h3>
-                    <p class="text-xs text-slate-500 mt-1">দৈনন্দিন জীবনে ব্যবহারের জন্য বিভিন্ন ক্যাটাগরির বাক্য</p>
-                </div>
-                <!-- Card 3 -->
-                <div onclick="switchTab('dialogue')" class="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200/60 dark:border-slate-700/60 hover:shadow-xl hover:-translate-y-1 transition duration-200 cursor-pointer group">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center text-xl shadow-lg shadow-emerald-500/30 mb-4 group-hover:scale-110 transition duration-200">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3 class="text-lg font-bold font-en group-hover:text-emerald-600 transition">Conversation</h3>
-                    <p class="text-xs text-slate-500 mt-1">বাস্তবমুখী ২০টি টপিকে সুন্দর কথোপকথন অনুশীলন</p>
-                </div>
-                <!-- Card 4 -->
-                <div onclick="switchTab('grammar')" class="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200/60 dark:border-slate-700/60 hover:shadow-xl hover:-translate-y-1 transition duration-200 cursor-pointer group">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-xl shadow-lg shadow-amber-500/30 mb-4 group-hover:scale-110 transition duration-200">
-                        <i class="fas fa-spell-check"></i>
-                    </div>
-                    <h3 class="text-lg font-bold font-en group-hover:text-amber-600 transition">English Grammar</h3>
-                    <p class="text-xs text-slate-500 mt-1">সহজ বাংলা ব্যাখ্যা ও উদাহরণসহ পূর্ণাঙ্গ গ্রামার</p>
+                    <h3 class="font-bold text-sm">গ্রামার</h3>
+                    <p class="text-[11px] text-slate-400">সহজ বাংলা ব্যাখ্যা</p>
                 </div>
             </div>
         </section>
 
-        <!-- Vocabulary View -->
-        <section id="view-vocab" class="hidden space-y-6">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <!-- Vocabulary Tab (Card System) -->
+        <section id="view-vocab" class="hidden space-y-4">
+            <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="text-2xl font-bold font-en">Vocabulary Vault</h2>
-                    <p class="text-sm text-slate-500">বাংলা উচ্চারণ ও অর্থসহ ইংরেজি শব্দ</p>
+                    <h2 class="text-lg font-bold">শব্দভাণ্ডার (Vocabulary)</h2>
+                    <p class="text-xs text-slate-400">কার্ড স্টাইলে শব্দ শিখুন</p>
                 </div>
-                <div class="flex items-center gap-2">
-                    <input type="text" id="vocab-search" oninput="renderVocab()" placeholder="শব্দ খুঁজুন..." class="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
-                </div>
+                <input type="text" id="vocab-search" oninput="renderVocabCards()" placeholder="খুঁজুন..." class="px-3 py-1.5 rounded-xl bg-cardBg border border-slate-800 text-xs focus:outline-none focus:border-amber-500 w-32">
             </div>
-
-            <div id="vocab-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Cards dynamically populated -->
+            
+            <div id="vocab-card-container" class="space-y-4">
+                <!-- Cards will be injected dynamically -->
             </div>
         </section>
 
-        <!-- Sentence Bank View -->
-        <section id="view-sentences" class="hidden space-y-6">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <!-- Sentences Tab (Card System) -->
+        <section id="view-sentences" class="hidden space-y-4">
+            <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="text-2xl font-bold font-en">Sentence Bank</h2>
-                    <p class="text-sm text-slate-500">দৈনন্দিন ব্যবহারের গুরুত্বপূর্ণ বাক্য</p>
+                    <h2 class="text-lg font-bold">বাক্য ভাণ্ডার (Sentence Bank)</h2>
+                    <p class="text-xs text-slate-400">দৈনন্দিন জীবনের বাক্য</p>
                 </div>
-                <input type="text" id="sentence-search" oninput="renderSentences()" placeholder="বাক্য খুঁজুন..." class="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <input type="text" id="sentence-search" oninput="renderSentenceCards()" placeholder="খুঁজুন..." class="px-3 py-1.5 rounded-xl bg-cardBg border border-slate-800 text-xs focus:outline-none focus:border-amber-500 w-32">
             </div>
-
-            <div id="sentence-list" class="space-y-3">
-                <!-- Sentences populated dynamically -->
-            </div>
-        </section>
-
-        <!-- Dialogue View -->
-        <section id="view-dialogue" class="hidden space-y-6">
-            <div>
-                <h2 class="text-2xl font-bold font-en">Conversation Practice</h2>
-                <p class="text-sm text-slate-500">বাস্তব জীবনের কথোপকথন অনুশীলন করুন</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div id="dialogue-topics" class="space-y-2 md:col-span-1">
-                    <!-- Topics populated dynamically -->
-                </div>
-                <div id="dialogue-content" class="md:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700">
-                    <p class="text-center text-slate-400 py-10">বাম পাশ থেকে যেকোনো একটি Conversation টপিক নির্বাচন করুন</p>
-                </div>
+            
+            <div id="sentence-card-container" class="space-y-4">
+                <!-- Cards will be injected dynamically -->
             </div>
         </section>
 
-        <!-- Grammar View -->
-        <section id="view-grammar" class="hidden space-y-6">
+        <!-- Conversation Tab -->
+        <section id="view-dialogue" class="hidden space-y-4">
             <div>
-                <h2 class="text-2xl font-bold font-en">English Grammar Masterclass</h2>
-                <p class="text-sm text-slate-500">সহজ নিয়মে বাংলা ভাষায় গ্রামার শিখুন</p>
+                <h2 class="text-lg font-bold">কথোপকথন (Conversation)</h2>
+                <p class="text-xs text-slate-400">বাস্তবমুখী কথোপকথন অনুশীলন</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div id="grammar-topics" class="space-y-2 md:col-span-1">
-                    <!-- Grammar list populated dynamically -->
-                </div>
-                <div id="grammar-content" class="md:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700">
-                    <p class="text-center text-slate-400 py-10">বাম পাশ থেকে যেকোনো একটি Grammar টপিক নির্বাচন করুন</p>
-                </div>
+            <div class="space-y-3" id="dialogue-card-container">
+                <!-- Dialogues injected dynamically -->
+            </div>
+        </section>
+
+        <!-- Grammar Tab -->
+        <section id="view-grammar" class="hidden space-y-4">
+            <div>
+                <h2 class="text-lg font-bold">ইংরেজি গ্রামার (Grammar)</h2>
+                <p class="text-xs text-slate-400">সহজ নিয়মে গ্রামার শিখুন</p>
+            </div>
+            <div class="space-y-3" id="grammar-card-container">
+                <!-- Grammar injected dynamically -->
             </div>
         </section>
 
     </main>
 
-    <!-- Content Creation Modal -->
-    <div id="admin-modal" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+    <!-- Admin/Add Modal -->
+    <div id="admin-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-cardBg border border-slate-800 rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
             <div class="flex justify-between items-center">
-                <h3 class="font-bold text-lg">নতুন কন্টেন্ট যোগ করুন</h3>
-                <button onclick="closeAdminModal()" class="text-slate-400 hover:text-slate-600"><i class="fas fa-times"></i></button>
+                <h3 class="font-bold text-sm text-amber-400">নতুন তথ্য যোগ করুন</h3>
+                <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
             </div>
-            <select id="modal-type" class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent text-sm">
+            <select id="modal-type" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs">
                 <option value="vocab">Vocabulary Word</option>
                 <option value="sentence">Sentence</option>
             </select>
-            <input type="text" id="modal-en" placeholder="English Text" class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent text-sm">
-            <input type="text" id="modal-pron" placeholder="বাংলা উচ্চারণ" class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent text-sm">
-            <input type="text" id="modal-bn" placeholder="বাংলা অর্থ" class="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-transparent text-sm">
-            <button onclick="saveNewContent()" class="w-full py-2.5 rounded-xl gradient-bg text-white font-medium text-sm shadow-md">সংরক্ষণ করুন</button>
+            <input type="text" id="modal-en" placeholder="English Word/Sentence" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+            <input type="text" id="modal-pron" placeholder="বাংলা উচ্চারণ" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+            <input type="text" id="modal-bn" placeholder="বাংলা অর্থ" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+            <button onclick="saveNewContent()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs shadow-lg">সংরক্ষণ করুন</button>
         </div>
     </div>
 
-    <!-- Mobile Navigation Bar -->
-    <nav class="sticky bottom-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800">
-        <div class="max-w-md mx-auto flex justify-around py-2">
-            <button onclick="switchTab('dashboard')" class="flex flex-col items-center text-purple-600 dark:text-purple-400 text-xs font-medium">
-                <i class="fas fa-home text-lg mb-0.5"></i> হোম
+    <!-- Bottom Navigation Bar (Matching Hayat OS UI) -->
+    <nav class="sticky bottom-0 z-40 bg-cardBg/95 backdrop-blur-md border-t border-slate-800 py-2 px-3">
+        <div class="max-w-md mx-auto flex justify-around items-center">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="flex flex-col items-center text-amber-400 text-[11px] font-medium transition">
+                <i class="fas fa-home text-base mb-0.5"></i> হোম
             </button>
-            <button onclick="switchTab('vocab')" class="flex flex-col items-center text-slate-500 dark:text-slate-400 hover:text-purple-600 text-xs font-medium">
-                <i class="fas fa-font text-lg mb-0.5"></i> শব্দভাণ্ডার
+            <button onclick="switchTab('vocab')" id="nav-vocab" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[11px] font-medium transition">
+                <i class="fas fa-book text-base mb-0.5"></i> শব্দভাণ্ডার
             </button>
-            <button onclick="switchTab('sentences')" class="flex flex-col items-center text-slate-500 dark:text-slate-400 hover:text-purple-600 text-xs font-medium">
-                <i class="fas fa-layer-group text-lg mb-0.5"></i> বাক্য
+            <button onclick="switchTab('sentences')" id="nav-sentences" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[11px] font-medium transition">
+                <i class="fas fa-align-left text-base mb-0.5"></i> বাক্য
             </button>
-            <button onclick="switchTab('dialogue')" class="flex flex-col items-center text-slate-500 dark:text-slate-400 hover:text-purple-600 text-xs font-medium">
-                <i class="fas fa-comments text-lg mb-0.5"></i> কথোপকথন
+            <button onclick="switchTab('dialogue')" id="nav-dialogue" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[11px] font-medium transition">
+                <i class="fas fa-comments text-base mb-0.5"></i> কথোপকথন
             </button>
-            <button onclick="switchTab('grammar')" class="flex flex-col items-center text-slate-500 dark:text-slate-400 hover:text-purple-600 text-xs font-medium">
-                <i class="fas fa-graduation-cap text-lg mb-0.5"></i> গ্রামার
+            <button onclick="switchTab('grammar')" id="nav-grammar" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[11px] font-medium transition">
+                <i class="fas fa-graduation-cap text-base mb-0.5"></i> গ্রামার
             </button>
         </div>
     </nav>
 
-    <!-- JavaScript Data Logic -->
+    <!-- JavaScript Application Logic -->
     <script>
-        // Storage Logic
-        const defaultVocab = [
-            { id: 1, word: "Achieve", pron: "অ্যাচিভ", bn: "অর্জন করা", ex: "She worked hard to achieve her goal.", exBn: "সে তার লক্ষ্য অর্জন করতে কঠোর পরিশ্রম করেছিল।" },
-            { id: 2, word: "Belief", pron: "বিলিফ", bn: "বিশ্বাস", ex: "Self-belief is key to success.", exBn: "আত্মবিশ্বাস সাফল্যের চাবিকাঠি।" },
-            { id: 3, word: "Curious", pron: "কিউরিয়াস", bn: "কৌতূহলী", ex: "Children are always curious.", exBn: "শিশুরা সবসময় কৌতূহলী হয়।" },
-            { id: 4, word: "Diligent", pron: "ডিলিজেন্ট", bn: "পরিশ্রমী", ex: "He is a diligent student.", exBn: "সে একজন পরিশ্রমী ছাত্র।" }
+        // Initial Data Arrays (100 words & sentences simulation ready structure)
+        let vocabList = JSON.parse(localStorage.getItem("hayat_vocab")) || [
+            { id: 1, word: "Fare", pron: "ফেয়ার", bn: "ভাড়া", ex: "What is the bus fare?", exBn: "বাস ভাড়া কত?" },
+            { id: 2, word: "Destination", pron: "ডেসটিনেশন", bn: "গন্তব্য", ex: "We reached our destination.", exBn: "আমরা আমাদের গন্তব্যে পৌঁছলাম।" },
+            { id: 3, word: "Reasonable", pron: "রিজেনেবল", bn: "যৌক্তিক / সহনীয়", ex: "The price is reasonable.", exBn: "দামটি যৌক্তিক।" },
+            { id: 4, word: "Achieve", pron: "অ্যাচিভ", bn: "অর্জন করা", ex: "Work hard to achieve success.", exBn: "সাফল্য অর্জনের জন্য কঠোর পরিশ্রম করো।" }
         ];
 
-        const defaultSentences = [
-            { id: 1, en: "Could you please help me?", pron: "কুড ইউ প্লিজ হেল্প মি?", bn: "আপনি কি আমাকে একটু সাহায্য করতে পারবেন?" },
-            { id: 2, en: "Nice to meet you.", pron: "নাইস টু মিট ইউ।", bn: "আপনার সাথে দেখা হয়ে ভালো লাগলো।" },
-            { id: 3, en: "What do you do?", pron: "হোয়াট ডু ইউ ডু?", bn: "আপনি কি কাজ করেন?" }
+        let sentenceList = JSON.parse(localStorage.getItem("hayat_sentences")) || [
+            { id: 1, en: "How are you?", pron: "হাউ আর ইউ?", bn: "আপনি কেমন আছেন?" },
+            { id: 2, en: "Could you please help me?", pron: "কুড ইউ প্লিজ হেল্প মি?", bn: "আপনি কি আমাকে একটু সাহায্য করতে পারবেন?" },
+            { id: 3, en: "Nice to meet you.", pron: "নাইস টু মিট ইউ।", bn: "আপনার সাথে দেখা হয়ে ভালো লাগলো।" }
         ];
 
-        const defaultDialogues = [
-            {
-                id: 1,
-                title: "Introducing Yourself",
-                conversation: [
-                    { speaker: "Rahim", en: "Hello! My name is Rahim. What is your name?", pron: "হ্যালো! মাই নেম ইজ রহিম। হোয়াট ইজ ইউর নেম?", bn: "হ্যালো! আমার নাম রহিম। আপনার নাম কি?" },
-                    { speaker: "Karim", en: "Hi Rahim! I am Karim. Nice to meet you.", pron: "হাই রহিম! আই অ্যাম করিম। নাইস টু মিট ইউ।", bn: "হাই রহিম! আমি করিম। আপনার সাথে দেখা হয়ে ভালো লাগলো।" }
-                ]
-            }
+        const sampleDialogues = [
+            { title: "Introducing Yourself", desc: "নিজের পরিচয় দেওয়া সম্পর্কিত কথোপকথন", text: "Rahim: Hello! My name is Rahim.\nKarim: Hi Rahim! I am Karim, nice to meet you." },
+            { title: "At the Market", desc: "বাজারে কেনাকাটার সময় কথোপকথন", text: "Buyer: How much is this?\nSeller: It is 100 Taka." }
         ];
 
-        const defaultGrammar = [
-            {
-                id: 1,
-                title: "Parts of Speech",
-                desc: "ইংরেজি ভাষায় ব্যবহৃত প্রতিটি শব্দকে তাদের কাজ অনুযায়ী ৮টি ভাগে ভাগ করা হয়েছে। এদের Parts of Speech বলে।",
-                types: ["Noun (বিশেষ্য)", "Pronoun (সর্বনাম)", "Verb (ক্রিয়া)", "Adjective (বিশেষণ)", "Adverb (ক্রিয়া বিশেষণ)", "Preposition (পদান্বয়ী অব্যয়)", "Conjunction (সংযোজক অব্যয়)", "Interjection (আবেগসূচক অব্যয়)"]
-            },
-            {
-                id: 2,
-                title: "Tense (কাল)",
-                desc: "কোনো কাজ সম্পাদনের সময় বা কালকে Tense বলে। এটি প্রধানত ৩ প্রকার:",
-                types: ["Present Tense (বর্তমান কাল)", "Past Tense ( অতীত কাল )", "Future Tense (ভবিষ্যৎ কাল)"]
-            }
+        const sampleGrammar = [
+            { title: "Parts of Speech", desc: "বাক্যে ব্যবহৃত প্রতিটি শব্দকে Parts of Speech বলে। এটি ৮ প্রকার।" },
+            { title: "Tense (কাল)", desc: "কোনো কাজ সম্পাদনের সময়কে Tense বলে। এটি Present, Past এবং Future তিন প্রকার।" }
         ];
-
-        // State Init
-        let vocabList = JSON.parse(localStorage.getItem("app_vocab")) || defaultVocab;
-        let sentenceList = JSON.parse(localStorage.getItem("app_sentences")) || defaultSentences;
 
         function updateStats() {
-            document.getElementById("stat-vocab").innerText = vocabList.length;
-            document.getElementById("stat-sentences").innerText = sentenceList.length;
-            document.getElementById("stat-dialogues").innerText = defaultDialogues.length;
-            document.getElementById("stat-grammar").innerText = defaultGrammar.length;
+            document.getElementById("stat-vocab-count").innerText = vocabList.length + "টি";
+            document.getElementById("stat-sentence-count").innerText = sentenceList.length + "টি";
         }
 
         function switchTab(tabId) {
             ['dashboard', 'vocab', 'sentences', 'dialogue', 'grammar'].forEach(id => {
-                document.getElementById(`view-${id}`).classList.add('hidden');
+                const el = document.getElementById(`view-${id}`);
+                if(el) el.classList.add('hidden');
+                const nav = document.getElementById(`nav-${id}`);
+                if(nav) {
+                    nav.classList.remove('text-amber-400');
+                    nav.classList.add('text-slate-400');
+                }
             });
-            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+            
+            const activeView = document.getElementById(`view-${tabId}`);
+            if(activeView) activeView.classList.remove('hidden');
+            
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if(activeNav) {
+                activeNav.classList.remove('text-slate-400');
+                activeNav.classList.add('text-amber-400');
+            }
 
-            if (tabId === 'vocab') renderVocab();
-            if (tabId === 'sentences') renderSentences();
-            if (tabId === 'dialogue') renderDialogues();
-            if (tabId === 'grammar') renderGrammar();
+            if(tabId === 'vocab') renderVocabCards();
+            if(tabId === 'sentences') renderSentenceCards();
+            if(tabId === 'dialogue') renderDialogues();
+            if(tabId === 'grammar') renderGrammar();
         }
 
-        function renderVocab() {
+        function renderVocabCards() {
             const query = document.getElementById("vocab-search").value.toLowerCase();
-            const container = document.getElementById("vocab-grid");
+            const container = document.getElementById("vocab-card-container");
             container.innerHTML = "";
+
+            const filtered = vocabList.filter(v => v.word.toLowerCase().includes(query) || v.bn.includes(query));
             
-            vocabList.filter(v => v.word.toLowerCase().includes(query) || v.bn.includes(query)).forEach(item => {
+            if(filtered.length === 0) {
+                container.innerHTML = `<p class="text-center text-xs text-slate-500 py-6">কোনো শব্দ পাওয়া যায়নি</p>`;
+                return;
+            }
+
+            filtered.forEach((item, index) => {
                 container.innerHTML += `
-                    <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2 shadow-sm">
-                        <div class="flex justify-between items-start">
-                            <h4 class="font-bold font-en text-lg text-purple-600 dark:text-purple-400">${item.word}</h4>
-                            <span class="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-500">${item.pron}</span>
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 space-y-3 shadow-lg relative">
+                        <div class="flex justify-between items-center text-xs text-amber-400 font-en">
+                            <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">সিরিয়াল: #${index + 1}</span>
+                            <div class="space-x-2 text-slate-400">
+                                <button onclick="deleteVocab(${item.id})" class="hover:text-red-400"><i class="fas fa-trash"></i></button>
+                            </div>
                         </div>
-                        <p class="font-semibold text-slate-700 dark:text-slate-200">${item.bn}</p>
-                        <div class="pt-2 border-t border-slate-100 dark:border-slate-700 text-xs text-slate-500 space-y-1">
-                            <p class="font-en italic">Ex: "${item.ex}"</p>
-                            <p>অর্থ: ${item.exBn}</p>
+                        <div class="text-center space-y-1 py-2">
+                            <p class="text-xs text-slate-400 uppercase tracking-wider font-en">১. English Word</p>
+                            <div class="flex items-center justify-center space-x-2">
+                                <h3 class="text-xl font-bold font-en text-white">${item.word}</h3>
+                                <button onclick="alert('উচ্চারণ: ${item.pron}\\nঅর্থ: ${item.bn}')" class="w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs"><i class="fas fa-volume-high"></i></button>
+                            </div>
+                            <p class="text-xs text-slate-400 pt-1">উচ্চারণ: <span class="text-amber-300 font-medium">${item.pron}</span> | অর্থ: <span class="text-emerald-400 font-medium">${item.bn}</span></p>
+                        </div>
+                        <div class="pt-2 border-t border-slate-800/80 text-center text-[11px] text-slate-400">
+                            উদাহরণ: <span class="italic text-slate-300 font-en">"${item.ex}"</span> (${item.exBn})
                         </div>
                     </div>
                 `;
             });
         }
 
-        function renderSentences() {
+        function renderSentenceCards() {
             const query = document.getElementById("sentence-search").value.toLowerCase();
-            const container = document.getElementById("sentence-list");
+            const container = document.getElementById("sentence-card-container");
             container.innerHTML = "";
 
-            sentenceList.filter(s => s.en.toLowerCase().includes(query) || s.bn.includes(query)).forEach(item => {
+            const filtered = sentenceList.filter(s => s.en.toLowerCase().includes(query) || s.bn.includes(query));
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<p class="text-center text-xs text-slate-500 py-6">কোনো বাক্য পাওয়া যায়নি</p>`;
+                return;
+            }
+
+            filtered.forEach((item, index) => {
                 container.innerHTML += `
-                    <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-sm">
-                        <div>
-                            <p class="font-bold font-en text-indigo-600 dark:text-indigo-400">${item.en}</p>
-                            <p class="text-xs text-slate-400 font-en mb-1">${item.pron}</p>
-                            <p class="text-sm font-medium text-slate-700 dark:text-slate-300">${item.bn}</p>
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 space-y-3 shadow-lg relative">
+                        <div class="flex justify-between items-center text-xs text-amber-400 font-en">
+                            <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">বাক্য: #${index + 1}</span>
+                            <button onclick="deleteSentence(${item.id})" class="text-slate-400 hover:text-red-400"><i class="fas fa-trash"></i></button>
+                        </div>
+                        <div class="text-center space-y-1.5 py-2">
+                            <h3 class="text-base font-bold font-en text-white">${item.en}</h3>
+                            <p class="text-xs text-amber-300">${item.pron}</p>
+                            <p class="text-sm font-medium text-emerald-400">${item.bn}</p>
                         </div>
                     </div>
                 `;
@@ -374,79 +337,36 @@
         }
 
         function renderDialogues() {
-            const topicsContainer = document.getElementById("dialogue-topics");
-            topicsContainer.innerHTML = "";
-
-            defaultDialogues.forEach((d, index) => {
-                topicsContainer.innerHTML += `
-                    <button onclick="loadDialogueContent(${d.id})" class="w-full text-left p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-purple-500 font-medium text-sm transition">
-                        ${d.title}
-                    </button>
-                `;
-            });
-            if(defaultDialogues.length > 0) loadDialogueContent(defaultDialogues[0].id);
-        }
-
-        function loadDialogueContent(id) {
-            const item = defaultDialogues.find(d => d.id === id);
-            const container = document.getElementById("dialogue-content");
-            
-            let html = `<h3 class="font-bold text-xl font-en mb-4 text-purple-600">${item.title}</h3><div class="space-y-4">`;
-            item.conversation.forEach(c => {
-                html += `
-                    <div class="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl space-y-1">
-                        <span class="text-xs font-bold font-en text-indigo-500">${c.speaker}</span>
-                        <p class="font-bold font-en text-slate-800 dark:text-slate-100">${c.en}</p>
-                        <p class="text-xs text-slate-400">${c.pron}</p>
-                        <p class="text-sm text-slate-600 dark:text-slate-300">${c.bn}</p>
+            const container = document.getElementById("dialogue-card-container");
+            container.innerHTML = "";
+            sampleDialogues.forEach((d, index) => {
+                container.innerHTML += `
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-4 space-y-2">
+                        <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-en">টপিক #${index + 1}</span>
+                        <h3 class="font-bold text-sm text-white">${d.title}</h3>
+                        <p class="text-xs text-slate-400">${d.desc}</p>
+                        <div class="p-3 bg-slate-900 rounded-xl text-xs font-en text-slate-300 whitespace-pre-line border border-slate-800">${d.text}</div>
                     </div>
                 `;
             });
-            html += `</div>`;
-            container.innerHTML = html;
         }
 
         function renderGrammar() {
-            const container = document.getElementById("grammar-topics");
+            const container = document.getElementById("grammar-card-container");
             container.innerHTML = "";
-
-            defaultGrammar.forEach(g => {
+            sampleGrammar.forEach((g, index) => {
                 container.innerHTML += `
-                    <button onclick="loadGrammarContent(${g.id})" class="w-full text-left p-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-purple-500 font-medium text-sm transition">
-                        ${g.title}
-                    </button>
+                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-4 space-y-2">
+                        <span class="text-[10px] px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 font-en">গ্রামার #${index + 1}</span>
+                        <h3 class="font-bold text-sm text-white">${g.title}</h3>
+                        <p class="text-xs text-slate-300">${g.desc}</p>
+                    </div>
                 `;
             });
-            if(defaultGrammar.length > 0) loadGrammarContent(defaultGrammar[0].id);
         }
 
-        function loadGrammarContent(id) {
-            const item = defaultGrammar.find(g => g.id === id);
-            const container = document.getElementById("grammar-content");
-            
-            let html = `
-                <h3 class="font-bold text-xl font-en mb-2 text-amber-600">${item.title}</h3>
-                <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">${item.desc}</p>
-                <div class="space-y-2">
-            `;
-            item.types.forEach(t => {
-                html += `<div class="p-2.5 bg-slate-50 dark:bg-slate-900 rounded-lg text-sm font-medium border border-slate-100 dark:border-slate-800">${t}</div>`;
-            });
-            html += `</div>`;
-            container.innerHTML = html;
-        }
-
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
-        }
-
-        function openAdminModal() {
-            document.getElementById('admin-modal').classList.remove('hidden');
-        }
-
-        function closeAdminModal() {
-            document.getElementById('admin-modal').classList.add('hidden');
-        }
+        function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
+        function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
 
         function saveNewContent() {
             const type = document.getElementById('modal-type').value;
@@ -454,22 +374,43 @@
             const pron = document.getElementById('modal-pron').value;
             const bn = document.getElementById('modal-bn').value;
 
-            if(!en || !bn) return alert("অনুগ্রহ করে ইংরেজি ও বাংলা তথ্য সঠিক দিন");
+            if(!en || !bn) return alert("অনুগ্রহ করে সকল তথ্য পূরণ করুন");
 
             if(type === 'vocab') {
-                vocabList.push({ id: Date.now(), word: en, pron: pron, bn: bn, ex: en, exBn: bn });
-                localStorage.setItem("app_vocab", JSON.stringify(vocabList));
-                renderVocab();
+                vocabList.push({ id: Date.now(), word: en, pron: pron || 'উচ্চারণ', bn: bn, ex: en, exBn: bn });
+                localStorage.setItem("hayat_vocab", JSON.stringify(vocabList));
+                renderVocabCards();
             } else {
-                sentenceList.push({ id: Date.now(), en: en, pron: pron, bn: bn });
-                localStorage.setItem("app_sentences", JSON.stringify(sentenceList));
-                renderSentences();
+                sentenceList.push({ id: Date.now(), en: en, pron: pron || 'উচ্চারণ', bn: bn });
+                localStorage.setItem("hayat_sentences", JSON.stringify(sentenceList));
+                renderSentenceCards();
             }
             updateStats();
             closeAdminModal();
+            document.getElementById('modal-en').value = '';
+            document.getElementById('modal-pron').value = '';
+            document.getElementById('modal-bn').value = '';
         }
 
-        // Init App
+        function deleteVocab(id) {
+            vocabList = vocabList.filter(v => v.id !== id);
+            localStorage.setItem("hayat_vocab", JSON.stringify(vocabList));
+            renderVocabCards();
+            updateStats();
+        }
+
+        function deleteSentence(id) {
+            sentenceList = sentenceList.filter(s => s.id !== id);
+            localStorage.setItem("hayat_sentences", JSON.stringify(sentenceList));
+            renderSentenceCards();
+            updateStats();
+        }
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        // Initialize App
         updateStats();
     </script>
 </body>
