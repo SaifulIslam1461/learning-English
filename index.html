@@ -132,23 +132,35 @@
 </head>
 <body class="bg-navy-900 text-slate-100 dark:bg-navy-900 dark:text-slate-100 light:bg-softwhite light:text-slate-800 font-sans transition-colors duration-300 min-h-screen pb-24 selection:bg-gold-500 selection:text-navy-900">
 
-    <!-- APP HEADER -->
+    <!-- APP HEADER WITH DEVELOPER PHOTO -->
     <header id="main-app-header" class="sticky top-0 z-40 bg-navy-800/90 dark:bg-navy-800/90 light:bg-white/90 backdrop-blur-md border-b border-gold-500/20 px-4 py-3 flex items-center justify-between shadow-md transition-all duration-300">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-navy-900 font-bold text-xl shadow-lg border border-gold-300/30">
-                H
+        <div class="flex items-center gap-4">
+            <!-- Developer Photo with Golden Glow & DEV Badge -->
+            <div class="relative group cursor-pointer" onclick="switchTab('settings')" title="ডেভেলপার সাইফুল ইসলাম তারেক">
+                <div class="absolute -inset-1.5 bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 rounded-3xl blur-md opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                
+                <div class="relative w-14 h-14 bg-navy-800 rounded-2xl border-2 border-gold-500/60 p-0.5 overflow-hidden flex items-center justify-center shadow-2xl transform group-hover:scale-105 transition-all duration-300 ease-out">
+                    <img src="https://i.ibb.co/68038vF/image-14.png" alt="ডেভেলপার সাইফুল ইসলাম তারেক" class="w-full h-full object-cover rounded-xl" />
+                    <div class="absolute inset-0 bg-navy-950/20 rounded-xl group-hover:bg-transparent transition-colors"></div>
+                </div>
+                
+                <div class="absolute -bottom-1 -right-2 bg-gradient-to-br from-gold-400 to-gold-600 text-navy-900 text-[9px] font-extrabold px-1.5 py-0.5 rounded-md border border-navy-900 shadow-xl uppercase tracking-widest ring-1 ring-gold-100/50">
+                    DEV
+                </div>
             </div>
+
             <div>
                 <h1 class="text-lg font-bold tracking-tight gold-gradient-text flex items-center gap-2 drop-shadow-sm">
                     HAYAT OS
                     <span class="text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded bg-gold-500/10 text-gold-500 border border-gold-500/30">প্রো</span>
                 </h1>
-                <p class="text-[10px] text-slate-300 light:text-slate-600 font-medium tracking-wide drop-shadow-sm">আপনার জীবন। আপনার সময়। আপনার বিকাশ।</p>
+                <p class="text-[10px] text-slate-300 light:text-slate-600 font-medium tracking-wide drop-shadow-sm flex items-center gap-1">
+                    <i class="fa-solid fa-code text-gold-500/70 text-[9px]"></i> Developed by Saiful Islam Tareq
+                </p>
             </div>
         </div>
 
         <div class="flex items-center gap-2">
-            <!-- App Install Button Header (Hidden by default, shown when installable) -->
             <button id="install-app-btn" onclick="installPWAApp()" class="hidden px-3 py-1.5 rounded-lg bg-gold-500 text-navy-900 font-bold text-xs shadow-md items-center gap-1.5 animate-pulse">
                 <i class="fa-solid fa-download"></i> অ্যাপ ইনস্টল
             </button>
@@ -233,7 +245,6 @@
 
     <!-- APP CORE LOGIC -->
     <script>
-        // --- PWA SETUP & MANIFEST GENERATION ---
         function setupPWAManifest() {
             const manifestData = {
                 "name": "HAYAT OS",
@@ -272,7 +283,7 @@
 
         async function installPWAApp() {
             if (!deferredPrompt) {
-                showToast('ব্রাউজারের মেনু (⋮) থেকে "Add to Home Screen" বা "Install App" সিলেক্ট করুন');
+                showToast('ব্রাউজারের মেনু থেকে Add to Home Screen সিলেক্ট করুন');
                 return;
             }
             deferredPrompt.prompt();
@@ -284,7 +295,6 @@
             document.getElementById('install-app-btn')?.classList.add('hidden');
         }
 
-        // --- INDEXEDDB SETUP ---
         const DB_NAME = 'HayatOSDB';
         const DB_VERSION = 3;
         let db = null;
@@ -391,7 +401,6 @@
             }, 3000);
         }
 
-        // --- SPEECH SYNTHESIS ENGINE ---
         function speakText(text, rate = 1.0) {
             if (!('speechSynthesis' in window)) {
                 showToast('আপনার ব্রাউজার স্পিচ সাপোর্ট করে না');
@@ -426,7 +435,6 @@
             }
         }
 
-        // --- APPLY BACKGROUND IMAGES TO HEADER AND CARDS ---
         async function applyCustomBackgrounds() {
             const profile = await dbGet('settings', 'profile');
             const bgImage = profile && profile.bgImage ? profile.bgImage : '';
@@ -512,7 +520,6 @@
             setTimeout(applyCustomBackgrounds, 50);
         }
 
-        // --- DASHBOARD VIEW ---
         async function renderDashboardView() {
             const today = getTodayDateStr();
             const healthData = (await dbGet('health', today)) || { water: 0, steps: 0, sleep: 0 };
@@ -584,7 +591,6 @@
             setTimeout(applyCustomBackgrounds, 50);
         }
 
-        // --- STUDY & VOCABULARY MODULE ---
         async function renderStudyView() {
             const allVocabs = await dbGetAll('vocab');
             const vocabs = allVocabs.filter(item => {
@@ -859,8 +865,6 @@
             renderStudyView();
         }
 
-
-        // --- SENTENCES MODULE ---
         async function renderSentencesView() {
             const allSentences = await dbGetAll('sentences');
             const sentences = allSentences.filter(item => {
@@ -1064,8 +1068,6 @@
             renderSentencesView();
         }
 
-
-        // --- CONVERSATIONS MODULE ---
         async function renderConversationsView() {
             const conversations = await dbGetAll('conversations');
 
@@ -1294,8 +1296,6 @@
             renderConversationsView();
         }
 
-
-        // --- SUB VIEW: BANGLA TO ENGLISH QUIZ ---
         async function renderVocabQuizView() {
             const vocabs = await dbGetAll('vocab');
             const activeVocabs = vocabs.length > 0 ? vocabs : [
@@ -1373,7 +1373,6 @@
             }
         }
 
-        // --- OTHER MODULES ---
         async function renderTodoView() {
             const todos = await dbGetAll('todos');
             document.getElementById('app-content').innerHTML = `
@@ -1472,7 +1471,6 @@
         }
         async function deleteDiary(id) { await dbDelete('diary', id); renderDiaryView(); }
 
-        // --- SETTINGS VIEW WITH IMAGE UPLOAD ---
         async function renderSettingsView() {
             const profile = (await dbGet('settings', 'profile')) || { name: 'সাইফুল ইসলাম', motto: 'নিরবচ্ছিন্ন আত্মউন্নয়ন', bgImage: '' };
             
@@ -1564,7 +1562,6 @@
             showToast('প্রোফাইল ও কার্ড ব্যাকগ্রাউন্ড সংরক্ষিত হয়েছে!');
         }
 
-        // --- INIT ---
         window.addEventListener('DOMContentLoaded', async () => {
             setupPWAManifest();
             loadThemePreference();
