@@ -2,496 +2,1576 @@
 <html lang="bn" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAYAT OS — English Master</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HAYAT OS - আপনার জীবন। আপনার সময়। আপনার বিকাশ।</title>
     
+    <!-- PWA Manifest & Meta Tags for App Installation -->
+    <meta name="theme-color" content="#0B132B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="HAYAT OS">
+    <link rel="apple-touch-icon" href="https://placehold.co/192x192/0B132B/D4AF37?text=HAYAT">
+    
+    <!-- Dynamic PWA Manifest Generator via Data URI -->
+    <link rel="manifest" id="pwa-manifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        darkBg: '#0b0f19',
-                        cardBg: '#131c2e',
-                        goldAccent: '#f59e0b',
-                        goldText: '#fbbf24'
+                        navy: {
+                            900: '#070B19',
+                            800: '#0B132B',
+                            700: '#1C2541',
+                            600: '#2A385B',
+                            500: '#3A4B7C'
+                        },
+                        gold: {
+                            400: '#F5D77F',
+                            500: '#D4AF37',
+                            600: '#AA8823',
+                            100: '#FDF6E2'
+                        },
+                        softwhite: '#F8F9FA'
                     },
                     fontFamily: {
-                        bangla: ['"Hind Siliguri"', 'sans-serif'],
-                        english: ['"Poppins"', 'sans-serif'],
+                        sans: ['"Hind Siliguri"', 'Inter', 'system-ui', 'sans-serif']
                     }
                 }
             }
         }
     </script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        body { font-family: 'Hind Siliguri', sans-serif; }
-        .font-en { font-family: 'Poppins', sans-serif; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+        
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF0B3 0%, #D4AF37 50%, #AA8823 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card {
+            background-color: rgba(11, 19, 43, 0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(7, 11, 25, 0.88) 0%, rgba(11, 19, 43, 0.82) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .light .glass-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .light .glass-card::before {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 250, 0.88) 100%);
+        }
+
+        .glass-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-item.active {
+            color: #D4AF37;
+            font-weight: 600;
+        }
+        .nav-item.active i {
+            transform: translateY(-2px);
+            color: #D4AF37;
+        }
+        .card-step-content {
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .custom-header-bg {
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            position: relative;
+        }
+        .custom-header-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(7, 11, 25, 0.88), rgba(11, 19, 43, 0.75));
+            z-index: 1;
+        }
+        .custom-header-bg > * {
+            position: relative;
+            z-index: 2;
+        }
     </style>
 </head>
-<body class="bg-darkBg text-slate-100 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black">
+<body class="bg-navy-900 text-slate-100 dark:bg-navy-900 dark:text-slate-100 light:bg-softwhite light:text-slate-800 font-sans transition-colors duration-300 min-h-screen pb-24 selection:bg-gold-500 selection:text-navy-900">
 
-    <!-- Top Navigation / Header -->
-    <header class="sticky top-0 z-40 bg-darkBg/90 backdrop-blur-md border-b border-slate-800 px-4 py-3">
-        <div class="max-w-md mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-2.5">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 font-bold text-xl flex items-center justify-center shadow-md font-en">
-                    H
-                </div>
-                <div>
-                    <div class="flex items-center space-x-1.5">
-                        <h1 class="font-bold text-base tracking-wide font-en text-white">HAYAT OS</h1>
-                        <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 font-en">প্রো</span>
-                    </div>
-                    <p class="text-[11px] text-slate-400">আপনার জীবন। আপনার সময়। আপনার বিকাশ।</p>
-                </div>
+    <!-- APP HEADER -->
+    <header id="main-app-header" class="sticky top-0 z-40 bg-navy-800/90 dark:bg-navy-800/90 light:bg-white/90 backdrop-blur-md border-b border-gold-500/20 px-4 py-3 flex items-center justify-between shadow-md transition-all duration-300">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-navy-900 font-bold text-xl shadow-lg border border-gold-300/30">
+                H
             </div>
+            <div>
+                <h1 class="text-lg font-bold tracking-tight gold-gradient-text flex items-center gap-2 drop-shadow-sm">
+                    HAYAT OS
+                    <span class="text-[10px] uppercase tracking-widest px-1.5 py-0.5 rounded bg-gold-500/10 text-gold-500 border border-gold-500/30">প্রো</span>
+                </h1>
+                <p class="text-[10px] text-slate-300 light:text-slate-600 font-medium tracking-wide drop-shadow-sm">আপনার জীবন। আপনার সময়। আপনার বিকাশ।</p>
+            </div>
+        </div>
 
-            <div class="flex items-center space-x-2">
-                <button onclick="openAdminModal()" class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 text-amber-400 flex items-center justify-center hover:bg-slate-700 transition">
-                    <i class="fas fa-plus text-sm"></i>
-                </button>
-                <button onclick="toggleDarkMode()" class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 text-amber-400 flex items-center justify-center hover:bg-slate-700 transition">
-                    <i class="fas fa-moon dark:hidden"></i>
-                    <i class="fas fa-sun hidden dark:inline"></i>
-                </button>
-            </div>
+        <div class="flex items-center gap-2">
+            <!-- App Install Button Header (Hidden by default, shown when installable) -->
+            <button id="install-app-btn" onclick="installPWAApp()" class="hidden px-3 py-1.5 rounded-lg bg-gold-500 text-navy-900 font-bold text-xs shadow-md items-center gap-1.5 animate-pulse">
+                <i class="fa-solid fa-download"></i> অ্যাপ ইনস্টল
+            </button>
+            <button onclick="toggleQuickModal()" class="w-9 h-9 rounded-lg bg-gold-500/20 text-gold-400 hover:bg-gold-500 hover:text-navy-900 transition-all flex items-center justify-center border border-gold-500/40 shadow-sm" title="দ্রুত যোগ করুন">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+            <button onclick="toggleTheme()" class="w-9 h-9 rounded-lg bg-navy-700/60 light:bg-slate-100 text-gold-400 hover:bg-gold-500/20 transition-all flex items-center justify-center border border-gold-500/30 shadow-sm" title="থিম পরিবর্তন">
+                <i id="theme-icon" class="fa-solid fa-moon"></i>
+            </button>
         </div>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="flex-grow max-w-md w-full mx-auto px-4 py-5 space-y-6">
-
-        <!-- Dashboard Tab -->
-        <section id="view-dashboard" class="space-y-4">
-            <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 shadow-xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl"></div>
-                <div class="space-y-3 relative z-10">
-                    <div class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-en font-medium">
-                        <i class="fas fa-sparkles mr-1"></i> Welcome Dashboard
-                    </div>
-                    <h2 class="text-xl font-bold font-en text-white">স্বাগতম, Learner!</h2>
-                    <p class="text-slate-300 text-xs leading-relaxed">
-                        "ইংরেজি শেখা কঠিন কিছু নয়। প্রতিদিন অল্প অল্প অনুশীলনই আপনাকে একদিন আত্মবিশ্বাসী করে তুলবে।"
-                    </p>
-                </div>
-            </div>
-
-            <!-- Stats Grid -->
-            <div class="grid grid-cols-2 gap-3">
-                <div onclick="switchTab('vocab')" class="bg-cardBg border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-amber-500/50 transition">
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center"><i class="fas fa-font"></i></div>
-                        <span class="text-xs text-slate-500 font-en" id="stat-vocab-count">0</span>
-                    </div>
-                    <h3 class="font-bold text-sm">শব্দভাণ্ডার</h3>
-                    <p class="text-[11px] text-slate-400">মাল্টি-স্টেপ ফ্ল্যাশ কার্ড</p>
-                </div>
-                <div onclick="switchTab('sentences')" class="bg-cardBg border border-slate-800 p-4 rounded-2xl cursor-pointer hover:border-amber-500/50 transition">
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center"><i class="fas fa-align-left"></i></div>
-                        <span class="text-xs text-slate-500 font-en" id="stat-sentence-count">0</span>
-                    </div>
-                    <h3 class="font-bold text-sm">বাক্য ভাণ্ডার</h3>
-                    <p class="text-[11px] text-slate-400">দৈনন্দিন প্রয়োজনীয় বাক্য</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Vocabulary Tab (Multi-Step Flash Card System) -->
-        <section id="view-vocab" class="hidden space-y-4">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-lg font-bold">শব্দভাণ্ডার ফ্ল্যাশ-কার্ড</h2>
-                    <p class="text-xs text-slate-400">ধাপে ধাপে শেখার আধুনিক পদ্ধতি</p>
-                </div>
-                <input type="text" id="vocab-search" oninput="renderVocabCards()" placeholder="খুঁজুন..." class="px-3 py-1.5 rounded-xl bg-cardBg border border-slate-800 text-xs focus:outline-none focus:border-amber-500 w-32">
-            </div>
-            
-            <div id="vocab-card-container" class="space-y-4">
-                <!-- Dynamic Multi-Step Flash Cards -->
-            </div>
-        </section>
-
-        <!-- Sentences Tab (Multi-Step Flash Card System) -->
-        <section id="view-sentences" class="hidden space-y-4">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-lg font-bold">বাক্য ফ্ল্যাশ-কার্ড</h2>
-                    <p class="text-xs text-slate-400">বাক্যভিত্তিক মাল্টি-স্টেপ প্র্যাকটিস</p>
-                </div>
-                <input type="text" id="sentence-search" oninput="renderSentenceCards()" placeholder="খুঁজুন..." class="px-3 py-1.5 rounded-xl bg-cardBg border border-slate-800 text-xs focus:outline-none focus:border-amber-500 w-32">
-            </div>
-            
-            <div id="sentence-card-container" class="space-y-4">
-                <!-- Dynamic Multi-Step Flash Cards -->
-            </div>
-        </section>
-
-        <!-- Conversation Tab -->
-        <section id="view-dialogue" class="hidden space-y-4">
-            <div>
-                <h2 class="text-lg font-bold">কথোপকথন (Conversation)</h2>
-                <p class="text-xs text-slate-400">বাস্তবমুখী কথোপকথন অনুশীলন</p>
-            </div>
-            <div class="space-y-3" id="dialogue-card-container"></div>
-        </section>
-
-        <!-- Grammar Tab -->
-        <section id="view-grammar" class="hidden space-y-4">
-            <div>
-                <h2 class="text-lg font-bold">ইংরেজি গ্রামার (Grammar)</h2>
-                <p class="text-xs text-slate-400">সহজ নিয়মে গ্রামার শিখুন</p>
-            </div>
-            <div class="space-y-3" id="grammar-card-container"></div>
-        </section>
-
+    <!-- MAIN VIEW CONTAINER -->
+    <main id="app-content" class="max-w-4xl mx-auto px-4 py-5 space-y-6">
+        <!-- Dynamic Modules -->
     </main>
 
-    <!-- Admin/Add Modal -->
-    <div id="admin-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-cardBg border border-slate-800 rounded-3xl max-w-sm w-full p-5 space-y-3 shadow-2xl">
-            <div class="flex justify-between items-center">
-                <h3 class="font-bold text-sm text-amber-400">নতুন তথ্য যোগ করুন (৪-ধাপ ফ্ল্যাশ কার্ড)</h3>
-                <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white"><i class="fas fa-times"></i></button>
-            </div>
-            <select id="modal-type" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs">
-                <option value="vocab">Vocabulary Word</option>
-                <option value="sentence">Sentence</option>
-            </select>
-            <input type="text" id="modal-en" placeholder="১. English Word/Sentence" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs">
-            <input type="text" id="modal-pron" placeholder="২. বাংলা উচ্চারণ" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs">
-            <input type="text" id="modal-bn" placeholder="৩. বাংলা অর্থ" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs">
-            <input type="text" id="modal-ex" placeholder="৪. Example Sentence" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs">
-            <input type="text" id="modal-exbn" placeholder="৪. বাক্যের বাংলা অনুবাদ" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs">
-            <button onclick="saveNewContent()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs shadow-lg">সংরক্ষণ করুন</button>
-        </div>
-    </div>
-
-    <!-- Bottom Navigation Bar -->
-    <nav class="sticky bottom-0 z-40 bg-cardBg/95 backdrop-blur-md border-t border-slate-800 py-2 px-3">
-        <div class="max-w-md mx-auto flex justify-around items-center">
-            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="flex flex-col items-center text-amber-400 text-[11px] font-medium transition">
-                <i class="fas fa-home text-base mb-0.5"></i> হোম
+    <!-- BOTTOM NAVIGATION BAR -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 bg-navy-800/95 dark:bg-navy-800/95 light:bg-white/95 backdrop-blur-lg border-t border-gold-500/20 px-2 py-2 shadow-2xl">
+        <div class="max-w-4xl mx-auto flex justify-around items-center overflow-x-auto no-scrollbar py-1">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-item flex flex-col items-center min-w-[65px] text-slate-400 transition-all">
+                <i class="fa-solid fa-house-laptop text-lg mb-0.5"></i>
+                <span class="text-[10px]">হোম</span>
             </button>
-            <button onclick="switchTab('vocab')" id="nav-vocab" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[11px] font-medium transition">
-                <i class="fas fa-book text-base mb-0.5"></i> পড়াশোনা
+            <button onclick="switchTab('study')" id="nav-study" class="nav-item flex flex-col items-center min-w-[65px] text-slate-400 transition-all">
+                <i class="fa-solid fa-book-open text-lg mb-0.5"></i>
+                <span class="text-[10px]">পড়াশোনা</span>
             </button>
-            <button onclick="switchTab('sentences')" id="nav-sentences" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[11px] font-medium transition">
-                <i class="fas fa-align-left text-base mb-0.5"></i> কাজ
+            <button onclick="switchTab('todo')" id="nav-todo" class="nav-item flex flex-col items-center min-w-[65px] text-slate-400 transition-all">
+                <i class="fa-solid fa-list-check text-lg mb-0.5"></i>
+                <span class="text-[10px]">কাজ</span>
             </button>
-            <button onclick="switchTab('dialogue')" id="nav-dialogue" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[11px] font-medium transition">
-                <i class="fas fa-comments text-base mb-0.5"></i> অভ্যাস
+            <button onclick="switchTab('habits')" id="nav-habits" class="nav-item flex flex-col items-center min-w-[65px] text-slate-400 transition-all">
+                <i class="fa-solid fa-chart-line text-lg mb-0.5"></i>
+                <span class="text-[10px]">অভ্যাস</span>
             </button>
-            <button onclick="switchTab('grammar')" id="nav-grammar" class="flex flex-col items-center text-slate-400 hover:text-amber-400 text-[11px] font-medium transition">
-                <i class="fas fa-graduation-cap text-base mb-0.5"></i> স্বাস্থ্য
+            <button onclick="switchTab('health')" id="nav-health" class="nav-item flex flex-col items-center min-w-[65px] text-slate-400 transition-all">
+                <i class="fa-solid fa-heart-pulse text-lg mb-0.5"></i>
+                <span class="text-[10px]">স্বাস্থ্য</span>
+            </button>
+            <button onclick="switchTab('diary')" id="nav-diary" class="nav-item flex flex-col items-center min-w-[65px] text-slate-400 transition-all">
+                <i class="fa-solid fa-book-bookmark text-lg mb-0.5"></i>
+                <span class="text-[10px]">ডায়েরি</span>
+            </button>
+            <button onclick="switchTab('settings')" id="nav-settings" class="nav-item flex flex-col items-center min-w-[65px] text-slate-400 transition-all">
+                <i class="fa-solid fa-sliders text-lg mb-0.5"></i>
+                <span class="text-[10px]">সেটিংস</span>
             </button>
         </div>
     </nav>
 
-    <!-- JavaScript Application Logic -->
+    <!-- QUICK ADD MODAL -->
+    <div id="quick-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-navy-800 dark:bg-navy-800 light:bg-white rounded-2xl border border-gold-500/30 w-full max-w-md p-6 shadow-2xl relative">
+            <button onclick="toggleQuickModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-xl font-bold gold-gradient-text mb-4">দ্রুত যোগ করুন</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="toggleQuickModal(); switchTab('todo');" class="p-4 rounded-xl bg-navy-700/50 light:bg-slate-100 hover:border-gold-500/50 border border-transparent transition text-left flex flex-col gap-2">
+                    <i class="fa-solid fa-circle-check text-gold-500 text-2xl"></i>
+                    <span class="font-semibold text-sm">নতুন কাজ যোগ</span>
+                </button>
+                <button onclick="toggleQuickModal(); switchTab('diary');" class="p-4 rounded-xl bg-navy-700/50 light:bg-slate-100 hover:border-gold-500/50 border border-transparent transition text-left flex flex-col gap-2">
+                    <i class="fa-solid fa-book-pen text-gold-500 text-2xl"></i>
+                    <span class="font-semibold text-sm">ডায়েরি এন্ট্রি</span>
+                </button>
+                <button onclick="toggleQuickModal(); switchTab('health');" class="p-4 rounded-xl bg-navy-700/50 light:bg-slate-100 hover:border-gold-500/50 border border-transparent transition text-left flex flex-col gap-2">
+                    <i class="fa-solid fa-glass-water text-gold-500 text-2xl"></i>
+                    <span class="font-semibold text-sm">পানি গ্রহণ (+২৫০ মি.লি.)</span>
+                </button>
+                <button onclick="toggleQuickModal(); switchTab('study');" class="p-4 rounded-xl bg-navy-700/50 light:bg-slate-100 hover:border-gold-500/50 border border-transparent transition text-left flex flex-col gap-2">
+                    <i class="fa-solid fa-spell-check text-gold-500 text-2xl"></i>
+                    <span class="font-semibold text-sm">নতুন ভোকেবুলারি</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container" class="fixed top-16 right-4 z-50 flex flex-col gap-2 max-w-xs pointer-events-none"></div>
+
+    <!-- APP CORE LOGIC -->
     <script>
-        // Data State Management with Steps Tracker
-        let vocabList = JSON.parse(localStorage.getItem("hayat_vocab_steps")) || [
-            { id: 1, word: "Rain", pron: "রেইন", bn: "বৃষ্টি", ex: "It is raining outside.", exbn: "বাইরে বৃষ্টি হচ্ছে।" },
-            { id: 2, word: "Cloudy", pron: "ক্লাউডি", bn: "মেঘলা", ex: "The sky is cloudy today.", exbn: "আজ আকাশ মেঘলা।" }
-        ];
+        // --- PWA SETUP & MANIFEST GENERATION ---
+        function setupPWAManifest() {
+            const manifestData = {
+                "name": "HAYAT OS",
+                "short_name": "HAYAT",
+                "start_url": "./",
+                "display": "standalone",
+                "background_color": "#0B132B",
+                "theme_color": "#0B132B",
+                "icons": [
+                    {
+                        "src": "https://placehold.co/192x192/0B132B/D4AF37?text=HAYAT",
+                        "sizes": "192x192",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "https://placehold.co/512x512/0B132B/D4AF37?text=HAYAT",
+                        "sizes": "512x512",
+                        "type": "image/png"
+                    }
+                ]
+            };
+            const stringified = JSON.stringify(manifestData);
+            const blob = new Blob([stringified], { type: 'application/json' });
+            const manifestURL = URL.createObjectURL(blob);
+            const manifestEl = document.getElementById('pwa-manifest');
+            if(manifestEl) manifestEl.setAttribute('href', manifestURL);
+        }
 
-        let sentenceList = JSON.parse(localStorage.getItem("hayat_sentence_steps")) || [
-            { id: 1, en: "How can I help you?", pron: "হাউ ক্যান আই হেল্প ইউ?", bn: "আমি আপনাকে কীভাবে সাহায্য করতে পারি?", ex: "Sir, how can I help you?", exbn: "স্যার, আমি আপনাকে কীভাবে সাহায্য করতে পারি?" },
-            { id: 2, en: "I want to go to Feni.", pron: "আই ওয়ান্ট টু গো টু ফেনী।", bn: "আমি ফেনী যেতে চাই।", ex: "I want to go to Feni by bus.", exbn: "আমি বাসে করে ফেনী যেতে চাই।" }
-        ];
+        let deferredPrompt = null;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const btn = document.getElementById('install-app-btn');
+            if(btn) btn.classList.remove('hidden');
+        });
 
-        // Track active step for each card index: { cardId: stepIndex (0 to 3) }
-        let vocabSteps = {};
-        let sentenceSteps = {};
-
-        // Female Voice Text-to-Speech Function
-        function speakText(text) {
-            if (!('speechSynthesis' in window)) {
-                alert("আপনার ব্রাউজারে স্পিচ সিন্থেসিস সমর্থিত নয়।");
+        async function installPWAApp() {
+            if (!deferredPrompt) {
+                showToast('ব্রাউজারের মেনু (⋮) থেকে "Add to Home Screen" বা "Install App" সিলেক্ট করুন');
                 return;
             }
-            window.speechSynthesis.cancel(); // Stop previous speech
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                showToast('অ্যাপটি সফলভাবে ইনস্টল করা হচ্ছে!');
+            }
+            deferredPrompt = null;
+            document.getElementById('install-app-btn')?.classList.add('hidden');
+        }
+
+        // --- INDEXEDDB SETUP ---
+        const DB_NAME = 'HayatOSDB';
+        const DB_VERSION = 3;
+        let db = null;
+
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                if (db) return resolve(db);
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                request.onerror = (e) => reject("ডেটাবেস ত্রুটি: " + e.target.errorCode);
+                request.onsuccess = (e) => { db = e.target.result; resolve(db); };
+                request.onupgradeneeded = (e) => {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains('todos')) db.createObjectStore('todos', { keyPath: 'id' });
+                    if (!db.objectStoreNames.contains('habits')) db.createObjectStore('habits', { keyPath: 'id' });
+                    if (!db.objectStoreNames.contains('vocab')) db.createObjectStore('vocab', { keyPath: 'id' });
+                    if (!db.objectStoreNames.contains('sentences')) db.createObjectStore('sentences', { keyPath: 'id' });
+                    if (!db.objectStoreNames.contains('conversations')) db.createObjectStore('conversations', { keyPath: 'id' });
+                    if (!db.objectStoreNames.contains('diary')) db.createObjectStore('diary', { keyPath: 'id' });
+                    if (!db.objectStoreNames.contains('goals')) db.createObjectStore('goals', { keyPath: 'id' });
+                    if (!db.objectStoreNames.contains('health')) db.createObjectStore('health', { keyPath: 'date' });
+                    if (!db.objectStoreNames.contains('settings')) db.createObjectStore('settings', { keyPath: 'key' });
+                };
+            });
+        }
+
+        function dbPut(storeName, data) {
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction(storeName, 'readwrite');
+                const store = tx.objectStore(storeName);
+                const req = store.put(data);
+                req.onsuccess = () => resolve(req.result);
+                req.onerror = () => reject(req.error);
+            });
+        }
+
+        function dbGetAll(storeName) {
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction(storeName, 'readonly');
+                const store = tx.objectStore(storeName);
+                const req = store.getAll();
+                req.onsuccess = () => resolve(req.result);
+                req.onerror = () => reject(req.error);
+            });
+        }
+
+        function dbGet(storeName, key) {
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction(storeName, 'readonly');
+                const store = tx.objectStore(storeName);
+                const req = store.get(key);
+                req.onsuccess = () => resolve(req.result);
+                req.onerror = () => reject(req.error);
+            });
+        }
+
+        function dbDelete(storeName, key) {
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction(storeName, 'readwrite');
+                const store = tx.objectStore(storeName);
+                const req = store.delete(key);
+                req.onsuccess = () => resolve();
+                req.onerror = () => reject(req.error);
+            });
+        }
+
+        let currentTab = 'dashboard';
+        let currentQuizIndex = 0;
+        let vocabSearchQuery = '';
+        let sentenceSearchQuery = '';
+        const cardStepsState = {}; 
+        const sentenceStepsState = {};
+        const conversationExpandedState = {};
+        const dialogueStepState = {};
+
+        const getTodayDateStr = () => new Date().toISOString().split('T')[0];
+
+        function getBengaliFormattedDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date().toLocaleDateString('bn-BD', options);
+        }
+
+        function toBengaliNumerals(num) {
+            if (num === null || num === undefined) return '';
+            const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+            return num.toString().replace(/\d/g, (x) => bengaliDigits[x]);
+        }
+
+        function escapeJS(str) {
+            if (!str) return '';
+            return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            if(!container) return;
+            const toast = document.createElement('div');
+            toast.className = `p-3 rounded-xl shadow-xl text-xs font-semibold flex items-center gap-2 border transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto bg-navy-800 text-white border-gold-500/40`;
+            toast.innerHTML = `<i class="fa-solid fa-circle-info text-gold-500"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            requestAnimationFrame(() => toast.classList.remove('translate-y-2', 'opacity-0'));
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // --- SPEECH SYNTHESIS ENGINE ---
+        function speakText(text, rate = 1.0) {
+            if (!('speechSynthesis' in window)) {
+                showToast('আপনার ব্রাউজার স্পিচ সাপোর্ট করে না');
+                return;
+            }
+            window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'en-US';
-            utterance.rate = 0.9; // Normal fluent speed
-            
-            const voices = window.speechSynthesis.getVoices();
-            // Try to find a soft female voice (e.g. Google US English female, Microsoft Zira, Samantha, Victoria)
-            const femaleVoice = voices.find(v => v.lang.includes('en') && (v.name.includes('Female') || v.name.includes('Zira') || v.name.includes('Samantha') || v.name.includes('Victoria') || v.name.includes('Google US English')));
-            if (femaleVoice) {
-                utterance.voice = femaleVoice;
+            utterance.rate = rate; 
+
+            let voices = window.speechSynthesis.getVoices();
+            const setVoiceAndSpeak = () => {
+                voices = window.speechSynthesis.getVoices();
+                const femaleVoice = voices.find(v => v.lang.includes('en') && (
+                    v.name.includes('Female') || 
+                    v.name.includes('Zira') || 
+                    v.name.includes('Aria') || 
+                    v.name.includes('Google US English') || 
+                    v.name.includes('Samantha') ||
+                    v.name.includes('Jenny')
+                ));
+                if (femaleVoice) {
+                    utterance.voice = femaleVoice;
+                }
+                window.speechSynthesis.speak(utterance);
+            };
+
+            if (voices.length === 0) {
+                window.speechSynthesis.onvoiceschanged = setVoiceAndSpeak;
+            } else {
+                setVoiceAndSpeak();
             }
-            window.speechSynthesis.speak(utterance);
         }
 
-        // Preload voices
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+        // --- APPLY BACKGROUND IMAGES TO HEADER AND CARDS ---
+        async function applyCustomBackgrounds() {
+            const profile = await dbGet('settings', 'profile');
+            const bgImage = profile && profile.bgImage ? profile.bgImage : '';
+
+            const header = document.getElementById('main-app-header');
+            if (header) {
+                if (bgImage) {
+                    header.classList.add('custom-header-bg');
+                    header.style.backgroundImage = `url('${bgImage}')`;
+                } else {
+                    header.classList.remove('custom-header-bg');
+                    header.style.backgroundImage = 'none';
+                }
+            }
+
+            document.querySelectorAll('.glass-card').forEach(card => {
+                if (bgImage) {
+                    card.style.backgroundImage = `url('${bgImage}')`;
+                } else {
+                    card.style.backgroundImage = 'none';
+                }
+            });
         }
 
-        function updateStats() {
-            document.getElementById("stat-vocab-count").innerText = vocabList.length + "টি";
-            document.getElementById("stat-sentence-count").innerText = sentenceList.length + "টি";
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                if(icon) icon.className = 'fa-solid fa-sun';
+                localStorage.setItem('hayat_theme', 'light');
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                if(icon) icon.className = 'fa-solid fa-moon';
+                localStorage.setItem('hayat_theme', 'dark');
+            }
+        }
+
+        function loadThemePreference() {
+            const saved = localStorage.getItem('hayat_theme') || 'dark';
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (saved === 'light') {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                if(icon) icon.className = 'fa-solid fa-sun';
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                if(icon) icon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        function toggleQuickModal() {
+            document.getElementById('quick-modal').classList.toggle('hidden');
         }
 
         function switchTab(tabId) {
-            ['dashboard', 'vocab', 'sentences', 'dialogue', 'grammar'].forEach(id => {
-                const el = document.getElementById(`view-${id}`);
-                if(el) el.classList.add('hidden');
-                const nav = document.getElementById(`nav-${id}`);
-                if(nav) {
-                    nav.classList.remove('text-amber-400');
-                    nav.classList.add('text-slate-400');
-                }
-            });
-            
-            const activeView = document.getElementById(`view-${tabId}`);
-            if(activeView) activeView.classList.remove('hidden');
-            
+            currentTab = tabId;
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             const activeNav = document.getElementById(`nav-${tabId}`);
-            if(activeNav) {
-                activeNav.classList.remove('text-slate-400');
-                activeNav.classList.add('text-amber-400');
+            if(activeNav) activeNav.classList.add('active');
+
+            const content = document.getElementById('app-content');
+            content.innerHTML = '';
+
+            switch(tabId) {
+                case 'dashboard': renderDashboardView(); break;
+                case 'study': renderStudyView(); break;
+                case 'sentences': renderSentencesView(); break;
+                case 'conversations': renderConversationsView(); break;
+                case 'todo': renderTodoView(); break;
+                case 'habits': renderHabitsView(); break;
+                case 'health': renderHealthView(); break;
+                case 'diary': renderDiaryView(); break;
+                case 'settings': renderSettingsView(); break;
+                case 'sub_vocab_quiz': renderVocabQuizView(); break;
+                default: renderDashboardView();
             }
-
-            if(tabId === 'vocab') renderVocabCards();
-            if(tabId === 'sentences') renderSentenceCards();
-            if(tabId === 'dialogue') renderDialogues();
-            if(tabId === 'grammar') renderGrammar();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(applyCustomBackgrounds, 50);
         }
 
-        function setVocabStep(id, step) {
-            vocabSteps[id] = step;
-            renderVocabCards();
-        }
+        // --- DASHBOARD VIEW ---
+        async function renderDashboardView() {
+            const today = getTodayDateStr();
+            const healthData = (await dbGet('health', today)) || { water: 0, steps: 0, sleep: 0 };
+            const todos = await dbGetAll('todos');
+            const pendingTodos = todos.filter(t => !t.completed).length;
+            const habits = await dbGetAll('habits');
+            const userProfile = (await dbGet('settings', 'profile')) || { name: 'সাইফুল ইসলাম', motto: 'নিরবচ্ছিন্ন আত্মউন্নয়ন' };
 
-        function setSentenceStep(id, step) {
-            sentenceSteps[id] = step;
-            renderSentenceCards();
-        }
-
-        function renderVocabCards() {
-            const query = document.getElementById("vocab-search").value.toLowerCase();
-            const container = document.getElementById("vocab-card-container");
-            container.innerHTML = "";
-
-            const filtered = vocabList.filter(v => v.word.toLowerCase().includes(query) || v.bn.includes(query));
-            
-            if(filtered.length === 0) {
-                container.innerHTML = `<p class="text-center text-xs text-slate-500 py-6">কোনো শব্দ পাওয়া যায়নি</p>`;
-                return;
-            }
-
-            filtered.forEach((item, index) => {
-                const currentStep = vocabSteps[item.id] || 0; // 0: English & Sound, 1: Pronunciation, 2: Meaning, 3: Example
-
-                let stepContent = '';
-                if (currentStep === 0) {
-                    stepContent = `
-                        <div class="text-center space-y-2 py-3">
-                            <p class="text-xs text-slate-400 uppercase tracking-wider font-en">১. English Word</p>
-                            <div class="flex items-center justify-center space-x-3">
-                                <h3 class="text-2xl font-bold font-en text-white">${item.word}</h3>
-                                <button onclick="speakText('${item.word}')" class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center hover:bg-amber-500 hover:text-black transition shadow"><i class="fas fa-volume-high"></i></button>
-                            </div>
+            document.getElementById('app-content').innerHTML = `
+                <div class="glass-card rounded-2xl p-5 border-gold-500/30 relative overflow-hidden shadow-xl">
+                    <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-gold-500/10 rounded-full blur-2xl"></div>
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <span class="text-xs font-semibold text-gold-500 uppercase tracking-widest">স্বাগতম</span>
+                            <h2 class="text-2xl font-bold text-slate-100 light:text-slate-800">${userProfile.name}</h2>
                         </div>
-                    `;
-                } else if (currentStep === 1) {
-                    stepContent = `
-                        <div class="text-center space-y-2 py-3">
-                            <p class="text-xs text-amber-400 uppercase tracking-wider font-en">২. বাংলা উচ্চারণ</p>
-                            <h3 class="text-xl font-bold text-amber-300">${item.pron}</h3>
-                        </div>
-                    `;
-                } else if (currentStep === 2) {
-                    stepContent = `
-                        <div class="text-center space-y-2 py-3">
-                            <p class="text-xs text-emerald-400 uppercase tracking-wider font-en">৩. বাংলা অর্থ</p>
-                            <h3 class="text-xl font-bold text-emerald-300">${item.bn}</h3>
-                        </div>
-                    `;
-                } else {
-                    stepContent = `
-                        <div class="text-center space-y-2 py-3">
-                            <p class="text-xs text-purple-400 uppercase tracking-wider font-en">৪. Example & Translation</p>
-                            <p class="italic text-slate-200 font-en text-sm">"${item.ex}"</p>
-                            <p class="text-xs text-slate-400">অর্থ: ${item.exbn}</p>
-                        </div>
-                    `;
-                }
-
-                container.innerHTML += `
-                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 space-y-3 shadow-xl relative">
-                        <div class="flex justify-between items-center text-xs text-amber-400 font-en">
-                            <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">সিরিয়াল: #${index + 1}</span>
-                            <button onclick="deleteVocab(${item.id})" class="text-slate-400 hover:text-red-400"><i class="fas fa-trash"></i></button>
-                        </div>
-
-                        ${stepContent}
-
-                        <!-- Dots / Step Switcher -->
-                        <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-xs">
-                            <button onclick="setVocabStep(${item.id}, ${Math.max(0, currentStep - 1)})" class="text-slate-400 hover:text-amber-400"><i class="fas fa-chevron-left mr-1"></i> পূর্ববর্তী</button>
-                            
-                            <div class="flex space-x-1.5 cursor-pointer">
-                                <span onclick="setVocabStep(${item.id}, 0)" class="w-2.5 h-2.5 rounded-full ${currentStep === 0 ? 'bg-amber-400' : 'bg-slate-700'}"></span>
-                                <span onclick="setVocabStep(${item.id}, 1)" class="w-2.5 h-2.5 rounded-full ${currentStep === 1 ? 'bg-amber-400' : 'bg-slate-700'}"></span>
-                                <span onclick="setVocabStep(${item.id}, 2)" class="w-2.5 h-2.5 rounded-full ${currentStep === 2 ? 'bg-amber-400' : 'bg-slate-700'}"></span>
-                                <span onclick="setVocabStep(${item.id}, 3)" class="w-2.5 h-2.5 rounded-full ${currentStep === 3 ? 'bg-amber-400' : 'bg-slate-700'}"></span>
-                            </div>
-
-                            <button onclick="setVocabStep(${item.id}, ${Math.min(3, currentStep + 1)})" class="text-slate-400 hover:text-amber-400">পরবর্তী <i class="fas fa-chevron-right ml-1"></i></button>
-                        </div>
-                        <p class="text-[10px] text-center text-slate-500">পরবর্তী ধাপ দেখতে ক্লিক করুন ↻</p>
+                        <span class="text-xs px-3 py-1 rounded-full bg-navy-700/60 light:bg-slate-200 text-gold-400 font-mono border border-gold-500/20">
+                            ${getBengaliFormattedDate()}
+                        </span>
                     </div>
-                `;
-            });
-        }
+                    <p class="text-xs text-slate-300 light:text-slate-600 italic">"${userProfile.motto}"</p>
+                </div>
 
-        function renderSentenceCards() {
-            const query = document.getElementById("sentence-search").value.toLowerCase();
-            const container = document.getElementById("sentence-card-container");
-            container.innerHTML = "";
-
-            const filtered = sentenceList.filter(s => s.en.toLowerCase().includes(query) || s.bn.includes(query));
-
-            if(filtered.length === 0) {
-                container.innerHTML = `<p class="text-center text-xs text-slate-500 py-6">কোনো বাক্য পাওয়া যায়নি</p>`;
-                return;
-            }
-
-            filtered.forEach((item, index) => {
-                const currentStep = sentenceSteps[item.id] || 0; // 0: English & Sound, 1: Pronunciation, 2: Meaning
-
-                let stepContent = '';
-                if (currentStep === 0) {
-                    stepContent = `
-                        <div class="text-center space-y-2 py-3">
-                            <p class="text-xs text-slate-400 uppercase tracking-wider font-en">১. English Sentence</p>
-                            <div class="flex items-center justify-center space-x-2">
-                                <h3 class="text-lg font-bold font-en text-white">"${item.en}"</h3>
-                                <button onclick="speakText('${item.en}')" class="w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center hover:bg-amber-500 hover:text-black transition shadow"><i class="fas fa-volume-high text-xs"></i></button>
-                            </div>
-                        </div>
-                    `;
-                } else if (currentStep === 1) {
-                    stepContent = `
-                        <div class="text-center space-y-2 py-3">
-                            <p class="text-xs text-amber-400 uppercase tracking-wider font-en">২. বাংলা উচ্চারণ</p>
-                            <h3 class="text-base font-bold text-amber-300">${item.pron}</h3>
-                        </div>
-                    `;
-                } else {
-                    stepContent = `
-                        <div class="text-center space-y-2 py-3">
-                            <p class="text-xs text-emerald-400 uppercase tracking-wider font-en">৩. বাংলা অর্থ</p>
-                            <h3 class="text-base font-bold text-emerald-300">${item.bn}</h3>
-                        </div>
-                    `;
-                }
-
-                container.innerHTML += `
-                    <div class="bg-cardBg border border-slate-800 rounded-2xl p-5 space-y-3 shadow-xl relative">
-                        <div class="flex justify-between items-center text-xs text-amber-400 font-en">
-                            <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">সিরিয়াল: #${index + 1}</span>
-                            <button onclick="deleteSentence(${item.id})" class="text-slate-400 hover:text-red-400"><i class="fas fa-trash"></i></button>
-                        </div>
-
-                        ${stepContent}
-
-                        <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-xs">
-                            <button onclick="setSentenceStep(${item.id}, ${Math.max(0, currentStep - 1)})" class="text-slate-400 hover:text-amber-400"><i class="fas fa-chevron-left mr-1"></i> পূর্ববর্তী</button>
-                            
-                            <div class="flex space-x-1.5 cursor-pointer">
-                                <span onclick="setSentenceStep(${item.id}, 0)" class="w-2.5 h-2.5 rounded-full ${currentStep === 0 ? 'bg-amber-400' : 'bg-slate-700'}"></span>
-                                <span onclick="setSentenceStep(${item.id}, 1)" class="w-2.5 h-2.5 rounded-full ${currentStep === 1 ? 'bg-amber-400' : 'bg-slate-700'}"></span>
-                                <span onclick="setSentenceStep(${item.id}, 2)" class="w-2.5 h-2.5 rounded-full ${currentStep === 2 ? 'bg-amber-400' : 'bg-slate-700'}"></span>
-                            </div>
-
-                            <button onclick="setSentenceStep(${item.id}, ${Math.min(2, currentStep + 1)})" class="text-slate-400 hover:text-amber-400">পরবর্তী <i class="fas fa-chevron-right ml-1"></i></button>
-                        </div>
-                        <p class="text-[10px] text-center text-slate-500">পরবর্তী ধাপ দেখতে ক্লিক করুন ↻</p>
+                <div class="grid grid-cols-3 gap-3">
+                    <div onclick="switchTab('todo')" class="glass-card p-4 rounded-2xl cursor-pointer hover:border-gold-500/50 transition text-center">
+                        <span class="text-xs text-slate-300">বাকি কাজ</span>
+                        <div class="text-xl font-bold text-white light:text-slate-800 mt-1">${toBengaliNumerals(pendingTodos)} টি</div>
                     </div>
-                `;
-            });
-        }
+                    <div onclick="switchTab('health')" class="glass-card p-4 rounded-2xl cursor-pointer hover:border-gold-500/50 transition text-center">
+                        <span class="text-xs text-slate-300">পানি গ্রহণ</span>
+                        <div class="text-xl font-bold text-white light:text-slate-800 mt-1">${toBengaliNumerals(healthData.water || 0)} মি.লি.</div>
+                    </div>
+                    <div onclick="switchTab('habits')" class="glass-card p-4 rounded-2xl cursor-pointer hover:border-gold-500/50 transition text-center">
+                        <span class="text-xs text-slate-300">অভ্যাস</span>
+                        <div class="text-xl font-bold text-white light:text-slate-800 mt-1">${toBengaliNumerals(habits.length)} সক্রিয়</div>
+                    </div>
+                </div>
 
-        function renderDialogues() {
-            document.getElementById("dialogue-card-container").innerHTML = `
-                <div class="bg-cardBg border border-slate-800 rounded-2xl p-4 space-y-2 text-center py-8">
-                    <p class="text-sm text-slate-300">কথোপকথন ও ডায়লগ প্র্যাকটিস সেকশন প্রস্তুত করা হচ্ছে...</p>
+                <div class="glass-card p-5 rounded-2xl">
+                    <h3 class="text-sm font-bold gold-gradient-text mb-4 uppercase tracking-wider">লাইফ ম্যানেজমেন্ট মডিউল</h3>
+                    <div class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                        <button onclick="switchTab('study')" class="flex flex-col items-center p-3 rounded-xl bg-navy-700/40 light:bg-slate-100 hover:bg-gold-500/10 border border-gold-500/15 transition">
+                            <i class="fa-solid fa-book-open text-gold-500 text-xl mb-1"></i><span class="text-xs">পড়াশোনা</span>
+                        </button>
+                        <button onclick="switchTab('sentences')" class="flex flex-col items-center p-3 rounded-xl bg-navy-700/40 light:bg-slate-100 hover:bg-gold-500/10 border border-gold-500/15 transition">
+                            <i class="fa-solid fa-comment-dots text-gold-500 text-xl mb-1"></i><span class="text-xs">বাক্য</span>
+                        </button>
+                        <button onclick="switchTab('conversations')" class="flex flex-col items-center p-3 rounded-xl bg-navy-700/40 light:bg-slate-100 hover:bg-gold-500/10 border border-gold-500/15 transition">
+                            <i class="fa-solid fa-comments text-gold-500 text-xl mb-1"></i><span class="text-xs">কথোপকথন</span>
+                        </button>
+                        <button onclick="switchTab('todo')" class="flex flex-col items-center p-3 rounded-xl bg-navy-700/40 light:bg-slate-100 hover:bg-gold-500/10 border border-gold-500/15 transition">
+                            <i class="fa-solid fa-list-check text-gold-500 text-xl mb-1"></i><span class="text-xs">রুটিন</span>
+                        </button>
+                        <button onclick="switchTab('habits')" class="flex flex-col items-center p-3 rounded-xl bg-navy-700/40 light:bg-slate-100 hover:bg-gold-500/10 border border-gold-500/15 transition">
+                            <i class="fa-solid fa-chart-line text-gold-500 text-xl mb-1"></i><span class="text-xs">অভ্যাস</span>
+                        </button>
+                        <button onclick="switchTab('health')" class="flex flex-col items-center p-3 rounded-xl bg-navy-700/40 light:bg-slate-100 hover:bg-gold-500/10 border border-gold-500/15 transition">
+                            <i class="fa-solid fa-heart-pulse text-gold-500 text-xl mb-1"></i><span class="text-xs">ফিটনেস</span>
+                        </button>
+                        <button onclick="switchTab('diary')" class="flex flex-col items-center p-3 rounded-xl bg-navy-700/40 light:bg-slate-100 hover:bg-gold-500/10 border border-gold-500/15 transition">
+                            <i class="fa-solid fa-book-bookmark text-gold-500 text-xl mb-1"></i><span class="text-xs">ডায়েরি</span>
+                        </button>
+                        <button onclick="switchTab('settings')" class="flex flex-col items-center p-3 rounded-xl bg-navy-700/40 light:bg-slate-100 hover:bg-gold-500/10 border border-gold-500/15 transition">
+                            <i class="fa-solid fa-sliders text-gold-500 text-xl mb-1"></i><span class="text-xs">সেটিংস</span>
+                        </button>
+                    </div>
                 </div>
             `;
+            setTimeout(applyCustomBackgrounds, 50);
         }
 
-        function renderGrammar() {
-            document.getElementById("grammar-card-container").innerHTML = `
-                <div class="bg-cardBg border border-slate-800 rounded-2xl p-4 space-y-2 text-center py-8">
-                    <p class="text-sm text-slate-300">গ্রামার মাস্টারক্লাস সেকশন প্রস্তুত করা হচ্ছে...</p>
+        // --- STUDY & VOCABULARY MODULE ---
+        async function renderStudyView() {
+            const allVocabs = await dbGetAll('vocab');
+            const vocabs = allVocabs.filter(item => {
+                if (!vocabSearchQuery) return true;
+                const q = vocabSearchQuery.toLowerCase();
+                return (item.word && item.word.toLowerCase().includes(q)) ||
+                       (item.meaning && item.meaning.toLowerCase().includes(q)) ||
+                       (item.pronunciation && item.pronunciation.toLowerCase().includes(q));
+            });
+
+            document.getElementById('app-content').innerHTML = `
+                <div class="flex items-center justify-between mb-2">
+                    <h2 class="text-xl font-bold gold-gradient-text flex items-center gap-2">
+                        <i class="fa-solid fa-book-open"></i> English Vocabulary Hub
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                    <div onclick="switchTab('sentences')" class="glass-card p-4 rounded-2xl cursor-pointer hover:border-gold-500/60 border border-gold-500/30 flex items-center justify-between transition group">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gold-500/20 text-gold-500 flex items-center justify-center text-lg group-hover:scale-110 transition">
+                                <i class="fa-solid fa-comment-dots"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xs text-white light:text-slate-800">বাক্য প্র্যাকটিস</h3>
+                                <p class="text-[10px] text-slate-300">ছোট ছোট ইংরেজি বাক্য ও অর্থ</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gold-500 text-xs"></i>
+                    </div>
+
+                    <div onclick="switchTab('conversations')" class="glass-card p-4 rounded-2xl cursor-pointer hover:border-gold-500/60 border border-gold-500/30 flex items-center justify-between transition group">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gold-500/20 text-gold-500 flex items-center justify-center text-lg group-hover:scale-110 transition">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xs text-white light:text-slate-800">কথোপকথন</h3>
+                                <p class="text-[10px] text-slate-300">দুই ব্যক্তির পারস্পরিক ডায়লগ</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gold-500 text-xs"></i>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4 mb-5">
+                    <div onclick="switchTab('sub_vocab_quiz')" class="glass-card p-4 rounded-3xl cursor-pointer hover:border-gold-500/60 border border-gold-500/30 flex items-center justify-between transition shadow-lg group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-gold-500/20 text-gold-500 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-language"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm text-white light:text-slate-800">বাংলা থেকে ইংরেজি কুইজ</h3>
+                                <p class="text-[11px] text-slate-300">শব্দার্থ ও নিজে লেখার প্র্যাকটিস</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-gold-500 text-sm"></i>
+                    </div>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center justify-between">
+                        <span id="form-title">নতুন শব্দ যোগ করুন</span>
+                        <span class="text-[10px] text-gold-400 font-normal">৪-ধাপ ফ্ল্যাশ কার্ড সিস্টেম</span>
+                    </h3>
+                    <input id="vocab-id" type="hidden">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <input id="vocab-word" type="text" placeholder="১. English Word (যেমন: Eloquent)" class="p-3 rounded-xl bg-navy-900/70 light:bg-slate-100 border border-gold-500/30 text-xs focus:outline-none text-white light:text-slate-900">
+                        <input id="vocab-pronunciation" type="text" placeholder="২. বাংলা উচ্চারণ (যেমন: এলোকুয়েন্ট)" class="p-3 rounded-xl bg-navy-900/70 light:bg-slate-100 border border-gold-500/30 text-xs focus:outline-none text-white light:text-slate-900">
+                    </div>
+                    <textarea id="vocab-meaning" placeholder="৩. বাংলা অর্থ" class="w-full p-3 rounded-xl bg-navy-900/70 light:bg-slate-100 border border-gold-500/30 text-xs focus:outline-none text-white light:text-slate-900" rows="2"></textarea>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <textarea id="vocab-sentence" placeholder="৪. Example Sentence" class="w-full p-3 rounded-xl bg-navy-900/70 light:bg-slate-100 border border-gold-500/30 text-xs focus:outline-none text-white light:text-slate-900" rows="2"></textarea>
+                        <textarea id="vocab-translation" placeholder="৪. বাক্যের বাংলা অনুবাদ" class="w-full p-3 rounded-xl bg-navy-900/70 light:bg-slate-100 border border-gold-500/30 text-xs focus:outline-none text-white light:text-slate-900" rows="2"></textarea>
+                    </div>
+
+                    <div class="flex gap-2 pt-1">
+                        <button onclick="saveVocab()" id="vocab-save-btn" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 text-navy-900 font-bold text-xs uppercase tracking-wider shadow-md">
+                            শব্দ সংরক্ষণ করুন
+                        </button>
+                        <button onclick="resetVocabForm()" id="vocab-cancel-btn" class="hidden px-4 py-2.5 rounded-xl bg-navy-700 text-slate-300 text-xs">বাতিল</button>
+                    </div>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider">
+                            <span>শব্দ ভাণ্ডার ফ্ল্যাশ-কার্ড (${toBengaliNumerals(vocabs.length)})</span>
+                        </h3>
+                        <div class="relative min-w-[200px]">
+                            <input type="text" id="vocab-search-input" value="${vocabSearchQuery}" oninput="handleVocabSearch(this.value)" placeholder="শব্দ বা অর্থ অনুসন্ধান..." class="w-full pl-8 pr-3 py-1.5 rounded-xl bg-navy-800/80 light:bg-slate-100 border border-gold-500/30 text-xs text-white light:text-slate-900 focus:outline-none">
+                            <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2 text-slate-400 text-xs"></i>
+                        </div>
+                    </div>
+                    
+                    ${vocabs.length === 0 ? `<p class="text-xs text-slate-300 italic py-4 text-center">কোনো শব্দ পাওয়া যায়নি।</p>` : ''}
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        ${vocabs.map((item, index) => {
+                            const currentStep = cardStepsState[item.id] || 0;
+                            const serialNo = toBengaliNumerals(index + 1);
+                            const escapedWord = escapeJS(item.word);
+                            const escapedSentence = escapeJS(item.sentence);
+
+                            return `
+                                <div class="w-full select-none">
+                                    <div class="glass-card p-5 rounded-2xl border-gold-500/30 relative flex flex-col justify-between shadow-lg min-h-[210px]">
+                                        <div class="flex justify-between items-center z-10 w-full mb-2">
+                                            <span class="text-[10px] font-bold text-gold-400 bg-gold-500/20 border border-gold-500/30 px-2 py-0.5 rounded-md">
+                                                সিরিয়াল: #${serialNo}
+                                            </span>
+                                            <div class="flex items-center gap-1">
+                                                <button onclick="event.stopPropagation(); editVocab('${item.id}', '${encodeURIComponent(item.word)}', '${encodeURIComponent(item.pronunciation || '')}', '${encodeURIComponent(item.meaning)}', '${encodeURIComponent(item.sentence || '')}', '${encodeURIComponent(item.translation || '')}')" class="text-xs text-gold-400 hover:text-gold-300 p-1.5 rounded-lg hover:bg-navy-700/50" title="এডিট">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+                                                <button onclick="event.stopPropagation(); deleteVocab('${item.id}')" class="text-xs text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-navy-700/50" title="ডিলিট">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div onclick="nextCardStep('${item.id}')" class="cursor-pointer my-auto py-3 flex flex-col items-center justify-center min-h-[110px]">
+                                            <div id="card-content-${item.id}" class="w-full text-center card-step-content">
+                                                ${getCardStepHTML(item, currentStep, escapedWord, escapedSentence)}
+                                            </div>
+                                        </div>
+
+                                        <div class="border-t border-gold-500/20 pt-3 flex items-center justify-between text-[11px] text-slate-300 z-10">
+                                            <button onclick="event.stopPropagation(); changeCardStep('${item.id}', -1)" class="text-gold-400 hover:text-gold-300 flex items-center gap-1 px-1 py-0.5 rounded">
+                                                <i class="fa-solid fa-chevron-left text-[9px]"></i> পূর্ববর্তী
+                                            </button>
+                                            <div class="flex items-center gap-1.5" id="card-dots-${item.id}">
+                                                ${[0, 1, 2, 3].map(step => `
+                                                    <span onclick="event.stopPropagation(); setCardStep('${item.id}', ${step})" class="w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${currentStep === step ? 'bg-gold-400 scale-125 ring-1 ring-gold-200' : 'bg-slate-500 hover:bg-slate-300'}"></span>
+                                                `).join('')}
+                                            </div>
+                                            <button onclick="event.stopPropagation(); changeCardStep('${item.id}', 1)" class="text-gold-400 hover:text-gold-300 flex items-center gap-1 px-1 py-0.5 rounded">
+                                                পরবর্তী <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
                 </div>
             `;
+            setTimeout(applyCustomBackgrounds, 50);
         }
 
-        function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
-        function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
+        function getCardStepHTML(item, step, escapedWord, escapedSentence) {
+            if (!escapedWord) escapedWord = escapeJS(item.word);
+            if (!escapedSentence) escapedSentence = escapeJS(item.sentence);
 
-        function saveNewContent() {
-            const type = document.getElementById('modal-type').value;
-            const en = document.getElementById('modal-en').value;
-            const pron = document.getElementById('modal-pron').value;
-            const bn = document.getElementById('modal-bn').value;
-            const ex = document.getElementById('modal-ex').value;
-            const exbn = document.getElementById('modal-exbn').value;
+            if (step === 0) {
+                return `
+                    <div class="text-[10px] text-gold-400 uppercase tracking-widest font-bold mb-1">১. English Word</div>
+                    <div class="flex items-center justify-center gap-2">
+                        <h4 class="text-2xl font-bold text-white light:text-slate-800 tracking-wide">${item.word}</h4>
+                        <button onclick="event.stopPropagation(); speakText('${escapedWord}', 1.0)" class="w-7 h-7 rounded-full bg-gold-500/20 text-gold-400 hover:bg-gold-500 hover:text-navy-900 transition flex items-center justify-center text-xs" title="উচ্চারণ শুনুন">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </div>
+                    <span class="text-[10px] text-slate-300 block mt-2">পরবর্তী ধাপ দেখতে ক্লিক করুন ⟳</span>
+                `;
+            } else if (step === 1) {
+                return `
+                    <div class="text-[10px] text-gold-400 uppercase tracking-widest font-bold mb-1">২. বাংলা উচ্চারণ</div>
+                    <div class="text-xl font-bold text-gold-300">${item.pronunciation || 'উচ্চারণ দেয়া হয়নি'}</div>
+                `;
+            } else if (step === 2) {
+                return `
+                    <div class="text-[10px] text-gold-400 uppercase tracking-widest font-bold mb-1">৩. বাংলা অর্থ</div>
+                    <div class="text-base font-semibold text-slate-100 light:text-slate-800 whitespace-pre-line">${item.meaning}</div>
+                `;
+            } else if (step === 3) {
+                const sentence = item.sentence || 'কোনো উদাহরণ বাক্য নেই।';
+                const translation = item.translation ? `<div class="text-gold-300 text-xs mt-1 font-normal">(${item.translation})</div>` : '';
+                return `
+                    <div class="text-[10px] text-gold-400 uppercase tracking-widest font-bold mb-1">৪. Example Sentence</div>
+                    <div class="flex items-center justify-center gap-2 mb-1">
+                        <span class="text-xs text-slate-100 light:text-slate-700 italic">"${sentence}"</span>
+                        ${item.sentence ? `
+                        <button onclick="event.stopPropagation(); speakText('${escapedSentence}', 1.0)" class="w-6 h-6 rounded-full bg-gold-500/20 text-gold-400 hover:bg-gold-500 hover:text-navy-900 transition flex items-center justify-center text-[10px]" title="উচ্চারণ শুনুন">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>` : ''}
+                    </div>
+                    ${translation}
+                `;
+            }
+        }
 
-            if(!en || !bn) return alert("অনুগ্রহ করে ইংরেজি শব্দ এবং বাংলা অর্থ পূরণ করুন");
+        function nextCardStep(id) { changeCardStep(id, 1); }
+        function changeCardStep(id, direction) {
+            let currentStep = cardStepsState[id] || 0;
+            let nextStep = (currentStep + direction) % 4;
+            if (nextStep < 0) nextStep = 3;
+            setCardStep(id, nextStep);
+        }
 
-            if(type === 'vocab') {
-                vocabList.push({ id: Date.now(), word: en, pron: pron || 'উচ্চারণ', bn: bn, ex: ex || en, exbn: exbn || bn });
-                localStorage.setItem("hayat_vocab_steps", JSON.stringify(vocabList));
-                renderVocabCards();
+        async function setCardStep(id, targetStep) {
+            cardStepsState[id] = targetStep;
+            const contentArea = document.getElementById(`card-content-${id}`);
+            const dotsArea = document.getElementById(`card-dots-${id}`);
+            if (!contentArea) return;
+            contentArea.style.opacity = '0';
+            contentArea.style.transform = 'translateY(4px)';
+            setTimeout(async () => {
+                const item = await dbGet('vocab', id);
+                if (item) {
+                    contentArea.innerHTML = getCardStepHTML(item, targetStep);
+                    contentArea.style.opacity = '1';
+                    contentArea.style.transform = 'translateY(0px)';
+                }
+            }, 150);
+            if (dotsArea) {
+                const dots = dotsArea.children;
+                for (let i = 0; i < dots.length; i++) {
+                    dots[i].className = i === targetStep ? 'w-2 h-2 rounded-full cursor-pointer transition-all duration-300 bg-gold-400 scale-125 ring-1 ring-gold-200' : 'w-2 h-2 rounded-full cursor-pointer transition-all duration-300 bg-slate-500 hover:bg-slate-300';
+                }
+            }
+        }
+
+        function handleVocabSearch(query) { vocabSearchQuery = query; renderStudyView(); }
+
+        async function saveVocab() {
+            const idInput = document.getElementById('vocab-id').value;
+            const word = document.getElementById('vocab-word').value.trim();
+            const pronunciation = document.getElementById('vocab-pronunciation').value.trim();
+            const meaning = document.getElementById('vocab-meaning').value.trim();
+            const sentence = document.getElementById('vocab-sentence').value.trim();
+            const translation = document.getElementById('vocab-translation').value.trim();
+
+            if (!word || !meaning) { showToast('অনুগ্রহ করে ইংরেজি শব্দ এবং অর্থ প্রদান করুন'); return; }
+            const id = idInput ? idInput : Date.now().toString();
+            await dbPut('vocab', { id, word, pronunciation, meaning, sentence, translation });
+            showToast(idInput ? 'শব্দ হালনাগাদ করা হয়েছে!' : 'নতুন শব্দ সংরক্ষিত হয়েছে!');
+            resetVocabForm();
+            renderStudyView();
+        }
+
+        function editVocab(id, word, pronunciation, meaning, sentence, translation) {
+            document.getElementById('vocab-id').value = id;
+            document.getElementById('vocab-word').value = decodeURIComponent(word);
+            document.getElementById('vocab-pronunciation').value = decodeURIComponent(pronunciation);
+            document.getElementById('vocab-meaning').value = decodeURIComponent(meaning);
+            document.getElementById('vocab-sentence').value = decodeURIComponent(sentence || '');
+            document.getElementById('vocab-translation').value = decodeURIComponent(translation || '');
+            document.getElementById('form-title').innerText = 'শব্দ সম্পাদনা করুন';
+            document.getElementById('vocab-save-btn').innerText = 'হালনাগাদ করুন';
+            document.getElementById('vocab-cancel-btn').classList.remove('hidden');
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+        }
+
+        function resetVocabForm() {
+            document.getElementById('vocab-id').value = '';
+            document.getElementById('vocab-word').value = '';
+            document.getElementById('vocab-pronunciation').value = '';
+            document.getElementById('vocab-meaning').value = '';
+            document.getElementById('vocab-sentence').value = '';
+            document.getElementById('vocab-translation').value = '';
+            document.getElementById('form-title').innerText = 'নতুন শব্দ যোগ করুন';
+            document.getElementById('vocab-save-btn').innerText = 'শব্দ সংরক্ষণ করুন';
+            document.getElementById('vocab-cancel-btn').classList.add('hidden');
+        }
+
+        async function deleteVocab(id) {
+            await dbDelete('vocab', id);
+            delete cardStepsState[id];
+            showToast('কার্ড মুছে ফেলা হয়েছে');
+            renderStudyView();
+        }
+
+
+        // --- SENTENCES MODULE ---
+        async function renderSentencesView() {
+            const allSentences = await dbGetAll('sentences');
+            const sentences = allSentences.filter(item => {
+                if (!sentenceSearchQuery) return true;
+                const q = sentenceSearchQuery.toLowerCase();
+                return (item.sentence && item.sentence.toLowerCase().includes(q)) ||
+                       (item.meaning && item.meaning.toLowerCase().includes(q)) ||
+                       (item.pronunciation && item.pronunciation.toLowerCase().includes(q));
+            });
+
+            document.getElementById('app-content').innerHTML = `
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-bold gold-gradient-text flex items-center gap-2">
+                        <i class="fa-solid fa-comment-dots"></i> ইংরেজি বাক্য প্র্যাকটিস (৩ দিক)
+                    </h2>
+                    <button onclick="switchTab('study')" class="text-xs text-gold-400 hover:underline">পড়াশোনা হাব</button>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center justify-between">
+                        <span id="sentence-form-title">নতুন বাক্য যোগ করুন</span>
+                        <span class="text-[10px] text-gold-400 font-normal">৩-ধাপ ফ্ল্যাশ কার্ড</span>
+                    </h3>
+                    <input id="sentence-id" type="hidden">
+                    <input id="sentence-text" type="text" placeholder="১. ইংরেজি বাক্য" class="w-full p-3 rounded-xl bg-navy-900/70 light:bg-slate-100 border border-gold-500/30 text-xs text-white light:text-slate-900 focus:outline-none">
+                    <input id="sentence-pronunciation" type="text" placeholder="২. বাংলা উচ্চারণ" class="w-full p-3 rounded-xl bg-navy-900/70 light:bg-slate-100 border border-gold-500/30 text-xs text-white light:text-slate-900 focus:outline-none">
+                    <textarea id="sentence-meaning" placeholder="৩. বাংলা অর্থ" class="w-full p-3 rounded-xl bg-navy-900/70 light:bg-slate-100 border border-gold-500/30 text-xs text-white light:text-slate-900 focus:outline-none" rows="2"></textarea>
+                    
+                    <div class="flex gap-2 pt-1">
+                        <button onclick="saveSentence()" id="sentence-save-btn" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 text-navy-900 font-bold text-xs uppercase shadow-md">
+                            বাক্য সংরক্ষণ করুন
+                        </button>
+                        <button onclick="resetSentenceForm()" id="sentence-cancel-btn" class="hidden px-4 py-2.5 rounded-xl bg-navy-700 text-slate-300 text-xs">বাতিল</button>
+                    </div>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider">
+                            <span>বাক্য ফ্ল্যাশ-কার্ড (${toBengaliNumerals(sentences.length)})</span>
+                        </h3>
+                        <div class="relative min-w-[200px]">
+                            <input type="text" value="${sentenceSearchQuery}" oninput="handleSentenceSearch(this.value)" placeholder="বাক্য বা অর্থ অনুসন্ধান..." class="w-full pl-8 pr-3 py-1.5 rounded-xl bg-navy-800/80 light:bg-slate-100 border border-gold-500/30 text-xs text-white light:text-slate-900 focus:outline-none">
+                            <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2 text-slate-400 text-xs"></i>
+                        </div>
+                    </div>
+
+                    ${sentences.length === 0 ? `<p class="text-xs text-slate-300 italic py-4 text-center">কোনো বাক্য পাওয়া যায়নি।</p>` : ''}
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        ${sentences.map((item, index) => {
+                            const currentStep = sentenceStepsState[item.id] || 0;
+                            const serialNo = toBengaliNumerals(index + 1);
+                            const escapedSentence = escapeJS(item.sentence);
+
+                            return `
+                                <div class="w-full select-none">
+                                    <div class="glass-card p-5 rounded-2xl border-gold-500/30 relative flex flex-col justify-between shadow-lg min-h-[190px]">
+                                        <div class="flex justify-between items-center z-10 w-full mb-2">
+                                            <span class="text-[10px] font-bold text-gold-400 bg-gold-500/20 border border-gold-500/30 px-2 py-0.5 rounded-md">
+                                                সিরিয়াল: #${serialNo}
+                                            </span>
+                                            <div class="flex items-center gap-1">
+                                                <button onclick="event.stopPropagation(); editSentence('${item.id}', '${encodeURIComponent(item.sentence)}', '${encodeURIComponent(item.pronunciation || '')}', '${encodeURIComponent(item.meaning)}')" class="text-xs text-gold-400 hover:text-gold-300 p-1.5 rounded-lg hover:bg-navy-700/50" title="এডিট">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+                                                <button onclick="event.stopPropagation(); deleteSentence('${item.id}')" class="text-xs text-red-400 hover:text-red-300 p-1.5 rounded-lg hover:bg-navy-700/50" title="ডিলিট">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div onclick="nextSentenceStep('${item.id}')" class="cursor-pointer my-auto py-3 flex flex-col items-center justify-center min-h-[90px]">
+                                            <div id="sentence-content-${item.id}" class="w-full text-center card-step-content">
+                                                ${getSentenceStepHTML(item, currentStep, escapedSentence)}
+                                            </div>
+                                        </div>
+
+                                        <div class="border-t border-gold-500/20 pt-3 flex items-center justify-between text-[11px] text-slate-300 z-10">
+                                            <button onclick="event.stopPropagation(); changeSentenceStep('${item.id}', -1)" class="text-gold-400 hover:text-gold-300 flex items-center gap-1 px-1 py-0.5">
+                                                <i class="fa-solid fa-chevron-left text-[9px]"></i> পূর্ববর্তী
+                                            </button>
+                                            <div class="flex items-center gap-1.5" id="sentence-dots-${item.id}">
+                                                ${[0, 1, 2].map(step => `
+                                                    <span onclick="event.stopPropagation(); setSentenceStep('${item.id}', ${step})" class="w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${currentStep === step ? 'bg-gold-400 scale-125 ring-1 ring-gold-200' : 'bg-slate-500 hover:bg-slate-300'}"></span>
+                                                `).join('')}
+                                            </div>
+                                            <button onclick="event.stopPropagation(); changeSentenceStep('${item.id}', 1)" class="text-gold-400 hover:text-gold-300 flex items-center gap-1 px-1 py-0.5">
+                                                পরবর্তী <i class="fa-solid fa-chevron-right text-[9px]"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+            setTimeout(applyCustomBackgrounds, 50);
+        }
+
+        function getSentenceStepHTML(item, step, escapedSentence) {
+            if (!escapedSentence) escapedSentence = escapeJS(item.sentence);
+
+            if (step === 0) {
+                return `
+                    <div class="text-[10px] text-gold-400 uppercase tracking-widest font-bold mb-1">১. ইংরেজি বাক্য</div>
+                    <div class="flex items-center justify-center gap-2">
+                        <h4 class="text-lg font-bold text-white light:text-slate-800 tracking-wide">"${item.sentence}"</h4>
+                        <button onclick="event.stopPropagation(); speakText('${escapedSentence}', 1.0)" class="w-6 h-6 rounded-full bg-gold-500/20 text-gold-400 hover:bg-gold-500 hover:text-navy-900 transition flex items-center justify-center text-[10px]" title="উচ্চারণ শুনুন">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </div>
+                    <span class="text-[10px] text-slate-300 block mt-2">পরবর্তী ধাপ দেখতে ক্লিক করুন ⟳</span>
+                `;
+            } else if (step === 1) {
+                return `
+                    <div class="text-[10px] text-gold-400 uppercase tracking-widest font-bold mb-1">২. বাংলা উচ্চারণ</div>
+                    <div class="text-base font-bold text-gold-300">${item.pronunciation || 'উচ্চারণ দেয়া হয়নি'}</div>
+                `;
+            } else if (step === 2) {
+                return `
+                    <div class="text-[10px] text-gold-400 uppercase tracking-widest font-bold mb-1">৩. বাংলা অর্থ</div>
+                    <div class="text-sm font-semibold text-slate-100 light:text-slate-800 whitespace-pre-line">${item.meaning}</div>
+                `;
+            }
+        }
+
+        function nextSentenceStep(id) { changeSentenceStep(id, 1); }
+        function changeSentenceStep(id, direction) {
+            let currentStep = sentenceStepsState[id] || 0;
+            let nextStep = (currentStep + direction) % 3;
+            if (nextStep < 0) nextStep = 2;
+            setSentenceStep(id, nextStep);
+        }
+
+        async function setSentenceStep(id, targetStep) {
+            sentenceStepsState[id] = targetStep;
+            const contentArea = document.getElementById(`sentence-content-${id}`);
+            const dotsArea = document.getElementById(`sentence-dots-${id}`);
+            if (!contentArea) return;
+            contentArea.style.opacity = '0';
+            contentArea.style.transform = 'translateY(4px)';
+            setTimeout(async () => {
+                const item = await dbGet('sentences', id);
+                if (item) {
+                    contentArea.innerHTML = getSentenceStepHTML(item, targetStep);
+                    contentArea.style.opacity = '1';
+                    contentArea.style.transform = 'translateY(0px)';
+                }
+            }, 150);
+            if (dotsArea) {
+                const dots = dotsArea.children;
+                for (let i = 0; i < dots.length; i++) {
+                    dots[i].className = i === targetStep ? 'w-2 h-2 rounded-full cursor-pointer transition-all duration-300 bg-gold-400 scale-125 ring-1 ring-gold-200' : 'w-2 h-2 rounded-full cursor-pointer transition-all duration-300 bg-slate-500 hover:bg-slate-300';
+                }
+            }
+        }
+
+        function handleSentenceSearch(query) { sentenceSearchQuery = query; renderSentencesView(); }
+
+        async function saveSentence() {
+            const idInput = document.getElementById('sentence-id').value;
+            const sentence = document.getElementById('sentence-text').value.trim();
+            const pronunciation = document.getElementById('sentence-pronunciation').value.trim();
+            const meaning = document.getElementById('sentence-meaning').value.trim();
+
+            if (!sentence || !meaning) { showToast('অনুগ্রহ করে ইংরেজি বাক্য এবং অর্থ প্রদান করুন'); return; }
+            const id = idInput ? idInput : Date.now().toString();
+            await dbPut('sentences', { id, sentence, pronunciation, meaning });
+            showToast(idInput ? 'বাক্য হালনাগাদ করা হয়েছে!' : 'নতুন বাক্য সংরক্ষিত হয়েছে!');
+            resetSentenceForm();
+            renderSentencesView();
+        }
+
+        function editSentence(id, sentence, pronunciation, meaning) {
+            document.getElementById('sentence-id').value = id;
+            document.getElementById('sentence-text').value = decodeURIComponent(sentence);
+            document.getElementById('sentence-pronunciation').value = decodeURIComponent(pronunciation);
+            document.getElementById('sentence-meaning').value = decodeURIComponent(meaning);
+            document.getElementById('sentence-form-title').innerText = 'বাক্য সম্পাদনা করুন';
+            document.getElementById('sentence-save-btn').innerText = 'হালনাগাদ করুন';
+            document.getElementById('sentence-cancel-btn').classList.remove('hidden');
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+        }
+
+        function resetSentenceForm() {
+            document.getElementById('sentence-id').value = '';
+            document.getElementById('sentence-text').value = '';
+            document.getElementById('sentence-pronunciation').value = '';
+            document.getElementById('sentence-meaning').value = '';
+            document.getElementById('sentence-form-title').innerText = 'নতুন বাক্য যোগ করুন';
+            document.getElementById('sentence-save-btn').innerText = 'বাক্য সংরক্ষণ করুন';
+            document.getElementById('sentence-cancel-btn').classList.add('hidden');
+        }
+
+        async function deleteSentence(id) {
+            await dbDelete('sentences', id);
+            delete sentenceStepsState[id];
+            showToast('বাক্য মুছে ফেলা হয়েছে');
+            renderSentencesView();
+        }
+
+
+        // --- CONVERSATIONS MODULE ---
+        async function renderConversationsView() {
+            const conversations = await dbGetAll('conversations');
+
+            document.getElementById('app-content').innerHTML = `
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-bold gold-gradient-text flex items-center gap-2">
+                        <i class="fa-solid fa-comments"></i> কথোপকথন (দ্বিপাক্ষিক ডায়লগ)
+                    </h2>
+                    <button onclick="switchTab('study')" class="text-xs text-gold-400 hover:underline">পড়াশোনা হাব</button>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider" id="conv-form-title">নতুন কথোপকথন যোগ করুন</h3>
+                    <input id="conv-id" type="hidden">
+                    <input id="conv-topic" type="text" placeholder="বিষয় (যেমন: হোটেলে রুম বুকিং / পরিচিত হওয়া)" class="w-full p-3 rounded-xl bg-navy-900/70 light:bg-slate-100 border border-gold-500/30 text-xs text-white light:text-slate-900 focus:outline-none">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <input id="conv-person1-name" type="text" placeholder="বক্তা ১ এর নাম (যেমন: A / John)" class="p-3 rounded-xl bg-navy-900/70 light:bg-slate-100 border border-gold-500/30 text-xs text-white light:text-slate-900 focus:outline-none">
+                        <input id="conv-person2-name" type="text" placeholder="বক্তা ২ এর নাম (যেমন: B / Receptionist)" class="p-3 rounded-xl bg-navy-900/70 light:bg-slate-100 border border-gold-500/30 text-xs text-white light:text-slate-900 focus:outline-none">
+                    </div>
+
+                    <div id="dialogues-container" class="space-y-2 pt-2">
+                        <div class="dialogue-input-row grid grid-cols-1 sm:grid-cols-12 gap-2 items-center">
+                            <select class="speaker-select sm:col-span-2 p-2.5 rounded-xl bg-navy-900 text-xs text-gold-400 border border-gold-500/30">
+                                <option value="1">বক্তা ১</option>
+                                <option value="2">বক্তা ২</option>
+                            </select>
+                            <input type="text" placeholder="ইংরেজি বাক্য..." class="dialogue-text sm:col-span-4 p-2.5 rounded-xl bg-navy-900/70 text-xs text-white border border-gold-500/30">
+                            <input type="text" placeholder="উচ্চারণ..." class="dialogue-pron sm:col-span-3 p-2.5 rounded-xl bg-navy-900/70 text-xs text-white border border-gold-500/30">
+                            <input type="text" placeholder="অর্থ..." class="dialogue-meaning sm:col-span-2 p-2.5 rounded-xl bg-navy-900/70 text-xs text-white border border-gold-500/30">
+                            <button onclick="this.parentElement.remove()" class="sm:col-span-1 text-red-400 text-center"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                    </div>
+
+                    <button onclick="addDialogueRow()" class="text-xs text-gold-400 hover:underline flex items-center gap-1">
+                        <i class="fa-solid fa-plus"></i> আরেকটি লাইন যোগ করুন
+                    </button>
+
+                    <div class="flex gap-2 pt-2">
+                        <button onclick="saveConversation()" id="conv-save-btn" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-gold-400 to-gold-600 text-navy-900 font-bold text-xs uppercase shadow-md">
+                            কথোপকথন সংরক্ষণ করুন
+                        </button>
+                        <button onclick="resetConvForm()" id="conv-cancel-btn" class="hidden px-4 py-2.5 rounded-xl bg-navy-700 text-slate-300 text-xs">বাতিল</button>
+                    </div>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider">
+                        <span>সংরক্ষিত কথোপকথন তালিকা (${toBengaliNumerals(conversations.length)})</span>
+                    </h3>
+                    
+                    ${conversations.length === 0 ? `<p class="text-xs text-slate-300 italic py-2">কোনো কথোপকথন যোগ করা হয়নি।</p>` : ''}
+
+                    <div class="space-y-3">
+                        ${conversations.map((c) => {
+                            const isExpanded = conversationExpandedState[c.id] || false;
+                            const totalLines = toBengaliNumerals(c.lines?.length || 0);
+
+                            return `
+                                <div class="glass-card rounded-2xl border-gold-500/30 shadow-lg overflow-hidden transition-all">
+                                    <div onclick="toggleConversationExpand('${c.id}')" class="p-4 cursor-pointer flex justify-between items-center hover:bg-gold-500/10 transition">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-9 h-9 rounded-xl bg-gold-500/20 border border-gold-500/30 flex items-center justify-center text-gold-400 text-sm shadow-sm">
+                                                <i class="fa-solid fa-comments"></i>
+                                            </div>
+                                            <div>
+                                                <h4 class="text-sm font-bold text-white light:text-slate-800">${c.topic}</h4>
+                                                <span class="text-[10px] text-slate-300">বক্তাগণ: ${c.p1 || 'বক্তা ১'} ও ${c.p2 || 'বক্তা ২'} (${totalLines} টি লাইন)</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <button onclick="event.stopPropagation(); editConversation('${c.id}')" class="text-xs text-gold-400 p-1.5 rounded hover:bg-navy-700" title="এডিট"><i class="fa-solid fa-pen-to-square"></i></button>
+                                            <button onclick="event.stopPropagation(); deleteConversation('${c.id}')" class="text-xs text-red-400 p-1.5 rounded hover:bg-navy-700" title="ডিলিট"><i class="fa-solid fa-trash"></i></button>
+                                            <i class="fa-solid fa-chevron-${isExpanded ? 'up' : 'down'} text-xs text-gold-400 ml-1"></i>
+                                        </div>
+                                    </div>
+
+                                    ${isExpanded ? `
+                                        <div class="p-4 bg-navy-900/60 border-t border-gold-500/20 space-y-2 text-xs">
+                                            <p class="text-[10px] text-slate-300 italic mb-2">প্রতিটি লাইনে ক্লিক করে ধাপে ধাপে উচ্চারণ ও অর্থ দেখুন এবং অডিও শুনুন:</p>
+                                            ${(c.lines || []).map((l, lIdx) => {
+                                                const dialogueKey = `${c.id}_${lIdx}`;
+                                                const step = dialogueStepState[dialogueKey] || 0;
+                                                const speakerName = l.speaker === '1' ? (c.p1 || 'বক্তা ১') : (c.p2 || 'বক্তা ২');
+                                                const escapedLineText = escapeJS(l.text);
+
+                                                return `
+                                                    <div onclick="nextDialogueStep('${c.id}', ${lIdx})" class="p-3 rounded-xl cursor-pointer transition ${l.speaker === '1' ? 'bg-navy-800/90 border-l-4 border-gold-400' : 'bg-navy-700/70 border-l-4 border-blue-400'}">
+                                                        <div class="flex justify-between items-center mb-1">
+                                                            <span class="font-bold text-gold-400">${speakerName}:</span>
+                                                            <div class="flex items-center gap-2">
+                                                                <button onclick="event.stopPropagation(); speakText('${escapedLineText}', 1.0)" class="px-2 py-0.5 rounded bg-gold-500/20 text-gold-300 hover:bg-gold-500 hover:text-navy-900 text-[10px] transition flex items-center gap-1" title="স্বাভাবিক গতিতে শুনুন">
+                                                                    <i class="fa-solid fa-volume-high"></i> স্বাভাবিক
+                                                                </button>
+                                                                <button onclick="event.stopPropagation(); speakText('${escapedLineText}', 0.6)" class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 hover:bg-blue-500 hover:text-white text-[10px] transition flex items-center gap-1" title="স্লো মোশনে শুনুন">
+                                                                    <i class="fa-solid fa-person-walking text-[9px]"></i> স্লো
+                                                                </button>
+                                                                <span class="text-[9px] text-slate-300 font-mono opacity-85 ml-1">ধাপ ${toBengaliNumerals(step + 1)}/৩</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dialogue-step-text text-slate-100">
+                                                            ${getDialogueStepHTML(l, step)}
+                                                        </div>
+                                                    </div>
+                                                `;
+                                            }).join('')}
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+            setTimeout(applyCustomBackgrounds, 50);
+        }
+
+        function toggleConversationExpand(id) {
+            conversationExpandedState[id] = !conversationExpandedState[id];
+            renderConversationsView();
+        }
+
+        function getDialogueStepHTML(lineObj, step) {
+            if (step === 0) {
+                return `<div class="font-semibold text-white">"${lineObj.text}"</div><div class="text-[9px] text-gold-300 mt-1">উচ্চারণ ও অর্থ দেখতে ক্লিক করুন ➔</div>`;
+            } else if (step === 1) {
+                return `<div class="text-gold-200 font-medium">উচ্চারণ: ${lineObj.pron || 'দেয়া হয়নি'}</div><div class="text-[9px] text-gold-300 mt-1">অর্থ দেখতে আবার ক্লিক করুন ➔</div>`;
             } else {
-                sentenceList.push({ id: Date.now(), en: en, pron: pron || 'উচ্চারণ', bn: bn, ex: ex || en, exbn: exbn || bn });
-                localStorage.setItem("hayat_sentence_steps", JSON.stringify(sentenceList));
-                renderSentenceCards();
+                return `<div class="text-emerald-300 font-semibold">অর্থ: ${lineObj.meaning || 'দেয়া হয়নি'}</div>`;
             }
-            updateStats();
-            closeAdminModal();
-            // Clear inputs
-            document.getElementById('modal-en').value = '';
-            document.getElementById('modal-pron').value = '';
-            document.getElementById('modal-bn').value = '';
-            document.getElementById('modal-ex').value = '';
-            document.getElementById('modal-exbn').value = '';
         }
 
-        function deleteVocab(id) {
-            vocabList = vocabList.filter(v => v.id !== id);
-            localStorage.setItem("hayat_vocab_steps", JSON.stringify(vocabList));
-            renderVocabCards();
-            updateStats();
+        function nextDialogueStep(convId, lineIdx) {
+            const key = `${convId}_${lineIdx}`;
+            let currentStep = dialogueStepState[key] || 0;
+            dialogueStepState[key] = (currentStep + 1) % 3;
+            renderConversationsView();
         }
 
-        function deleteSentence(id) {
-            sentenceList = sentenceList.filter(s => s.id !== id);
-            localStorage.setItem("hayat_sentence_steps", JSON.stringify(sentenceList));
-            renderSentenceCards();
-            updateStats();
+        function addDialogueRow(speakerVal = '1', textVal = '', pronVal = '', meaningVal = '') {
+            const container = document.getElementById('dialogues-container');
+            const row = document.createElement('div');
+            row.className = 'dialogue-input-row grid grid-cols-1 sm:grid-cols-12 gap-2 items-center';
+            row.innerHTML = `
+                <select class="speaker-select sm:col-span-2 p-2.5 rounded-xl bg-navy-900 text-xs text-gold-400 border border-gold-500/30">
+                    <option value="1" ${speakerVal==='1'?'selected':''}>বক্তা ১</option>
+                    <option value="2" ${speakerVal==='2'?'selected':''}>বক্তা ২</option>
+                </select>
+                <input type="text" value="${textVal}" placeholder="ইংরেজি বাক্য..." class="dialogue-text sm:col-span-4 p-2.5 rounded-xl bg-navy-900/70 text-xs text-white border border-gold-500/30">
+                <input type="text" value="${pronVal}" placeholder="উচ্চারণ..." class="dialogue-pron sm:col-span-3 p-2.5 rounded-xl bg-navy-900/70 text-xs text-white border border-gold-500/30">
+                <input type="text" value="${meaningVal}" placeholder="অর্থ..." class="dialogue-meaning sm:col-span-2 p-2.5 rounded-xl bg-navy-900/70 text-xs text-white border border-gold-500/30">
+                <button onclick="this.parentElement.remove()" class="sm:col-span-1 text-red-400 text-center"><i class="fa-solid fa-xmark"></i></button>
+            `;
+            container.appendChild(row);
         }
 
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
+        async function saveConversation() {
+            const idInput = document.getElementById('conv-id').value;
+            const topic = document.getElementById('conv-topic').value.trim();
+            const p1 = document.getElementById('conv-person1-name').value.trim() || 'বক্তা ১';
+            const p2 = document.getElementById('conv-person2-name').value.trim() || 'বক্তা ২';
+
+            if (!topic) { showToast('অনুগ্রহ করে কথোপকথনের বিষয় লিখুন'); return; }
+
+            const rows = document.querySelectorAll('.dialogue-input-row');
+            const lines = [];
+            rows.forEach(r => {
+                const speaker = r.querySelector('.speaker-select').value;
+                const text = r.querySelector('.dialogue-text').value.trim();
+                const pron = r.querySelector('.dialogue-pron').value.trim();
+                const meaning = r.querySelector('.dialogue-meaning').value.trim();
+                if(text) lines.push({ speaker, text, pron, meaning });
+            });
+
+            if(lines.length === 0) { showToast('অন্তত একটি ডায়লগ লাইন লিখুন'); return; }
+
+            const id = idInput ? idInput : Date.now().toString();
+            await dbPut('conversations', { id, topic, p1, p2, lines });
+            showToast(idInput ? 'কথোপকথন হালনাগাদ করা হয়েছে!' : 'কথোপকথন সংরক্ষিত হয়েছে!');
+            renderConversationsView();
         }
 
-        // Initialize App
-        updateStats();
+        async function editConversation(id) {
+            const c = await dbGet('conversations', id);
+            if(!c) return;
+            document.getElementById('conv-id').value = c.id;
+            document.getElementById('conv-topic').value = c.topic;
+            document.getElementById('conv-person1-name').value = c.p1;
+            document.getElementById('conv-person2-name').value = c.p2;
+
+            const container = document.getElementById('dialogues-container');
+            container.innerHTML = '';
+            c.lines.forEach(l => addDialogueRow(l.speaker, l.text, l.pron || '', l.meaning || ''));
+
+            document.getElementById('conv-form-title').innerText = 'কথোপকথন সম্পাদনা করুন';
+            document.getElementById('conv-save-btn').innerText = 'হালনাগাদ করুন';
+            document.getElementById('conv-cancel-btn').classList.remove('hidden');
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+        }
+
+        function resetConvForm() {
+            document.getElementById('conv-id').value = '';
+            document.getElementById('conv-topic').value = '';
+            document.getElementById('conv-person1-name').value = '';
+            document.getElementById('conv-person2-name').value = '';
+            document.getElementById('dialogues-container').innerHTML = `
+                <div class="dialogue-input-row grid grid-cols-1 sm:grid-cols-12 gap-2 items-center">
+                    <select class="speaker-select sm:col-span-2 p-2.5 rounded-xl bg-navy-900 text-xs text-gold-400 border border-gold-500/30">
+                        <option value="1">বক্তা ১</option>
+                        <option value="2">বক্তা ২</option>
+                    </select>
+                    <input type="text" placeholder="ইংরেজি বাক্য..." class="dialogue-text sm:col-span-4 p-2.5 rounded-xl bg-navy-900/70 text-xs text-white border border-gold-500/30">
+                    <input type="text" placeholder="উচ্চারণ..." class="dialogue-pron sm:col-span-3 p-2.5 rounded-xl bg-navy-900/70 text-xs text-white border border-gold-500/30">
+                    <input type="text" placeholder="অর্থ..." class="dialogue-meaning sm:col-span-2 p-2.5 rounded-xl bg-navy-900/70 text-xs text-white border border-gold-500/30">
+                    <button onclick="this.parentElement.remove()" class="sm:col-span-1 text-red-400 text-center"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            `;
+            document.getElementById('conv-form-title').innerText = 'নতুন কথোপকথন যোগ করুন';
+            document.getElementById('conv-save-btn').innerText = 'কথোপকথন সংরক্ষণ করুন';
+            document.getElementById('conv-cancel-btn').classList.add('hidden');
+        }
+
+        async function deleteConversation(id) {
+            await dbDelete('conversations', id);
+            showToast('কথোপকথন মুছে ফেলা হয়েছে');
+            renderConversationsView();
+        }
+
+
+        // --- SUB VIEW: BANGLA TO ENGLISH QUIZ ---
+        async function renderVocabQuizView() {
+            const vocabs = await dbGetAll('vocab');
+            const activeVocabs = vocabs.length > 0 ? vocabs : [
+                { id: 'default1', word: 'Eloquent', meaning: 'সুন্দর, মনমুগ্ধকর বা প্রাঞ্জল ভাষা ব্যবহারকারী' }
+            ];
+
+            if (currentQuizIndex >= activeVocabs.length) currentQuizIndex = 0;
+            const currentItem = activeVocabs[currentQuizIndex];
+            const escapedQuizWord = escapeJS(currentItem.word);
+
+            document.getElementById('app-content').innerHTML = `
+                <div class="flex items-center justify-between mb-4">
+                    <button onclick="switchTab('study')" class="text-xs text-gold-400 hover:underline flex items-center gap-1">
+                        <i class="fa-solid fa-arrow-left"></i> ইংরেজি হাব এ ফিরে যান
+                    </button>
+                    <span class="text-xs font-bold text-slate-200">কুইজ (${toBengaliNumerals(currentQuizIndex + 1)}/${toBengaliNumerals(activeVocabs.length)})</span>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="glass-card p-5 rounded-2xl border-gold-500/30 space-y-3">
+                        <span class="text-[10px] text-gold-400 uppercase font-bold">প্রথম পদ্ধতি: বাংলা দেখে ইংরেজি শেখা</span>
+                        <div class="bg-navy-900/80 p-4 rounded-xl text-center border border-gold-500/20">
+                            <span class="text-xs text-slate-300">বাংলা অর্থ</span>
+                            <h3 class="text-xl font-bold text-white mt-1">${currentItem.meaning}</h3>
+                        </div>
+
+                        <div id="quiz-answer-display" class="hidden bg-gold-500/20 border border-gold-500/40 p-3 rounded-xl text-center">
+                            <span class="text-[10px] text-gold-300 uppercase tracking-widest block">সঠিক ইংরেজি শব্দ</span>
+                            <div class="flex items-center justify-center gap-2 mt-1">
+                                <span class="text-lg font-bold text-gold-200">${currentItem.word}</span>
+                                <button onclick="speakText('${escapedQuizWord}', 1.0)" class="w-6 h-6 rounded-full bg-gold-500/20 text-gold-400 hover:bg-gold-500 hover:text-navy-900 transition flex items-center justify-center text-[10px]">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-2">
+                            <button onclick="toggleQuizAnswer()" class="flex-1 py-2.5 rounded-xl bg-navy-700 text-slate-200 text-xs border border-gold-500/20">উত্তর দেখুন / লুকান</button>
+                            <button onclick="nextQuizQuestion(${activeVocabs.length})" class="px-4 py-2.5 rounded-xl bg-gold-500/20 text-gold-300 border border-gold-500/30 text-xs">পরবর্তী ➔</button>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl border-gold-500/30 space-y-3">
+                        <span class="text-[10px] text-gold-400 uppercase font-bold">দ্বিতীয় পদ্ধতি: নিজে ইংরেজি লেখা</span>
+                        <div class="bg-navy-900/80 p-4 rounded-xl text-center border border-gold-500/20">
+                            <span class="text-xs text-slate-300">বাংলা অর্থ</span>
+                            <h3 class="text-xl font-bold text-white mt-1">${currentItem.meaning}</h3>
+                        </div>
+                        <input id="quiz-user-input" type="text" placeholder="আপনার উত্তর এখানে লিখুন..." class="w-full p-3 rounded-xl bg-navy-900/90 border border-gold-500/30 text-xs text-white focus:outline-none">
+                        <div id="quiz-verify-result" class="hidden p-3 rounded-xl text-xs font-semibold text-center"></div>
+                        <button onclick="verifyQuizAnswer('${escapedQuizWord}')" class="w-full py-3 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-bold text-xs uppercase shadow-md">উত্তর যাচাই করুন</button>
+                    </div>
+                </div>
+            `;
+            setTimeout(applyCustomBackgrounds, 50);
+        }
+
+        function toggleQuizAnswer() { document.getElementById('quiz-answer-display')?.classList.toggle('hidden'); }
+        function nextQuizQuestion(total) { currentQuizIndex = (currentQuizIndex + 1) % total; renderVocabQuizView(); }
+        function verifyQuizAnswer(correctAnswer) {
+            const userInput = document.getElementById('quiz-user-input').value.trim().toLowerCase();
+            const target = correctAnswer.trim().toLowerCase();
+            const resultBox = document.getElementById('quiz-verify-result');
+            if (!userInput) { showToast('অনুগ্রহ করে ইংরেজি শব্দটি লিখুন!'); return; }
+            resultBox.classList.remove('hidden', 'bg-emerald-500/20', 'text-emerald-300', 'border-emerald-500/30', 'bg-red-500/20', 'text-red-300', 'border-red-500/30');
+            if (userInput === target) {
+                resultBox.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border', 'border-emerald-500/30');
+                resultBox.innerHTML = `<i class="fa-solid fa-circle-check"></i> চমৎকার! সঠিক উত্তর হয়েছে (${correctAnswer})।`;
+                speakText(correctAnswer, 1.0);
+                showToast('সঠিক উত্তর!');
+            } else {
+                resultBox.classList.add('bg-red-500/20', 'text-red-300', 'border', 'border-red-500/30');
+                resultBox.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ভুল হয়েছে! সঠিক উত্তর: <strong class="underline">${correctAnswer}</strong>`;
+                showToast('সঠিক হয়নি');
+            }
+        }
+
+        // --- OTHER MODULES ---
+        async function renderTodoView() {
+            const todos = await dbGetAll('todos');
+            document.getElementById('app-content').innerHTML = `
+                <div class="flex items-center justify-between mb-4"><h2 class="text-xl font-bold gold-gradient-text"><i class="fa-solid fa-list-check"></i> কাজের তালিকা ও রুটিন</h2></div>
+                <div class="glass-card p-4 rounded-2xl flex gap-2">
+                    <input id="todo-input" type="text" placeholder="নতুন কাজ..." class="flex-1 p-3 rounded-xl bg-navy-900/70 border border-gold-500/30 text-xs text-white focus:outline-none">
+                    <button onclick="addTodo()" class="px-5 rounded-xl bg-gold-500 text-navy-900 font-bold text-xs shadow-md">যোগ</button>
+                </div>
+                <div class="glass-card p-5 rounded-2xl space-y-2">
+                    ${todos.map(t => `<div class="p-3 rounded-xl bg-navy-700/60 border border-gold-500/20 flex justify-between items-center text-xs"><label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" onchange="toggleTodo('${t.id}')" ${t.completed?'checked':''} class="accent-amber-500"><span class="${t.completed?'line-through text-slate-400':''}">${t.title}</span></label><button onclick="deleteTodo('${t.id}')" class="text-red-400"><i class="fa-solid fa-trash"></i></button></div>`).join('')}
+                </div>
+            `;
+            setTimeout(applyCustomBackgrounds, 50);
+        }
+        async function addTodo() {
+            const title = document.getElementById('todo-input').value.trim();
+            if(!title) return;
+            await dbPut('todos', { id: Date.now().toString(), title, completed: false });
+            renderTodoView();
+        }
+        async function toggleTodo(id) { const t = await dbGet('todos', id); if(t) { t.completed = !t.completed; await dbPut('todos', t); renderTodoView(); } }
+        async function deleteTodo(id) { await dbDelete('todos', id); renderTodoView(); }
+
+        async function renderHabitsView() {
+            const habits = await dbGetAll('habits');
+            document.getElementById('app-content').innerHTML = `
+                <div class="flex items-center justify-between mb-4"><h2 class="text-xl font-bold gold-gradient-text"><i class="fa-solid fa-chart-line"></i> অভ্যাস ট্র্যাকার</h2></div>
+                <div class="glass-card p-4 rounded-2xl flex gap-2">
+                    <input id="habit-title" type="text" placeholder="অভ্যাস..." class="flex-1 p-3 rounded-xl bg-navy-900/70 border border-gold-500/30 text-xs text-white focus:outline-none">
+                    <button onclick="addHabit()" class="px-5 rounded-xl bg-gold-500 text-navy-900 font-bold text-xs shadow-md">তৈরি</button>
+                </div>
+                <div class="glass-card p-5 rounded-2xl space-y-2">
+                    ${habits.map(h => `<div class="p-3 rounded-xl bg-navy-700/60 border border-gold-500/20 flex justify-between items-center text-xs"><span class="text-white">${h.title} (স্ট্রীক: ${toBengaliNumerals(h.streak||0)} দিন)</span><div class="flex gap-2"><button onclick="incrementStreak('${h.id}')" class="px-2.5 py-1 bg-gold-500/20 text-gold-300 border border-gold-500/30 rounded-lg">সম্পন্ন</button><button onclick="deleteHabit('${h.id}')" class="text-red-400"><i class="fa-solid fa-trash"></i></button></div></div>`).join('')}
+                </div>
+            `;
+            setTimeout(applyCustomBackgrounds, 50);
+        }
+        async function addHabit() {
+            const title = document.getElementById('habit-title').value.trim();
+            if(!title) return;
+            await dbPut('habits', { id: Date.now().toString(), title, streak: 0 });
+            renderHabitsView();
+        }
+        async function incrementStreak(id) { const h = await dbGet('habits', id); if(h) { h.streak = (h.streak||0) + 1; await dbPut('habits', h); showToast('স্ট্রীক হালনাগাদ হয়েছে!'); renderHabitsView(); } }
+        async function deleteHabit(id) { await dbDelete('habits', id); renderHabitsView(); }
+
+        async function renderHealthView() {
+            const today = getTodayDateStr();
+            let health = (await dbGet('health', today)) || { water: 0, steps: 0, sleep: 0 };
+            document.getElementById('app-content').innerHTML = `
+                <div class="flex items-center justify-between mb-4"><h2 class="text-xl font-bold gold-gradient-text"><i class="fa-solid fa-heart-pulse"></i> ফিটনেস ট্র্যাকার</h2></div>
+                <div class="glass-card p-5 rounded-2xl space-y-4 text-xs">
+                    <div class="flex justify-between font-bold text-slate-200"><span>পানি গ্রহণ</span><span class="text-blue-300">${toBengaliNumerals(health.water)} মি.লি.</span></div>
+                    <div class="w-full bg-navy-900 h-3 rounded-full overflow-hidden border border-blue-500/30"><div class="bg-blue-500 h-full" style="width: ${Math.min(100, (health.water/2000)*100)}%"></div></div>
+                    <div class="flex gap-2"><button onclick="addWater(250)" class="flex-1 py-2 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-xl">+২৫০ মি.লি.</button><button onclick="addWater(500)" class="flex-1 py-2 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-xl">+৫০০ মি.লি.</button><button onclick="resetWater()" class="px-3 bg-navy-700 text-slate-300 border border-gold-500/20 rounded-xl">রিসেট</button></div>
+                </div>
+            `;
+            setTimeout(applyCustomBackgrounds, 50);
+        }
+        async function addWater(amount) {
+            const today = getTodayDateStr();
+            let h = (await dbGet('health', today)) || { date: today, water: 0 };
+            h.water = (h.water || 0) + amount;
+            await dbPut('health', h);
+            renderHealthView();
+        }
+        async function resetWater() {
+            const today = getTodayDateStr();
+            let h = (await dbGet('health', today)) || { date: today, water: 0 };
+            h.water = 0;
+            await dbPut('health', h);
+            renderHealthView();
+        }
+
+        async function renderDiaryView() {
+            const entries = await dbGetAll('diary');
+            document.getElementById('app-content').innerHTML = `
+                <div class="flex items-center justify-between mb-4"><h2 class="text-xl font-bold gold-gradient-text"><i class="fa-solid fa-book-bookmark"></i> ব্যক্তিগত ডায়েরি</h2></div>
+                <div class="glass-card p-5 rounded-2xl space-y-3">
+                    <input id="diary-title" type="text" placeholder="শিরোনাম..." class="w-full p-3 rounded-xl bg-navy-900/70 border border-gold-500/30 text-xs text-white focus:outline-none">
+                    <textarea id="diary-content" placeholder="অনুভূতি বা চিন্তাভাবনা..." class="w-full p-3 rounded-xl bg-navy-900/70 border border-gold-500/30 text-xs text-white focus:outline-none" rows="3"></textarea>
+                    <button onclick="saveDiary()" class="w-full py-2.5 rounded-xl bg-gold-500 text-navy-900 font-bold text-xs shadow-md">সংরক্ষণ</button>
+                </div>
+                <div class="space-y-3">
+                    ${entries.map(e => `<div class="glass-card p-4 rounded-xl text-xs space-y-1"><h4 class="font-bold text-gold-400">${e.title}</h4><p class="text-slate-200">${e.content}</p><div class="text-right"><button onclick="deleteDiary('${e.id}')" class="text-red-400 text-[10px]">মুছে ফেলুন</button></div></div>`).join('')}
+                </div>
+            `;
+            setTimeout(applyCustomBackgrounds, 50);
+        }
+        async function saveDiary() {
+            const title = document.getElementById('diary-title').value.trim();
+            const content = document.getElementById('diary-content').value.trim();
+            if(!title || !content) return;
+            await dbPut('diary', { id: Date.now().toString(), title, content, timestamp: new Date().toISOString() });
+            renderDiaryView();
+        }
+        async function deleteDiary(id) { await dbDelete('diary', id); renderDiaryView(); }
+
+        // --- SETTINGS VIEW WITH IMAGE UPLOAD ---
+        async function renderSettingsView() {
+            const profile = (await dbGet('settings', 'profile')) || { name: 'সাইফুল ইসলাম', motto: 'নিরবচ্ছিন্ন আত্মউন্নয়ন', bgImage: '' };
+            
+            document.getElementById('app-content').innerHTML = `
+                <div class="flex items-center justify-between mb-4"><h2 class="text-xl font-bold gold-gradient-text"><i class="fa-solid fa-sliders"></i> প্রোফাইল সেটিংস</h2></div>
+                <div class="glass-card p-5 rounded-2xl space-y-4 text-xs">
+                    <div>
+                        <label class="text-slate-300 font-medium mb-1 block">আপনার নাম</label>
+                        <input id="set-name" type="text" value="${profile.name}" class="w-full p-3 rounded-xl bg-navy-900 border border-gold-500/30 text-white focus:outline-none focus:border-gold-500/60">
+                    </div>
+                    <div>
+                        <label class="text-slate-300 font-medium mb-1 block">নীতিবাক্য (Motto)</label>
+                        <input id="set-motto" type="text" value="${profile.motto}" class="w-full p-3 rounded-xl bg-navy-900 border border-gold-500/30 text-white focus:outline-none focus:border-gold-500/60">
+                    </div>
+                    
+                    <div class="border-t border-gold-500/30 pt-4 mt-2">
+                        <label class="text-gold-400 font-bold mb-1 flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-image"></i> প্রোফাইল ও ব্যাকগ্রাউন্ড ছবি
+                        </label>
+                        <p class="text-[10px] text-slate-300 mb-3">গ্যালারি থেকে ছবি আপলোড করলে হেডার এবং সব ফ্ল্যাশ কার্ডের ব্যাকগ্রাউন্ডে আপনার ছবিটি সুন্দরভাবে ভেসে উঠবে।</p>
+                        
+                        <div class="flex flex-col gap-3">
+                            <input type="file" id="header-bg-input" accept="image/*" onchange="handleImageUpload(event)" class="hidden">
+                            <button onclick="document.getElementById('header-bg-input').click()" class="py-3 px-4 bg-navy-700/80 hover:bg-navy-700 text-gold-400 border border-gold-500/30 font-semibold rounded-xl flex items-center justify-center gap-2 transition shadow-sm">
+                                <i class="fa-solid fa-upload text-sm"></i> গ্যালারি থেকে ছবি আপলোড করুন
+                            </button>
+                            
+                            <div id="image-preview-container" class="${profile.bgImage ? '' : 'hidden'} relative rounded-xl overflow-hidden border border-gold-500/30 max-h-32">
+                                <img id="header-bg-preview" src="${profile.bgImage || ''}" class="w-full h-32 object-cover">
+                                <button onclick="removeHeaderImage()" class="absolute top-2 right-2 bg-red-600/80 hover:bg-red-600 text-white text-[10px] px-2 py-1 rounded-lg backdrop-blur-sm transition flex items-center gap-1">
+                                    <i class="fa-solid fa-trash"></i> রিমুভ করুন
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="saveProfile()" class="py-3 px-4 bg-gradient-to-r from-gold-400 to-gold-600 text-navy-900 font-bold rounded-xl w-full shadow-lg text-xs uppercase tracking-wider mt-2">
+                        সেটিংস সংরক্ষণ করুন
+                    </button>
+                </div>
+            `;
+            setTimeout(applyCustomBackgrounds, 50);
+        }
+
+        let tempUploadedImageData = null;
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (file.size > 5 * 1024 * 1024) {
+                showToast('ছবি ৫ MB এর চেয়ে ছোট হতে হবে');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                tempUploadedImageData = e.target.result;
+                const preview = document.getElementById('header-bg-preview');
+                const container = document.getElementById('image-preview-container');
+                if (preview && container) {
+                    preview.src = tempUploadedImageData;
+                    container.classList.remove('hidden');
+                }
+                showToast('ছবি প্রিভিউ রেডি, সেভ চাপুন!');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function removeHeaderImage() {
+            tempUploadedImageData = '';
+            const profile = (await dbGet('settings', 'profile')) || { name: 'সাইফুল ইসলাম', motto: 'নিরবচ্ছিন্ন আত্মউন্নয়ন' };
+            profile.bgImage = '';
+            await dbPut('settings', { key: 'profile', ...profile });
+            await applyCustomBackgrounds();
+            showToast('ব্যাকগ্রাউন্ড ছবি মুছে ফেলা হয়েছে');
+            renderSettingsView();
+        }
+
+        async function saveProfile() {
+            const name = document.getElementById('set-name').value.trim();
+            const motto = document.getElementById('set-motto').value.trim();
+            const existingProfile = (await dbGet('settings', 'profile')) || {};
+            
+            const bgImage = tempUploadedImageData !== null ? tempUploadedImageData : (existingProfile.bgImage || '');
+
+            await dbPut('settings', { key: 'profile', name, motto, bgImage });
+            await applyCustomBackgrounds();
+            showToast('প্রোফাইল ও কার্ড ব্যাকগ্রাউন্ড সংরক্ষিত হয়েছে!');
+        }
+
+        // --- INIT ---
+        window.addEventListener('DOMContentLoaded', async () => {
+            setupPWAManifest();
+            loadThemePreference();
+            await initDB();
+            await applyCustomBackgrounds();
+            switchTab('dashboard');
+        });
     </script>
 </body>
 </html>
