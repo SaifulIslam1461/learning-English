@@ -246,31 +246,35 @@
     <!-- APP CORE LOGIC -->
     <script>
         function setupPWAManifest() {
-            const manifestData = {
-                "name": "HAYAT OS",
-                "short_name": "HAYAT",
-                "start_url": "./",
-                "display": "standalone",
-                "background_color": "#0B132B",
-                "theme_color": "#0B132B",
-                "icons": [
-                    {
-                        "src": "https://placehold.co/192x192/0B132B/D4AF37?text=HAYAT",
-                        "sizes": "192x192",
-                        "type": "image/png"
-                    },
-                    {
-                        "src": "https://placehold.co/512x512/0B132B/D4AF37?text=HAYAT",
-                        "sizes": "512x512",
-                        "type": "image/png"
-                    }
-                ]
-            };
-            const stringified = JSON.stringify(manifestData);
-            const blob = new Blob([stringified], { type: 'application/json' });
-            const manifestURL = URL.createObjectURL(blob);
-            const manifestEl = document.getElementById('pwa-manifest');
-            if(manifestEl) manifestEl.setAttribute('href', manifestURL);
+            try {
+                const manifestData = {
+                    "name": "HAYAT OS",
+                    "short_name": "HAYAT",
+                    "start_url": "./",
+                    "display": "standalone",
+                    "background_color": "#0B132B",
+                    "theme_color": "#0B132B",
+                    "icons": [
+                        {
+                            "src": "https://placehold.co/192x192/0B132B/D4AF37?text=HAYAT",
+                            "sizes": "192x192",
+                            "type": "image/png"
+                        },
+                        {
+                            "src": "https://placehold.co/512x512/0B132B/D4AF37?text=HAYAT",
+                            "sizes": "512x512",
+                            "type": "image/png"
+                        }
+                    ]
+                };
+                const stringified = JSON.stringify(manifestData);
+                const blob = new Blob([stringified], { type: 'application/json' });
+                const manifestURL = URL.createObjectURL(blob);
+                const manifestEl = document.getElementById('pwa-manifest');
+                if(manifestEl) manifestEl.setAttribute('href', manifestURL);
+            } catch (err) {
+                console.log('Manifest setup skipped:', err);
+            }
         }
 
         let deferredPrompt = null;
@@ -298,65 +302,117 @@
         const DB_NAME = 'HayatOSDB';
         const DB_VERSION = 3;
         let db = null;
+        let fallbackMemoryStore = {};
 
         function initDB() {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 if (db) return resolve(db);
-                const request = indexedDB.open(DB_NAME, DB_VERSION);
-                request.onerror = (e) => reject("ডেটাবেস ত্রুটি: " + e.target.errorCode);
-                request.onsuccess = (e) => { db = e.target.result; resolve(db); };
-                request.onupgradeneeded = (e) => {
-                    const db = e.target.result;
-                    if (!db.objectStoreNames.contains('todos')) db.createObjectStore('todos', { keyPath: 'id' });
-                    if (!db.objectStoreNames.contains('habits')) db.createObjectStore('habits', { keyPath: 'id' });
-                    if (!db.objectStoreNames.contains('vocab')) db.createObjectStore('vocab', { keyPath: 'id' });
-                    if (!db.objectStoreNames.contains('sentences')) db.createObjectStore('sentences', { keyPath: 'id' });
-                    if (!db.objectStoreNames.contains('conversations')) db.createObjectStore('conversations', { keyPath: 'id' });
-                    if (!db.objectStoreNames.contains('diary')) db.createObjectStore('diary', { keyPath: 'id' });
-                    if (!db.objectStoreNames.contains('goals')) db.createObjectStore('goals', { keyPath: 'id' });
-                    if (!db.objectStoreNames.contains('health')) db.createObjectStore('health', { keyPath: 'date' });
-                    if (!db.objectStoreNames.contains('settings')) db.createObjectStore('settings', { keyPath: 'key' });
-                };
+                try {
+                    const request = indexedDB.open(DB_NAME, DB_VERSION);
+                    request.onerror = (e) => {
+                        console.warn("IndexedDB error, using memory fallback", e);
+                        resolve(null);
+                    };
+                    request.onsuccess = (e) => { 
+                        db = e.target.result; 
+                        resolve(db); 
+                    };
+                    request.onupgradeneeded = (e) => {
+                        const activeDb = e.target.result;
+                        if (!activeDb.objectStoreNames.contains('todos')) activeDb.createObjectStore('todos', { keyPath: 'id' });
+                        if (!activeDb.objectStoreNames.contains('habits')) activeDb.createObjectStore('habits', { keyPath: 'id' });
+                        if (!activeDb.objectStoreNames.contains('vocab')) activeDb.createObjectStore('vocab', { keyPath: 'id' });
+                        if (!activeDb.objectStoreNames.contains('sentences')) activeDb.createObjectStore('sentences', { keyPath: 'id' });
+                        if (!activeDb.objectStoreNames.contains('conversations')) activeDb.createObjectStore('conversations', { keyPath: 'id' });
+                        if (!activeDb.objectStoreNames.contains('diary')) activeDb.createObjectStore('diary', { keyPath: 'id' });
+                        if (!activeDb.objectStoreNames.contains('goals')) activeDb.createObjectStore('goals', { keyPath: 'id' });
+                        if (!activeDb.objectStoreNames.contains('health')) activeDb.createObjectStore('health', { keyPath: 'date' });
+                        if (!activeDb.objectStoreNames.contains('settings')) activeDb.createObjectStore('settings', { keyPath: 'key' });
+                    };
+                } catch (err) {
+                    console.warn("IndexedDB not supported or blocked", err);
+                    resolve(null);
+                }
             });
         }
 
         function dbPut(storeName, data) {
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction(storeName, 'readwrite');
-                const store = tx.objectStore(storeName);
-                const req = store.put(data);
-                req.onsuccess = () => resolve(req.result);
-                req.onerror = () => reject(req.error);
+            return new Promise((resolve) => {
+                if (!db) {
+                    if (!fallbackMemoryStore[storeName]) fallbackMemoryStore[storeName] = {};
+                    const key = data.id || data.key || data.date || Date.now().toString();
+                    fallbackMemoryStore[storeName][key] = data;
+                    return resolve(key);
+                }
+                try {
+                    const tx = db.transaction(storeName, 'readwrite');
+                    const store = tx.objectStore(storeName);
+                    const req = store.put(data);
+                    req.onsuccess = () => resolve(req.result);
+                    req.onerror = () => resolve(null);
+                } catch (e) {
+                    if (!fallbackMemoryStore[storeName]) fallbackMemoryStore[storeName] = {};
+                    const key = data.id || data.key || data.date || Date.now().toString();
+                    fallbackMemoryStore[storeName][key] = data;
+                    resolve(key);
+                }
             });
         }
 
         function dbGetAll(storeName) {
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction(storeName, 'readonly');
-                const store = tx.objectStore(storeName);
-                const req = store.getAll();
-                req.onsuccess = () => resolve(req.result);
-                req.onerror = () => reject(req.error);
+            return new Promise((resolve) => {
+                if (!db) {
+                    const storeData = fallbackMemoryStore[storeName] || {};
+                    return resolve(Object.values(storeData));
+                }
+                try {
+                    const tx = db.transaction(storeName, 'readonly');
+                    const store = tx.objectStore(storeName);
+                    const req = store.getAll();
+                    req.onsuccess = () => resolve(req.result || []);
+                    req.onerror = () => resolve([]);
+                } catch (e) {
+                    const storeData = fallbackMemoryStore[storeName] || {};
+                    resolve(Object.values(storeData));
+                }
             });
         }
 
         function dbGet(storeName, key) {
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction(storeName, 'readonly');
-                const store = tx.objectStore(storeName);
-                const req = store.get(key);
-                req.onsuccess = () => resolve(req.result);
-                req.onerror = () => reject(req.error);
+            return new Promise((resolve) => {
+                if (!db) {
+                    const storeData = fallbackMemoryStore[storeName] || {};
+                    return resolve(storeData[key] || null);
+                }
+                try {
+                    const tx = db.transaction(storeName, 'readonly');
+                    const store = tx.objectStore(storeName);
+                    const req = store.get(key);
+                    req.onsuccess = () => resolve(req.result || null);
+                    req.onerror = () => resolve(null);
+                } catch (e) {
+                    const storeData = fallbackMemoryStore[storeName] || {};
+                    resolve(storeData[key] || null);
+                }
             });
         }
 
         function dbDelete(storeName, key) {
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction(storeName, 'readwrite');
-                const store = tx.objectStore(storeName);
-                const req = store.delete(key);
-                req.onsuccess = () => resolve();
-                req.onerror = () => reject(req.error);
+            return new Promise((resolve) => {
+                if (!db) {
+                    if (fallbackMemoryStore[storeName]) delete fallbackMemoryStore[storeName][key];
+                    return resolve();
+                }
+                try {
+                    const tx = db.transaction(storeName, 'readwrite');
+                    const store = tx.objectStore(storeName);
+                    const req = store.delete(key);
+                    req.onsuccess = () => resolve();
+                    req.onerror = () => resolve();
+                } catch (e) {
+                    if (fallbackMemoryStore[storeName]) delete fallbackMemoryStore[storeName][key];
+                    resolve();
+                }
             });
         }
 
@@ -411,52 +467,60 @@
             utterance.lang = 'en-US';
             utterance.rate = rate; 
 
-            let voices = window.speechSynthesis.getVoices();
-            const setVoiceAndSpeak = () => {
-                voices = window.speechSynthesis.getVoices();
-                const femaleVoice = voices.find(v => v.lang.includes('en') && (
-                    v.name.includes('Female') || 
-                    v.name.includes('Zira') || 
-                    v.name.includes('Aria') || 
-                    v.name.includes('Google US English') || 
-                    v.name.includes('Samantha') ||
-                    v.name.includes('Jenny')
-                ));
-                if (femaleVoice) {
-                    utterance.voice = femaleVoice;
-                }
-                window.speechSynthesis.speak(utterance);
-            };
+            try {
+                let voices = window.speechSynthesis.getVoices();
+                const setVoiceAndSpeak = () => {
+                    voices = window.speechSynthesis.getVoices();
+                    const femaleVoice = voices.find(v => v.lang.includes('en') && (
+                        v.name.includes('Female') || 
+                        v.name.includes('Zira') || 
+                        v.name.includes('Aria') || 
+                        v.name.includes('Google US English') || 
+                        v.name.includes('Samantha') ||
+                        v.name.includes('Jenny')
+                    ));
+                    if (femaleVoice) {
+                        utterance.voice = femaleVoice;
+                    }
+                    window.speechSynthesis.speak(utterance);
+                };
 
-            if (voices.length === 0) {
-                window.speechSynthesis.onvoiceschanged = setVoiceAndSpeak;
-            } else {
-                setVoiceAndSpeak();
+                if (voices.length === 0) {
+                    window.speechSynthesis.onvoiceschanged = setVoiceAndSpeak;
+                } else {
+                    setVoiceAndSpeak();
+                }
+            } catch (e) {
+                window.speechSynthesis.speak(utterance);
             }
         }
 
         async function applyCustomBackgrounds() {
-            const profile = await dbGet('settings', 'profile');
-            const bgImage = profile && profile.bgImage ? profile.bgImage : '';
+            try {
+                const profile = await dbGet('settings', 'profile');
+                const bgImage = profile && profile.bgImage ? profile.bgImage : '';
 
-            const header = document.getElementById('main-app-header');
-            if (header) {
-                if (bgImage) {
-                    header.classList.add('custom-header-bg');
-                    header.style.backgroundImage = `url('${bgImage}')`;
-                } else {
-                    header.classList.remove('custom-header-bg');
-                    header.style.backgroundImage = 'none';
+                const header = document.getElementById('main-app-header');
+                if (header) {
+                    if (bgImage) {
+                        header.classList.add('custom-header-bg');
+                        header.style.backgroundImage = `url('${bgImage}')`;
+                    } else {
+                        header.classList.remove('custom-header-bg');
+                        header.style.backgroundImage = 'none';
+                    }
                 }
+
+                document.querySelectorAll('.glass-card').forEach(card => {
+                    if (bgImage) {
+                        card.style.backgroundImage = `url('${bgImage}')`;
+                    } else {
+                        card.style.backgroundImage = 'none';
+                    }
+                });
+            } catch (err) {
+                console.log('Background apply skipped', err);
             }
-
-            document.querySelectorAll('.glass-card').forEach(card => {
-                if (bgImage) {
-                    card.style.backgroundImage = `url('${bgImage}')`;
-                } else {
-                    card.style.backgroundImage = 'none';
-                }
-            });
         }
 
         function toggleTheme() {
@@ -501,6 +565,7 @@
             if(activeNav) activeNav.classList.add('active');
 
             const content = document.getElementById('app-content');
+            if(!content) return;
             content.innerHTML = '';
 
             switch(tabId) {
